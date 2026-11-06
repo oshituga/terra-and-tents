@@ -87,6 +87,32 @@ body {
   will-change: transform, opacity;
 }
 
+/* Steps load in turn: each card fills upward, its title and text follow. */
+.step-fill {
+  --step: calc(var(--i) * 380ms);
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1) var(--step);
+}
+
+.step-title,
+.step-text {
+  opacity: 0;
+  transition: opacity 900ms ease-out var(--step, calc(var(--i) * 380ms));
+}
+
+.step-text {
+  transition-delay: calc(var(--i) * 380ms + 700ms);
+}
+
+[data-in] .step-fill {
+  clip-path: inset(0);
+}
+
+[data-in] .step-title,
+[data-in] .step-text {
+  opacity: 1;
+}
+
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
   --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -153,7 +179,9 @@ body {
 
   .reveal-word,
   .fade-in,
-  .rise-card {
+  .rise-card,
+  .step-title,
+  .step-text {
     opacity: 1;
     transform: none;
     transition: none;
@@ -161,6 +189,11 @@ body {
 
   .swap > *,
   .underline-line {
+    transition: none;
+  }
+
+  .step-fill {
+    clip-path: none;
     transition: none;
   }
 }
