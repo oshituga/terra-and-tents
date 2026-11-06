@@ -127,7 +127,7 @@ function ArrowButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="group relative flex items-center justify-center px-6 py-[15px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+      className="group relative flex items-center justify-center px-6 pt-[15px] pb-[16.5px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
     >
       <Image
         src="/brand/arrow-left.svg"

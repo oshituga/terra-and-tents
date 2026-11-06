@@ -28,7 +28,7 @@ export function ButtonLink({
     <Link
       href={href}
       style={style}
-      className={`group relative inline-flex items-center justify-center px-6 text-body whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current ${compact ? "py-[15px]" : "py-4"} ${variants[variant]} ${className}`}
+      className={`group relative inline-flex items-center justify-center px-6 text-body whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current ${variant === "underline" ? (compact ? "pt-[15px] pb-[16.5px]" : "pt-4 pb-[17.5px]") : compact ? "py-[15px]" : "py-4"} ${variants[variant]} ${className}`}
     >
       <SwapText>{children}</SwapText>
       {variant === "underline" && (

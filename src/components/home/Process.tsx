@@ -57,7 +57,9 @@ export function Process() {
             <h3 className="step-title pl-5 font-display text-display-s font-light uppercase">
               {title}
             </h3>
-            <div className="step-fill flex flex-1 items-end bg-cream px-5 pb-8 text-ink">
+            <div
+              className={`step-fill flex flex-1 items-end bg-cream pb-8 text-ink ${i === steps.length - 1 ? "px-8" : "px-5"}`}
+            >
               <p className="step-text text-body">{body}</p>
             </div>
           </article>

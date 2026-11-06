@@ -34,7 +34,7 @@ export default function Contact() {
       <main className="flex min-h-svh flex-col justify-between bg-ink text-cream">
         <Nav variant="solid" />
 
-        <header className="flex flex-col items-center gap-10 px-page pt-20 pb-5 text-center">
+        <header className="flex flex-col items-center gap-[50px] px-page pt-[60px] pb-5 text-center">
           <div
             className="fade flex flex-col items-center gap-5"
             style={delay(350)}

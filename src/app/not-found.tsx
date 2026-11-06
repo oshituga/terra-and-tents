@@ -22,7 +22,7 @@ export default function NotFound() {
 
         <div className="flex justify-end pr-page">
           <div className="flex flex-col gap-5">
-            <p className="fade w-[529px] text-body" style={delay(350)}>
+            <p className="fade h-[43px] w-[529px] text-body" style={delay(350)}>
               The link may be broken, or the page may have moved on. Head back
               to the weddings, or tell us what you were looking for and we will
               point you the right way.

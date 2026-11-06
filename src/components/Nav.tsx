@@ -4,10 +4,10 @@ import { delay } from "./motion";
 import { SwapText } from "./SwapText";
 
 const links = [
-  { href: "/about", label: "About" },
-  { href: "/weddings", label: "Weddings" },
-  { href: "/journal", label: "Journal" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About", width: "w-[78px]" },
+  { href: "/weddings", label: "Weddings", width: "w-[103px]" },
+  { href: "/journal", label: "Journal", width: "w-[87px]" },
+  { href: "/gallery", label: "Gallery", width: "w-[85px]" },
 ];
 
 // overlay: over a photo. solid: on ink pages. light: on cream pages.
@@ -33,11 +33,11 @@ export function Nav({
         style={delay(0)}
         className={`fade flex gap-2.5 overflow-hidden rounded-[25px] px-[18px] py-2 ${pill}`}
       >
-        {links.map(({ href, label }) => (
+        {links.map(({ href, label, width }) => (
           <Link
             key={href}
             href={href}
-            className="group px-[18px] py-2 text-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+            className={`group flex justify-center py-2 text-body ${width} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current`}
           >
             <SwapText>{label}</SwapText>
           </Link>

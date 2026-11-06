@@ -308,6 +308,18 @@ body {
   opacity: 0.35;
 }
 
+/* About principles: a stuck card eases back as the next one slides over. */
+.stack-card-inner {
+  transform: scale(calc(1 - var(--t, 0) * 0.06));
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.stack-card-dim {
+  background: var(--color-ink);
+  opacity: calc(var(--t, 0) * 0.5);
+}
+
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
   --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);

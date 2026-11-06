@@ -37,7 +37,7 @@ export function LegalPage({
           </p>
         </header>
 
-        <div className="max-page py-10 pl-[53%]">
+        <div className="max-page py-10 pr-8 pl-[53%]">
           <div className="flex flex-col gap-10 pr-8 pl-8 py-5">
             {sections.map(({ title, body }) => (
               <FadeIn key={title} className="flex flex-col gap-4">

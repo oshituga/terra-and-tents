@@ -185,10 +185,12 @@ export function AboutStory() {
                     aria-current={i === active ? "step" : undefined}
                     className="beat flex w-full items-center gap-4 border-b border-ink/20 py-[11px] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
                   >
-                    <span className="beat-num text-[13px] tracking-[-0.03em]">
+                    <span className="beat-num text-[13px] leading-[16.38px] tracking-[-0.03em]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="beat-title text-body">{title}</span>
+                    <span className="beat-title text-body leading-[20.16px]">
+                      {title}
+                    </span>
                   </button>
                 </li>
               ))}
