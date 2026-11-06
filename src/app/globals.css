@@ -30,45 +30,29 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Entrance: elements rise softly into place. Delay comes from --d. */
-@keyframes rise {
+/* Entrance: plain fades in sequence. Delay comes from --d. */
+@keyframes fade {
   from {
     opacity: 0;
-    transform: translateY(14px);
-    filter: blur(6px);
   }
 }
 
-@keyframes rise-line {
-  from {
-    transform: translateY(105%);
-  }
+.fade {
+  animation: fade 900ms ease-out var(--d, 0ms) both;
 }
 
-@keyframes settle {
-  from {
-    transform: scale(1.04);
-  }
+/* Scroll reveal: words fill from 30% to full ink as --p goes 0 to 1. */
+.reveal-word {
+  opacity: clamp(
+    0.3,
+    calc(0.3 + (var(--p, 0) * 1.35 * var(--n) - var(--i)) * 0.7),
+    1
+  );
 }
 
-.rise {
-  animation: rise 1500ms var(--ease-flow) var(--d, 0ms) both;
-}
-
-.rise-mask {
-  display: block;
-  overflow: hidden;
-  padding-block: 0.1em;
-  margin-block: -0.1em;
-}
-
-.rise-line {
-  display: block;
-  animation: rise-line 1500ms var(--ease-flow) var(--d, 0ms) both;
-}
-
-.settle {
-  animation: settle 2600ms var(--ease-flow) both;
+.slide-track {
+  transform: translate3d(calc(var(--p, 0) * var(--shift, 0px) * -1), 0, 0);
+  will-change: transform;
 }
 
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
@@ -131,10 +115,12 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise,
-  .rise-line,
-  .settle {
+  .fade {
     animation: none !important;
+  }
+
+  .reveal-word {
+    opacity: 1;
   }
 
   .swap > *,

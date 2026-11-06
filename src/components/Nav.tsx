@@ -17,7 +17,7 @@ export function Nav() {
       <nav
         aria-label="Main"
         style={delay(0)}
-        className="rise flex gap-2.5 overflow-hidden rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]"
+        className="fade flex gap-2.5 overflow-hidden rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]"
       >
         {links.map(({ href, label }) => (
           <Link
@@ -33,8 +33,8 @@ export function Nav() {
       <Link
         href="/"
         aria-label="Terra & Tent home"
-        style={delay(50)}
-        className="rise absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+        style={delay(0)}
+        className="fade absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
       >
         <Image src="/brand/tent-mark.svg" alt="" width={36} height={32.8965} />
       </Link>
@@ -43,8 +43,8 @@ export function Nav() {
         href="/contact"
         variant="underline"
         compact
-        className="rise"
-        style={delay(100)}
+        className="fade"
+        style={delay(0)}
       >
         Make enquiries
       </ButtonLink>
