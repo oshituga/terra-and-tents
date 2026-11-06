@@ -11,13 +11,18 @@ const links = [
   { href: "/gallery", label: "Gallery" },
 ];
 
-export function Nav() {
+const pills = {
+  overlay: "bg-black/20 backdrop-blur-[8px]",
+  solid: "bg-cream text-ink",
+};
+
+export function Nav({ variant = "overlay" }: { variant?: keyof typeof pills }) {
   return (
     <header className="relative flex items-center justify-between px-8 py-5 text-cream">
       <nav
         aria-label="Main"
         style={delay(0)}
-        className="fade flex gap-2.5 overflow-hidden rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]"
+        className={`fade flex gap-2.5 overflow-hidden rounded-[25px] px-[18px] py-2 ${pills[variant]}`}
       >
         {links.map(({ href, label }) => (
           <Link
