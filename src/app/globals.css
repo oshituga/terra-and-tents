@@ -38,6 +38,12 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Logo drawn in the current text colour, from the original SVG. */
+.tent-mark {
+  background: currentColor;
+  mask: url("/brand/tent-mark.svg") center / contain no-repeat;
+}
+
 /* Entrance: plain fades in sequence. Delay comes from --d. */
 @keyframes fade {
   from {

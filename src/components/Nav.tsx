@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "./ButtonLink";
 import { delay } from "./motion";
@@ -11,18 +10,28 @@ const links = [
   { href: "/gallery", label: "Gallery" },
 ];
 
-const pills = {
-  overlay: "bg-black/20 backdrop-blur-[8px]",
-  solid: "bg-cream text-ink",
+// overlay: over a photo. solid: on ink pages. light: on cream pages.
+const styles = {
+  overlay: { header: "text-cream", pill: "bg-black/20 backdrop-blur-[8px]" },
+  solid: { header: "text-cream", pill: "bg-cream text-ink" },
+  light: { header: "text-ink", pill: "bg-ink text-cream" },
 };
 
-export function Nav({ variant = "overlay" }: { variant?: keyof typeof pills }) {
+export function Nav({
+  variant = "overlay",
+}: {
+  variant?: keyof typeof styles;
+}) {
+  const { header, pill } = styles[variant];
+
   return (
-    <header className="relative flex items-center justify-between px-8 py-5 text-cream">
+    <header
+      className={`relative flex items-center justify-between px-8 py-5 ${header}`}
+    >
       <nav
         aria-label="Main"
         style={delay(0)}
-        className={`fade flex gap-2.5 overflow-hidden rounded-[25px] px-[18px] py-2 ${pills[variant]}`}
+        className={`fade flex gap-2.5 overflow-hidden rounded-[25px] px-[18px] py-2 ${pill}`}
       >
         {links.map(({ href, label }) => (
           <Link
@@ -41,7 +50,7 @@ export function Nav({ variant = "overlay" }: { variant?: keyof typeof pills }) {
         style={delay(0)}
         className="fade absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
       >
-        <Image src="/brand/tent-mark.svg" alt="" width={36} height={32.8965} />
+        <span aria-hidden className="tent-mark block h-[32.8965px] w-9" />
       </Link>
 
       <ButtonLink
