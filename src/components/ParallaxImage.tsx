@@ -26,7 +26,7 @@ export function ParallaxImage({
       const vh = window.innerHeight;
       const centre =
         (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
-      const offset = Math.max(-1, Math.min(1, centre)) * rect.height * 0.07;
+      const offset = Math.max(-1, Math.min(1, centre)) * rect.height * 0.12;
       el.style.setProperty("--py", `${offset.toFixed(1)}px`);
     };
 
@@ -47,7 +47,7 @@ export function ParallaxImage({
   return (
     <div ref={frame} className="absolute inset-0 overflow-hidden">
       <div
-        className="absolute inset-x-0 -top-[8%] -bottom-[8%]"
+        className="absolute inset-x-0 -top-[14%] -bottom-[14%]"
         style={{ transform: "translate3d(0, var(--py, 0px), 0)" }}
       >
         <Image

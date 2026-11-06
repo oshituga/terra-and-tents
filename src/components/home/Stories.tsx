@@ -45,7 +45,7 @@ export function Stories() {
         {stories.map((story, i) => (
           <FadeIn
             key={story.couple}
-            delay={i * 150}
+            delay={i * 200}
             className={`relative flex min-w-0 flex-1 flex-col justify-center overflow-hidden pt-[360px] pb-10 ${story.align}`}
           >
             <ParallaxImage
@@ -54,7 +54,7 @@ export function Stories() {
               sizes="(min-width: 768px) 50vw, 100vw"
             />
             <FadeIn
-              delay={i * 150 + 300}
+              delay={i * 200 + 1000}
               className="relative w-[449px] bg-cream p-8"
             >
               <article className="flex flex-col items-start gap-11">
