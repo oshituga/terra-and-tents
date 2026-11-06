@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "./ButtonLink";
+import { delay } from "./motion";
 
 const links = [
   { href: "/about", label: "About" },
@@ -14,7 +15,8 @@ export function Nav() {
     <header className="relative flex items-center justify-between px-8 py-5 text-cream">
       <nav
         aria-label="Main"
-        className="flex gap-2.5 overflow-hidden rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]"
+        style={delay(100)}
+        className="rise flex gap-2.5 overflow-hidden rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]"
       >
         {links.map(({ href, label }) => (
           <Link
@@ -30,12 +32,19 @@ export function Nav() {
       <Link
         href="/"
         aria-label="Terra & Tent home"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+        style={delay(180)}
+        className="rise absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
       >
         <Image src="/brand/tent-mark.svg" alt="" width={36} height={32.8965} />
       </Link>
 
-      <ButtonLink href="/contact" variant="underline" compact>
+      <ButtonLink
+        href="/contact"
+        variant="underline"
+        compact
+        className="rise"
+        style={delay(260)}
+      >
         Make enquiries
       </ButtonLink>
     </header>

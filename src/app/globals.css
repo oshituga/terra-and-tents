@@ -19,8 +19,118 @@
   --text-display-l--letter-spacing: -0.05em;
 }
 
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* Entrance: elements rise softly into place. Delay comes from --d. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes rise-line {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+}
+
+.rise {
+  animation: rise 1100ms var(--ease-out) var(--d, 0ms) both;
+}
+
+.rise-mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.1em;
+  margin-block: -0.1em;
+}
+
+.rise-line {
+  display: block;
+  animation: rise-line 1200ms var(--ease-out) var(--d, 0ms) both;
+}
+
+.settle {
+  animation: settle 1800ms var(--ease-out) both;
+}
+
+/* Hover: letters roll up one after another, a copy rises from below. */
+.roll {
+  display: inline-flex;
+  overflow: hidden;
+  height: 1lh;
+}
+
+.roll-char {
+  display: inline-block;
+  white-space: pre;
+  text-shadow: 0 1lh currentColor;
+  transition: transform 550ms var(--ease-out) calc(var(--i) * 14ms);
+}
+
+/* Underline buttons: line wipes out to the right and redraws from the left. */
+@keyframes wipe {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  45% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  55% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.underline-line {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: currentColor;
+}
+
+@media (hover: hover) {
+  .group:hover .roll-char {
+    transform: translateY(-1lh);
+  }
+
+  .group:hover .underline-line {
+    animation: wipe 750ms var(--ease-out);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .rise-line,
+  .settle,
+  .underline-line {
+    animation: none !important;
+  }
+
+  .roll-char {
+    transition: none;
+  }
 }
