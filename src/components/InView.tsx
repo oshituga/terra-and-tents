@@ -17,11 +17,11 @@ export function InView({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // Wait until it is properly on screen, or fully visible for anything at
+    // Wait until it is properly on screen, or nearly fully visible for anything at
     // the very end of the page that can never scroll past the bottom tenth.
     const observers = [
       { threshold: 0, rootMargin: "0px 0px -10% 0px" },
-      { threshold: 1 },
+      { threshold: 0.9 },
     ].map((options) => {
       const io = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
