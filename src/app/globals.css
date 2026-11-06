@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #2d211c;
+  --color-cream: #faf7f2;
+  --color-oat: #eadbc2;
+  --color-clay: #d9b48c;
+  --color-tan: #c99a6b;
+
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-saphion), ui-serif, Georgia, serif;
+
+  --text-body: 16px;
+  --text-body--line-height: 21px;
+  --text-body--letter-spacing: -0.03em;
+
+  --text-display-l: 64px;
+  --text-display-l--line-height: 0.88;
+  --text-display-l--letter-spacing: -0.05em;
+}
+
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-flow: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Entrance: plain fades in sequence. Delay comes from --d. */
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.fade {
+  animation: fade 900ms ease-out var(--d, 0ms) both;
+}
+
+/* Scroll reveal: words fill from 30% to full ink as --p goes 0 to 1. */
+.reveal-word {
+  opacity: clamp(
+    0.3,
+    calc(0.3 + (var(--p, 0) * 1.35 * var(--n) - var(--i)) * 0.7),
+    1
+  );
+}
+
+.slide-track {
+  transform: translate3d(calc(var(--p, 0) * var(--shift, 0px) * -1), 0, 0);
+  will-change: transform;
+}
+
+/* In view: sections fade in once as they scroll into view. */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1000ms ease-out var(--d, 0ms);
+}
+
+.fade-in[data-in] {
+  opacity: 1;
+}
+
+/* Scroll-linked cards: each rises and fades in a little behind the one before. */
+.rise-card {
+  --t: clamp(0, calc((var(--q, 0) - var(--i) * 0.12) / 0.55), 1);
+  opacity: var(--t);
+  transform: translate3d(0, calc((1 - var(--t)) * 140px), 0);
+  will-change: transform, opacity;
+}
+
+/* Hover: the label drifts up out of focus as a copy rises in sharp. */
+.swap {
+  --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  display: inline-grid;
+}
+
+.swap > * {
+  grid-area: 1 / 1;
+  transition:
+    transform 800ms var(--swap-ease),
+    filter 800ms var(--swap-ease),
+    opacity 520ms var(--swap-ease);
+}
+
+.swap-in {
+  opacity: 0;
+  transform: translateY(45%);
+  filter: blur(3px);
+}
+
+.underline-line {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (hover: hover) {
+  .group:hover .swap-out {
+    opacity: 0;
+    transform: translateY(-45%);
+    filter: blur(3px);
+    transition-delay: 0ms;
+  }
+
+  .group:hover .swap-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition-delay: 60ms;
+  }
+
+  .group:hover .underline-line {
+    transform: scaleX(0.3);
+  }
+}
+
+.group:focus-visible .swap-out {
+  opacity: 0;
+}
+
+.group:focus-visible .swap-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    animation: none !important;
+  }
+
+  .reveal-word,
+  .fade-in,
+  .rise-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .swap > *,
+  .underline-line {
+    transition: none;
+  }
+}
