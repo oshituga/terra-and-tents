@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { RollText } from "./RollText";
+import { SwapText } from "./SwapText";
 
 type Variant = "solid" | "underline";
 
@@ -30,7 +30,7 @@ export function ButtonLink({
       style={style}
       className={`group relative inline-flex items-center justify-center px-6 text-body whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current ${compact ? "py-[15px]" : "py-4"} ${variants[variant]} ${className}`}
     >
-      <RollText>{children}</RollText>
+      <SwapText>{children}</SwapText>
       {variant === "underline" && (
         <span aria-hidden className="underline-line" />
       )}

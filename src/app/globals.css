@@ -71,38 +71,24 @@ body {
   animation: settle 2600ms var(--ease-flow) both;
 }
 
-/* Hover: letters roll up one after another, a copy rises from below. */
-.roll {
-  display: inline-flex;
-  overflow: hidden;
-  height: 1lh;
+/* Hover: the label drifts up out of focus as a copy rises in sharp. */
+.swap {
+  --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  display: inline-grid;
 }
 
-.roll-char {
-  display: inline-block;
-  white-space: pre;
-  text-shadow: 0 1lh currentColor;
-  transition: transform 550ms var(--ease-out) calc(var(--i) * 14ms);
+.swap > * {
+  grid-area: 1 / 1;
+  transition:
+    transform 800ms var(--swap-ease),
+    filter 800ms var(--swap-ease),
+    opacity 520ms var(--swap-ease);
 }
 
-/* Underline buttons: line wipes out to the right and redraws from the left. */
-@keyframes wipe {
-  0% {
-    transform: scaleX(1);
-    transform-origin: right;
-  }
-  45% {
-    transform: scaleX(0);
-    transform-origin: right;
-  }
-  55% {
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  100% {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
+.swap-in {
+  opacity: 0;
+  transform: translateY(45%);
+  filter: blur(3px);
 }
 
 .underline-line {
@@ -111,27 +97,48 @@ body {
   bottom: 0;
   height: 1.5px;
   background: currentColor;
+  transition: transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @media (hover: hover) {
-  .group:hover .roll-char {
-    transform: translateY(-1lh);
+  .group:hover .swap-out {
+    opacity: 0;
+    transform: translateY(-45%);
+    filter: blur(3px);
+    transition-delay: 0ms;
+  }
+
+  .group:hover .swap-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition-delay: 60ms;
   }
 
   .group:hover .underline-line {
-    animation: wipe 750ms var(--ease-out);
+    transform: scaleX(0.3);
   }
+}
+
+.group:focus-visible .swap-out {
+  opacity: 0;
+}
+
+.group:focus-visible .swap-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .rise-line,
-  .settle,
-  .underline-line {
+  .settle {
     animation: none !important;
   }
 
-  .roll-char {
+  .swap > *,
+  .underline-line {
     transition: none;
   }
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "./ButtonLink";
 import { delay } from "./motion";
-import { RollText } from "./RollText";
+import { SwapText } from "./SwapText";
 
 const links = [
   { href: "/about", label: "About" },
@@ -25,7 +25,7 @@ export function Nav() {
             href={href}
             className="group px-[18px] py-2 text-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
           >
-            <RollText>{label}</RollText>
+            <SwapText>{label}</SwapText>
           </Link>
         ))}
       </nav>
