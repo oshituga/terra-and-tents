@@ -12,7 +12,7 @@ export function Cta() {
       <div className="absolute inset-0 -z-20">
         <ParallaxImage
           src={cta}
-          alt="A long reception table dressed in white and dark linen, lined with white chairs and flowers, facing a draped top table"
+          alt="A rustic wooden drinks cart with glass dispensers and glasses on a lawn, beside woven lanterns and a patterned rug"
           sizes="100vw"
         />
       </div>

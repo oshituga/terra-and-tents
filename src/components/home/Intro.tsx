@@ -16,19 +16,19 @@ const words = statement.split(" ");
 const photos = [
   {
     src: intro1,
-    alt: "A ceremony canopy of red roses in a palace courtyard, seen through a carved stone arch",
+    alt: "A long wooden table set with gold-rimmed chargers, folded napkins, crystal glasses and small white flowers",
   },
   {
     src: intro2,
-    alt: "White draped chairs and a gold table set beneath a white canvas pergola on a lawn",
+    alt: "A wooden ceremony door frame topped with dried grasses in an orchard, with rows of chairs beneath the trees",
   },
   {
     src: intro3,
-    alt: "Rows of white and gold chairs on a lawn beside a villa, with flower stands and a welcome sign",
+    alt: "Bunches of dried flowers hanging from a branch above a still lake edged with pine forest",
   },
   {
     src: intro4,
-    alt: "A couple holding hands beneath a wooden arch dressed in white roses, greenery and draped linen, with desert mountains behind",
+    alt: "A round table with terracotta plates, mustard napkins and a white vase of dried flowers under a canopy by the sea",
   },
 ];
 

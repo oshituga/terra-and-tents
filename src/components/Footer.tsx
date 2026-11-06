@@ -52,7 +52,7 @@ export function Footer() {
               </nav>
             </FadeIn>
             <FadeIn delay={160} className="flex shrink-0 flex-col gap-8">
-              <Label>Explore</Label>
+              <Label>Follow</Label>
               <ul className="flex flex-col gap-5">
                 {social.map(({ href, label }) => (
                   <li key={href}>
