@@ -17,6 +17,14 @@
   --text-display-l: 64px;
   --text-display-l--line-height: 0.88;
   --text-display-l--letter-spacing: -0.05em;
+
+  --text-display-m: 40px;
+  --text-display-m--line-height: 0.88;
+  --text-display-m--letter-spacing: -0.05em;
+
+  --text-display-s: 32px;
+  --text-display-s--line-height: 0.88;
+  --text-display-s--letter-spacing: -0.05em;
 }
 
 :root {

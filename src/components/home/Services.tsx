@@ -73,7 +73,7 @@ export function Services() {
     >
       <div className="flex w-full flex-col items-end px-8 py-10">
         <FadeIn>
-          <h2 className="w-[616px] text-center font-display text-[40px] leading-[0.88] font-light tracking-[-0.05em] uppercase">
+          <h2 className="w-[616px] text-center font-display text-display-m font-light uppercase">
             From an empty field to a room people talk about for years
           </h2>
         </FadeIn>
@@ -87,7 +87,7 @@ export function Services() {
             style={{ "--i": i } as CSSProperties}
           >
             <div className="flex h-5 items-center">
-              <h3 className="font-display text-[32px] leading-[47px] font-light tracking-[-0.05em] whitespace-nowrap uppercase">
+              <h3 className="font-display text-display-s leading-[47px] font-light whitespace-nowrap uppercase">
                 {title}
               </h3>
             </div>

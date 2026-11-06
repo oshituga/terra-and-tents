@@ -89,7 +89,7 @@ export function Intro() {
       <div className="sticky top-0 flex h-svh flex-col items-center gap-[14px] overflow-hidden pt-[70px]">
         <div className="px-8 py-10">
           <p
-            className="w-[781px] text-center font-display text-[40px] leading-[0.88] font-light tracking-[-0.05em] uppercase"
+            className="w-[781px] text-center font-display text-display-m font-light uppercase"
             style={{ "--n": words.length } as CSSProperties}
           >
             {words.map((word, i) => (
