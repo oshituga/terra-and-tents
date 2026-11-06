@@ -35,21 +35,33 @@ const quotes = [
 const ADVANCE_MS = 8000;
 
 export function Testimonials() {
-  const [active, setActive] = useState(0);
+  const [{ active, prev, dir }, setSlide] = useState({
+    active: 0,
+    prev: -1,
+    dir: 0,
+  });
   const [paused, setPaused] = useState(false);
+
+  const go = (step: number) =>
+    setSlide((s) => ({
+      active: (s.active + step + quotes.length) % quotes.length,
+      prev: s.active,
+      dir: step,
+    }));
 
   useEffect(() => {
     if (paused) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setTimeout(
-      () => setActive((i) => (i + 1) % quotes.length),
-      ADVANCE_MS,
-    );
+    const id = setTimeout(() => go(1), ADVANCE_MS);
     return () => clearTimeout(id);
   }, [active, paused]);
 
-  const go = (step: number) =>
-    setActive((i) => (i + step + quotes.length) % quotes.length);
+  const slideState = (i: number) => {
+    const way = dir > 0 ? "next" : "prev";
+    if (i === active) return dir === 0 ? "still" : `in-${way}`;
+    if (i === prev) return `out-${way}`;
+    return undefined;
+  };
 
   return (
     <section
@@ -66,8 +78,8 @@ export function Testimonials() {
           <div
             key={src.src}
             aria-hidden={i !== active}
-            className="slide absolute inset-0"
-            data-active={i === active ? "" : undefined}
+            className="tslide absolute inset-0"
+            data-state={slideState(i)}
           >
             <ParallaxImage src={src} alt={alt} sizes="100vw" />
           </div>
