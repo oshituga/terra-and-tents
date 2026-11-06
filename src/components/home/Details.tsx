@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { ButtonLink } from "../ButtonLink";
 import { FadeIn } from "../FadeIn";
@@ -65,7 +65,9 @@ const photos: { src: StaticImageData; alt: string }[] = [
   },
 ];
 
-// Slot sizes from the 1440px design, left to right. The two end slots sit off screen.
+// Slot sizes from the 1440px design, left to right. The two end slots sit off
+// screen. Each photo is drawn at the largest size and moved and scaled, which
+// keeps the motion on the compositor instead of re-laying out every frame.
 const slots = [
   [27, 222],
   [206, 275],
@@ -84,28 +86,85 @@ const START =
 const lefts = slots.map((_, i) =>
   slots.slice(0, i).reduce((x, [w]) => x + w + GAP, START),
 );
-const STEP_MS = 3200;
-const u = (px: number) => `calc(100cqw * ${px / 1440})`;
+const widths = slots.map(([w]) => w);
+const heights = slots.map(([, h]) => h);
+const TILE_W = 331;
+const TILE_H = 441;
+const LAST = slots.length - 1;
+const SLOT_MS = 2600;
+
+// Catmull-Rom curve through the slot values, so size and speed change
+// gradually instead of jumping at each slot.
+function along(values: number[], f: number) {
+  const k = Math.floor(f);
+  const t = f - k;
+  const at = (i: number) => values[Math.max(0, Math.min(LAST, i))];
+  const [p0, p1, p2, p3] = [at(k - 1), at(k), at(k + 1), at(k + 2)];
+  return (
+    0.5 *
+    (2 * p1 +
+      (p2 - p0) * t +
+      (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t +
+      (3 * p1 - p0 - 3 * p2 + p3) * t * t * t)
+  );
+}
+
+// Lay the photos out edge to edge from the leftmost one, always GAP apart,
+// so they can never overlap. At whole slot positions this is the design.
+function layout(t: number) {
+  const n = photos.length;
+  const order = photos
+    .map((_, i) => ({ i, f: (((i - t) % n) + n) % n }))
+    .sort((a, b) => a.f - b.f);
+  const out: string[] = [];
+  let x = along(lefts, order[0].f);
+  for (const { i, f } of order) {
+    const slot = Math.min(f, LAST);
+    const w = along(widths, slot);
+    const h = along(heights, slot);
+    const left = f > LAST ? lefts[LAST] : x;
+    out[i] =
+      `translate3d(${(left / 14.4).toFixed(4)}cqw, 0, 0) ` +
+      `scale(${(w / TILE_W).toFixed(4)}, ${(h / TILE_H).toFixed(4)})`;
+    x += w + GAP;
+  }
+  return out;
+}
+
+const initial = layout(0);
 
 export function Details() {
   const strip = useRef<HTMLDivElement>(null);
-  const [tick, setTick] = useState(0);
+  const tiles = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const el = strip.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let id = 0;
+
+    let t = 0;
+    let last = 0;
+    let raf = 0;
+
+    const frame = (now: number) => {
+      if (last) t += (now - last) / SLOT_MS;
+      last = now;
+      const transforms = layout(t);
+      tiles.current.forEach((tile, i) => {
+        if (tile) tile.style.transform = transforms[i];
+      });
+      raf = requestAnimationFrame(frame);
+    };
+
     const io = new IntersectionObserver(([entry]) => {
-      window.clearInterval(id);
-      if (entry.isIntersecting) {
-        id = window.setInterval(() => setTick((t) => t + 1), STEP_MS);
-      }
+      cancelAnimationFrame(raf);
+      last = 0;
+      if (entry.isIntersecting) raf = requestAnimationFrame(frame);
     });
     io.observe(el);
     return () => {
       io.disconnect();
-      window.clearInterval(id);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -135,39 +194,30 @@ export function Details() {
         ref={strip}
         className="relative aspect-[1440/449] w-full overflow-hidden [container-type:inline-size]"
       >
-        {photos.map(({ src, alt }, i) => {
-          const pos =
-            (((i - tick) % photos.length) + photos.length) % photos.length;
-          const slot = Math.min(pos, slots.length - 1);
-          const [w, h] = slots[slot];
-          const style: CSSProperties = {
-            left: u(lefts[slot]),
-            width: u(w),
-            height: u(h),
-            transition:
-              pos < slots.length - 1
-                ? `left ${STEP_MS}ms linear, width ${STEP_MS}ms linear, height ${STEP_MS}ms linear`
-                : "none",
-          };
-          return (
-            <div
-              key={src.src}
-              aria-hidden={pos === 0 || pos >= slots.length - 1}
-              className="absolute bottom-2 overflow-hidden bg-clay"
-              style={style}
-            >
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                sizes="25vw"
-                placeholder="blur"
-                quality={90}
-                className="object-cover"
-              />
-            </div>
-          );
-        })}
+        {photos.map(({ src, alt }, i) => (
+          <div
+            key={src.src}
+            ref={(node) => {
+              tiles.current[i] = node;
+            }}
+            className="absolute bottom-2 left-0 origin-bottom-left overflow-hidden bg-clay will-change-transform"
+            style={{
+              width: "calc(100cqw * " + TILE_W / 1440 + ")",
+              height: "calc(100cqw * " + TILE_H / 1440 + ")",
+              transform: initial[i],
+            }}
+          >
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes="25vw"
+              placeholder="blur"
+              quality={90}
+              className="object-cover"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );
