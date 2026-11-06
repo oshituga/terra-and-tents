@@ -1,3 +1,4 @@
+import { Cta } from "@/components/home/Cta";
 import { Details } from "@/components/home/Details";
 import { Hero } from "@/components/home/Hero";
 import { Intro } from "@/components/home/Intro";
@@ -18,6 +19,7 @@ export default function Home() {
       <Testimonials />
       <Details />
       <JournalTeaser />
+      <Cta />
     </main>
   );
 }
