@@ -180,7 +180,7 @@ export function Details() {
           </h2>
         </FadeIn>
         <FadeIn className="flex items-end justify-between px-8 py-5">
-          <p className="w-[574px] text-body">
+          <p className="w-[426px] text-body">
             Hand-tied posies, pressed linen, the candle that lasts until the
             final dance. We plan the small things as carefully as the big ones.
           </p>
