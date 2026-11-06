@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { FadeIn } from "@/components/FadeIn";
-import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { delay } from "@/components/motion";
@@ -22,7 +21,7 @@ function Detail({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start gap-[clamp(6px,1.2vh,16px)]">
       <p className="text-body opacity-50">{label}</p>
       {children}
     </div>
@@ -32,10 +31,10 @@ function Detail({
 export default function Contact() {
   return (
     <>
-      <main className="bg-ink text-cream">
+      <main className="flex min-h-svh flex-col justify-between bg-ink text-cream">
         <Nav variant="solid" />
 
-        <header className="flex flex-col items-center gap-10 px-page pt-20 pb-5 text-center">
+        <header className="flex flex-col items-center gap-[clamp(12px,2vh,40px)] px-page pt-[clamp(16px,3.5vh,80px)] pb-[clamp(8px,1vh,20px)] text-center">
           <div
             className="fade flex flex-col items-center gap-5"
             style={delay(350)}
@@ -53,7 +52,7 @@ export default function Contact() {
         </header>
 
         <div className="max-page flex items-end gap-8">
-          <FadeIn className="dim-group flex min-w-0 flex-1 flex-col gap-8 pt-[70px] pl-8">
+          <FadeIn className="dim-group flex min-w-0 flex-1 flex-col gap-[clamp(12px,1.6vh,32px)] pt-[clamp(16px,4vh,70px)] pl-8">
             <Detail label="Studio">
               <address className="w-[455px] font-display text-display-s font-light not-italic uppercase">
                 14 Orchard Lane, Chipping Campden, GL55 6AB
@@ -83,20 +82,19 @@ export default function Contact() {
 
           <FadeIn
             delay={100}
-            className="w-[861px] shrink-0 bg-cream pt-[62px] pb-8 pl-8 text-ink"
+            className="w-[861px] shrink-0 bg-cream pt-[clamp(20px,3vh,62px)] pb-[clamp(12px,1.6vh,32px)] pl-8 text-ink"
           >
             <ContactForm />
           </FadeIn>
         </div>
 
-        <FadeIn className="flex justify-end px-page py-[30px]">
+        <FadeIn className="flex justify-end px-page py-[clamp(10px,1.5vh,30px)]">
           <p className="text-body">
             Studio visits are by appointment, so let us know when you would like
             to come by.
           </p>
         </FadeIn>
       </main>
-      <Footer />
     </>
   );
 }
