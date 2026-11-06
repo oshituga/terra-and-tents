@@ -98,6 +98,7 @@ export function Services() {
                 fill
                 sizes="(min-width: 768px) 25vw, 90vw"
                 placeholder="blur"
+                quality={90}
                 className="object-cover"
               />
             </div>
@@ -110,8 +111,8 @@ export function Services() {
         <p className="w-[508px] text-body">
           We design the look, source the flowers, and build everything
           ourselves. That includes the tents, the arches, the tables and the
-          lighting. Each wedding is planned around its own site, so the
-          finished room feels like it belongs there.
+          lighting. Each wedding is planned around its own site, so the finished
+          room feels like it belongs there.
         </p>
         <ButtonLink href="/weddings" variant="underline" compact>
           See our work

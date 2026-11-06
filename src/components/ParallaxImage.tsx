@@ -56,6 +56,7 @@ export function ParallaxImage({
           fill
           sizes={sizes}
           placeholder="blur"
+          quality={90}
           className="object-cover"
         />
       </div>

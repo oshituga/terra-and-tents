@@ -19,5 +19,5 @@ export function SmoothScroll() {
   );
 
   if (reduced) return null;
-  return <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }} />;
+  return <ReactLenis root options={{ lerp: 0.08, smoothWheel: true }} />;
 }

@@ -162,6 +162,7 @@ export function Details() {
                 fill
                 sizes="25vw"
                 placeholder="blur"
+                quality={90}
                 className="object-cover"
               />
             </div>
