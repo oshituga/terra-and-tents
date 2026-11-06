@@ -6,6 +6,7 @@ import { ButtonLink } from "../ButtonLink";
 import intro1 from "@/assets/intro-1.webp";
 import intro2 from "@/assets/intro-2.webp";
 import intro3 from "@/assets/intro-3.webp";
+import intro4 from "@/assets/intro-4.webp";
 
 const statement =
   "Terra & Tent styles weddings held outdoors. We work under canvas, between trees, and on land that was borrowed for the day. Our flowers are real, our linen is raw, and our lighting is whatever the evening gives us.";
@@ -24,6 +25,10 @@ const photos = [
   {
     src: intro3,
     alt: "Rows of white and gold chairs on a lawn beside a villa, with flower stands and a welcome sign",
+  },
+  {
+    src: intro4,
+    alt: "A couple holding hands beneath a wooden arch dressed in white roses, greenery and draped linen, with desert mountains behind",
   },
 ];
 
