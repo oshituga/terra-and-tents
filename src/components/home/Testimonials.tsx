@@ -12,7 +12,7 @@ const quotes = [
   {
     quote:
       "The moment we walked in, we stopped talking. It looked better than anything we had pictured, and it felt like us.",
-    by: "Maja & Oliver, Cotswolds",
+    by: "Maja & Oliver, Dalarna, Sweden",
     src: majaOliver,
     alt: "A newly married couple kissing in a long grass meadow below red farm barns and pine trees under a cloudy sky",
   },

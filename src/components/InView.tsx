@@ -17,17 +17,22 @@ export function InView({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
+    // Wait until it is properly on screen, or fully visible for anything at
+    // the very end of the page that can never scroll past the bottom fifth.
+    const observers = [
+      { threshold: 0, rootMargin: "0px 0px -20% 0px" },
+      { threshold: 1 },
+    ].map((options) => {
+      const io = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
           setShown(true);
-          io.disconnect();
+          observers.forEach((o) => o.disconnect());
         }
-      },
-      { threshold: 0, rootMargin: "0px 0px -20% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
+      }, options);
+      io.observe(el);
+      return io;
+    });
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   return (
