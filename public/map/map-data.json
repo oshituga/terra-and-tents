@@ -1,0 +1,301 @@
+{
+ "map": {
+  "width": 2000.0,
+  "height": 1407.8,
+  "metresPerPx": 4.491282990676094,
+  "bounds": {
+   "west": -1.8476,
+   "south": 52.0178,
+   "east": -1.7164,
+   "north": 52.0746
+  },
+  "projection": "web-mercator, linear in map px"
+ },
+ "studio": {
+  "name": "Terra & Tent Studio",
+  "address": "14 Orchard Lane, Chipping Campden",
+  "x": 999.7,
+  "y": 705.1,
+  "lat": 52.04616,
+  "lon": -1.78202
+ },
+ "labels": [
+  {
+   "text": "BROADWAY HILL",
+   "x": 183.9,
+   "y": 1233.7,
+   "angle": 0.0,
+   "size": 13,
+   "tracking": 40,
+   "kind": "hill",
+   "opacity": 0.8
+  },
+  {
+   "text": "SAINTBURY",
+   "x": 242.9,
+   "y": 492.2,
+   "angle": 0.0,
+   "size": 19,
+   "tracking": 26,
+   "kind": "village",
+   "opacity": 0.95
+  },
+  {
+   "text": "WILLERSEY HILL",
+   "x": 261.7,
+   "y": 824.3,
+   "angle": 0.0,
+   "size": 13,
+   "tracking": 40,
+   "kind": "hill",
+   "opacity": 0.8
+  },
+  {
+   "text": "WESTON-SUB-EDGE",
+   "x": 450.1,
+   "y": 157.8,
+   "angle": 0.0,
+   "size": 19,
+   "tracking": 26,
+   "kind": "village",
+   "opacity": 0.95
+  },
+  {
+   "text": "DOVER'S HILL",
+   "x": 695.9,
+   "y": 472.4,
+   "angle": 0.0,
+   "size": 13,
+   "tracking": 40,
+   "kind": "hill",
+   "opacity": 0.8
+  },
+  {
+   "text": "CHIPPING CAMPDEN",
+   "x": 1009.3,
+   "y": 605.0,
+   "angle": 0.0,
+   "size": 30,
+   "tracking": 28,
+   "kind": "town",
+   "opacity": 1.0
+  },
+  {
+   "text": "BROAD CAMPDEN",
+   "x": 1193.7,
+   "y": 903.3,
+   "angle": 0.0,
+   "size": 19,
+   "tracking": 26,
+   "kind": "village",
+   "opacity": 0.95
+  },
+  {
+   "text": "DRAYCOTT",
+   "x": 1668.3,
+   "y": 1341.7,
+   "angle": 0.0,
+   "size": 13,
+   "tracking": 22,
+   "kind": "hamlet",
+   "opacity": 0.85
+  },
+  {
+   "text": "PAXFORD",
+   "x": 1767.6,
+   "y": 877.9,
+   "angle": 0.0,
+   "size": 19,
+   "tracking": 26,
+   "kind": "village",
+   "opacity": 0.95
+  },
+  {
+   "text": "EBRINGTON",
+   "x": 1775.5,
+   "y": 413.4,
+   "angle": 0.0,
+   "size": 19,
+   "tracking": 26,
+   "kind": "village",
+   "opacity": 0.95
+  },
+  {
+   "text": "B4035",
+   "x": 1547.3,
+   "y": 624.3,
+   "angle": 48.1,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "B4081",
+   "x": 900.9,
+   "y": 934.7,
+   "angle": -70.6,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "A44",
+   "x": 301.0,
+   "y": 1060.4,
+   "angle": 34.0,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "B4632",
+   "x": 385.3,
+   "y": 245.2,
+   "angle": -78.3,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "B4479",
+   "x": 1726.2,
+   "y": 1027.7,
+   "angle": -52.8,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "KINGCOMB LANE",
+   "x": 840.1,
+   "y": 451.8,
+   "angle": -31.1,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "BUCKLE STREET",
+   "x": 350.5,
+   "y": 1001.2,
+   "angle": 84.4,
+   "size": 10,
+   "tracking": 22,
+   "kind": "road",
+   "opacity": 0.85
+  },
+  {
+   "text": "NORCOMBE WOOD",
+   "x": 1065.1,
+   "y": 1380.0,
+   "angle": 0.0,
+   "size": 11,
+   "tracking": 40,
+   "kind": "wood",
+   "opacity": 0.7
+  },
+  {
+   "text": "CAMPDEN WOOD",
+   "x": 706.3,
+   "y": 679.4,
+   "angle": 0.0,
+   "size": 11,
+   "tracking": 40,
+   "kind": "wood",
+   "opacity": 0.7
+  },
+  {
+   "text": "LYNCHES WOOD",
+   "x": 662.6,
+   "y": 329.4,
+   "angle": 0.0,
+   "size": 11,
+   "tracking": 40,
+   "kind": "wood",
+   "opacity": 0.7
+  },
+  {
+   "text": "DARK COPPICE",
+   "x": 1021.7,
+   "y": 128.0,
+   "angle": 0.0,
+   "size": 11,
+   "tracking": 40,
+   "kind": "wood",
+   "opacity": 0.7
+  },
+  {
+   "text": "THE DINGLE",
+   "x": 864.7,
+   "y": 149.3,
+   "angle": 0.0,
+   "size": 11,
+   "tracking": 40,
+   "kind": "wood",
+   "opacity": 0.7
+  },
+  {
+   "text": "THE CAM",
+   "x": 1228.1,
+   "y": 578.9,
+   "angle": -36.0,
+   "size": 10,
+   "tracking": 30,
+   "kind": "water",
+   "opacity": 0.75
+  },
+  {
+   "text": "MARBROOK",
+   "x": 1554.2,
+   "y": 1020.8,
+   "angle": -3.6,
+   "size": 10,
+   "tracking": 30,
+   "kind": "water",
+   "opacity": 0.75
+  },
+  {
+   "text": "BLOCKLEY BROOK",
+   "x": 1695.6,
+   "y": 1218.0,
+   "angle": -26.6,
+   "size": 10,
+   "tracking": 30,
+   "kind": "water",
+   "opacity": 0.75
+  }
+ ],
+ "spotHeights": [
+  {
+   "x": 186.0,
+   "y": 1274.0,
+   "text": "312 m"
+  },
+  {
+   "x": 262.0,
+   "y": 854.0,
+   "text": "271 m"
+  },
+  {
+   "x": 694.0,
+   "y": 494.0,
+   "text": "228 m"
+  }
+ ],
+ "attribution": [
+  {
+   "text": "\u00a9 OpenStreetMap contributors",
+   "href": "https://www.openstreetmap.org/copyright"
+  },
+  {
+   "text": "Elevation: AWS Terrain Tiles",
+   "href": "https://registry.opendata.aws/terrain-tiles/"
+  }
+ ]
+}
