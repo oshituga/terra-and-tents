@@ -16,7 +16,7 @@ export function Nav() {
     <header className="relative flex items-center justify-between px-8 py-5 text-cream">
       <nav
         aria-label="Main"
-        style={delay(100)}
+        style={delay(0)}
         className="rise flex gap-2.5 overflow-hidden rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]"
       >
         {links.map(({ href, label }) => (
@@ -33,7 +33,7 @@ export function Nav() {
       <Link
         href="/"
         aria-label="Terra & Tent home"
-        style={delay(180)}
+        style={delay(50)}
         className="rise absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
       >
         <Image src="/brand/tent-mark.svg" alt="" width={36} height={32.8965} />
@@ -44,7 +44,7 @@ export function Nav() {
         variant="underline"
         compact
         className="rise"
-        style={delay(260)}
+        style={delay(100)}
       >
         Make enquiries
       </ButtonLink>

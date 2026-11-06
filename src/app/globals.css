@@ -21,6 +21,7 @@
 
 :root {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-flow: cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 body {
@@ -33,7 +34,8 @@ body {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
+    filter: blur(6px);
   }
 }
 
@@ -45,13 +47,12 @@ body {
 
 @keyframes settle {
   from {
-    opacity: 0;
-    transform: scale(1.06);
+    transform: scale(1.04);
   }
 }
 
 .rise {
-  animation: rise 1100ms var(--ease-out) var(--d, 0ms) both;
+  animation: rise 1500ms var(--ease-flow) var(--d, 0ms) both;
 }
 
 .rise-mask {
@@ -63,11 +64,11 @@ body {
 
 .rise-line {
   display: block;
-  animation: rise-line 1200ms var(--ease-out) var(--d, 0ms) both;
+  animation: rise-line 1500ms var(--ease-flow) var(--d, 0ms) both;
 }
 
 .settle {
-  animation: settle 1800ms var(--ease-out) both;
+  animation: settle 2600ms var(--ease-flow) both;
 }
 
 /* Hover: letters roll up one after another, a copy rises from below. */

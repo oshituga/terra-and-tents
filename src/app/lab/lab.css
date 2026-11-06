@@ -1,0 +1,176 @@
+.hv {
+  --e: cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transition: color 600ms var(--e);
+}
+
+.hv.solid {
+  border-radius: 25px;
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+.hv.line,
+.hv.link {
+  color: var(--color-cream);
+}
+
+.hv.link {
+  padding: 8px 18px;
+  border-radius: 20px;
+}
+
+.hv:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.hv-stack {
+  display: grid;
+  justify-items: center;
+}
+
+.hv-stack > * {
+  grid-area: 1 / 1;
+}
+
+.hv-b {
+  opacity: 0;
+}
+
+.hv-line {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.hv-fill,
+.hv-dot {
+  display: none;
+}
+
+/* A. Ink rise: a fill rises from the baseline and the label changes colour. */
+.hv-ink .hv-fill {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 600ms var(--e);
+}
+
+.hv-ink.solid .hv-fill {
+  background: var(--color-ink);
+}
+
+.hv-ink.line .hv-fill,
+.hv-ink.link .hv-fill {
+  background: var(--color-cream);
+}
+
+/* B. Soft focus: the label drifts up out of focus, a copy rises in sharp. */
+.hv-blur .hv-a,
+.hv-blur .hv-b {
+  transition:
+    transform 650ms var(--e),
+    opacity 650ms var(--e),
+    filter 650ms var(--e);
+}
+
+.hv-blur .hv-b {
+  transform: translateY(80%);
+  filter: blur(5px);
+}
+
+.hv-blur .hv-line {
+  transition: transform 650ms var(--e);
+}
+
+/* C. Tracking: letters open up, a small dot sets in before the label. */
+.hv-track .hv-a {
+  transition:
+    letter-spacing 650ms var(--e),
+    transform 650ms var(--e);
+}
+
+.hv-track .hv-b {
+  visibility: hidden;
+  letter-spacing: 0.05em;
+  padding-left: 12px;
+}
+
+.hv-track .hv-dot {
+  display: block;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateY(-50%) scale(0);
+  transition: transform 650ms var(--e);
+}
+
+.hv-track.link .hv-dot {
+  left: 12px;
+}
+
+@media (hover: hover) {
+  .hv-ink:hover .hv-fill {
+    clip-path: inset(0);
+  }
+
+  .hv-ink.solid:hover {
+    color: var(--color-cream);
+  }
+
+  .hv-ink.line:hover,
+  .hv-ink.link:hover {
+    color: var(--color-ink);
+  }
+
+  .hv-blur:hover .hv-a {
+    opacity: 0;
+    transform: translateY(-80%);
+    filter: blur(5px);
+  }
+
+  .hv-blur:hover .hv-b {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .hv-blur:hover .hv-line {
+    transform: scaleX(0.3);
+  }
+
+  .hv-track:hover .hv-a {
+    letter-spacing: 0.05em;
+    transform: translateX(6px);
+  }
+
+  .hv-track:hover .hv-dot {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hv,
+  .hv * {
+    transition: none !important;
+  }
+}
