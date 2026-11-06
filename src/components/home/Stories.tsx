@@ -53,10 +53,7 @@ export function Stories() {
               alt={story.alt}
               sizes="(min-width: 768px) 50vw, 100vw"
             />
-            <FadeIn
-              delay={i * 200 + 1000}
-              className="relative w-[449px] bg-cream p-8"
-            >
+            <div className="relative w-[449px] bg-cream p-8">
               <article className="flex flex-col items-start gap-11">
                 <p className="w-full text-right text-body">{story.place}</p>
                 <div className="flex flex-col gap-5">
@@ -69,7 +66,7 @@ export function Stories() {
                   Read their story
                 </ButtonLink>
               </article>
-            </FadeIn>
+            </div>
           </FadeIn>
         ))}
       </div>
