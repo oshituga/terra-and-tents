@@ -2,39 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "../ButtonLink";
 import { FadeIn } from "../FadeIn";
-import flowers from "@/assets/journal-flowers-every-season.webp";
-import candlelight from "@/assets/journal-candlelight-tables.webp";
-import tented from "@/assets/journal-tented-wedding.webp";
-
-const articles = [
-  {
-    title: "How to Choose Flowers for Every Season",
-    slug: "flowers-for-every-season",
-    author: "Eleanor Hart",
-    date: "2026-10-12",
-    dateLabel: "12 October 2026",
-    src: flowers,
-    alt: "A florist gathering an armful of cut flowers in a meadow garden",
-  },
-  {
-    title: "Candlelight Tables That Glow Until Midnight",
-    slug: "candlelight-tables",
-    author: "Rowan Ellis",
-    date: "2026-09-09",
-    dateLabel: "9 September 2026",
-    src: candlelight,
-    alt: "A long table lit by candles and string lights inside a timber barn draped with fabric",
-  },
-  {
-    title: "Planning a Tented Wedding From the Ground Up",
-    slug: "planning-a-tented-wedding",
-    author: "Eleanor Hart",
-    date: "2026-09-28",
-    dateLabel: "28 September 2026",
-    src: tented,
-    alt: "The peaked white roof of a large marquee against a deep blue sky",
-  },
-];
+import { articles } from "@/lib/journal";
 
 export function JournalTeaser() {
   return (
@@ -64,8 +32,8 @@ export function JournalTeaser() {
               </h3>
               <div className="relative h-[455px] w-full overflow-hidden bg-tan">
                 <Image
-                  src={article.src}
-                  alt={article.alt}
+                  src={article.cover.src}
+                  alt={article.cover.alt}
                   fill
                   sizes="(min-width: 768px) 28vw, 90vw"
                   placeholder="blur"
