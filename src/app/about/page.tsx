@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { AboutHero } from "@/components/about/Hero";
+import { AboutStory } from "@/components/about/Story";
 
 export const metadata: Metadata = {
   title: "About | Terra & Tent",
@@ -13,6 +14,7 @@ export default function About() {
     <>
       <main>
         <AboutHero />
+        <AboutStory />
       </main>
       <Footer />
     </>

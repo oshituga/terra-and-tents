@@ -106,7 +106,14 @@ export function Footer() {
           </div>
           <p className="flex gap-1">
             <span>Designed by:</span>
-            <span>Ayomide Oshituga</span>
+            <a
+              href="https://www.ayomide.website/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={smallLink}
+            >
+              <span className="sheen">Ayo</span>
+            </a>
           </p>
         </div>
       </FadeIn>
