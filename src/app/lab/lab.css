@@ -129,41 +129,41 @@
 }
 
 @media (hover: hover) {
-  .hv-ink:hover .hv-fill {
+  .hv-ink:is(:hover, [data-on] *) .hv-fill {
     clip-path: inset(0);
   }
 
-  .hv-ink.solid:hover {
+  .hv-ink.solid:is(:hover, [data-on] *) {
     color: var(--color-cream);
   }
 
-  .hv-ink.line:hover,
-  .hv-ink.link:hover {
+  .hv-ink.line:is(:hover, [data-on] *),
+  .hv-ink.link:is(:hover, [data-on] *) {
     color: var(--color-ink);
   }
 
-  .hv-blur:hover .hv-a {
+  .hv-blur:is(:hover, [data-on] *) .hv-a {
     opacity: 0;
     transform: translateY(-80%);
     filter: blur(5px);
   }
 
-  .hv-blur:hover .hv-b {
+  .hv-blur:is(:hover, [data-on] *) .hv-b {
     opacity: 1;
     transform: none;
     filter: none;
   }
 
-  .hv-blur:hover .hv-line {
+  .hv-blur:is(:hover, [data-on] *) .hv-line {
     transform: scaleX(0.3);
   }
 
-  .hv-track:hover .hv-a {
+  .hv-track:is(:hover, [data-on] *) .hv-a {
     letter-spacing: 0.05em;
     transform: translateX(6px);
   }
 
-  .hv-track:hover .hv-dot {
+  .hv-track:is(:hover, [data-on] *) .hv-dot {
     transform: translateY(-50%) scale(1);
   }
 }

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import heroImage from "@/assets/home-hero.webp";
 import "./lab.css";
+import { Autoplay } from "./Autoplay";
 
 const options = [
   {
@@ -52,37 +53,42 @@ export default function Lab() {
         Hover lab
       </h1>
       <p className="mt-3 w-[508px] text-body">
-        Three hover treatments on the real hero photo. Pick one and it goes on
-        every button and nav link.
+        Three hover treatments on the real hero photo, playing on a loop. Pause
+        it to try each one with your mouse. Pick one and it goes on every button
+        and nav link.
       </p>
 
-      <div className="mt-12 flex flex-col gap-12">
-        {options.map(({ kind, name, note }) => (
-          <section key={kind} className="flex flex-col gap-5">
-            <div>
-              <h2 className="text-body font-medium">{name}</h2>
-              <p className="mt-1 w-[508px] text-body opacity-80">{note}</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-8">
-              <nav className="flex gap-2.5 rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]">
-                {["About", "Weddings", "Journal", "Gallery"].map((l) => (
-                  <a key={l} href="#" className={`hv hv-${kind} link`}>
-                    <Label text={l} />
-                  </a>
-                ))}
-              </nav>
-              <div className="flex gap-2">
-                <a href="#" className={`hv hv-${kind} solid`}>
-                  <Label text="Begin your enquiry" />
-                </a>
-                <a href="#" className={`hv hv-${kind} line`}>
-                  <Label text="See our work" />
-                  <span aria-hidden className="hv-line" />
-                </a>
-              </div>
-            </div>
-          </section>
-        ))}
+      <div className="mt-8">
+        <Autoplay>
+          <div className="flex flex-col gap-12">
+            {options.map(({ kind, name, note }) => (
+              <section key={kind} className="flex flex-col gap-5">
+                <div>
+                  <h2 className="text-body font-medium">{name}</h2>
+                  <p className="mt-1 w-[508px] text-body opacity-80">{note}</p>
+                </div>
+                <div className="flex flex-wrap items-center gap-8">
+                  <nav className="flex gap-2.5 rounded-[25px] bg-black/20 px-[18px] py-2 backdrop-blur-[8px]">
+                    {["About", "Weddings", "Journal", "Gallery"].map((l) => (
+                      <a key={l} href="#" className={`hv hv-${kind} link`}>
+                        <Label text={l} />
+                      </a>
+                    ))}
+                  </nav>
+                  <div className="flex gap-2">
+                    <a href="#" className={`hv hv-${kind} solid`}>
+                      <Label text="Begin your enquiry" />
+                    </a>
+                    <a href="#" className={`hv hv-${kind} line`}>
+                      <Label text="See our work" />
+                      <span aria-hidden className="hv-line" />
+                    </a>
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
+        </Autoplay>
       </div>
     </main>
   );
