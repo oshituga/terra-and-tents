@@ -174,12 +174,12 @@ export function Details() {
       className="flex min-h-svh flex-col items-center justify-between gap-[130px] bg-cream pt-[70px] text-ink"
     >
       <div className="flex w-full flex-col gap-[14px]">
-        <FadeIn className="flex justify-center px-8 py-10">
+        <FadeIn className="flex justify-center px-page py-10">
           <h2 className="w-[506px] text-center font-display text-display-m font-light uppercase">
             The details you only notice when you look twice
           </h2>
         </FadeIn>
-        <FadeIn className="flex items-end justify-between px-8 py-5">
+        <FadeIn className="flex items-end justify-between px-page py-5">
           <p className="w-[426px] text-body">
             Hand-tied posies, pressed linen, the candle that lasts until the
             final dance. We plan the small things as carefully as the big ones.
@@ -192,7 +192,7 @@ export function Details() {
 
       <div
         ref={strip}
-        className="relative aspect-[1440/449] w-full overflow-hidden [container-type:inline-size]"
+        className="max-page relative aspect-[1440/449] overflow-hidden [container-type:inline-size]"
       >
         {photos.map(({ src, alt }, i) => (
           <div

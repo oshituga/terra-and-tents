@@ -20,11 +20,12 @@ export function AboutHero() {
 
       <Nav />
 
-      <div className="flex flex-1 flex-col items-end justify-between px-8 py-[60px]">
+      <div className="flex flex-1 flex-col items-end justify-between px-page py-[60px]">
         <p className="fade w-full text-body" style={delay(350)}>
           <span className="block w-[508px]">
-            From tablescapes to tents, we design and style weddings that feel
-            like you, rooted in natural materials, warm light and real flowers.
+            We are a small studio of designers, florists and builders. Every
+            wedding we take on is planned around one piece of ground and the
+            people standing on it.
           </span>
         </p>
 

@@ -7,7 +7,7 @@ export function Cta() {
   return (
     <section
       aria-label="Start planning"
-      className="relative isolate flex h-svh min-h-[640px] flex-col items-center justify-between overflow-hidden bg-ink px-8 py-10 text-cream"
+      className="relative isolate flex h-svh min-h-[640px] flex-col items-center justify-between overflow-hidden bg-ink px-page py-10 text-cream"
     >
       <div className="absolute inset-0 -z-20">
         <ParallaxImage

@@ -71,7 +71,7 @@ export function Testimonials() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative isolate flex min-h-svh flex-col items-end justify-center gap-20 overflow-hidden bg-ink p-8 text-cream"
+      className="relative isolate flex min-h-svh flex-col items-end justify-center gap-20 overflow-hidden bg-ink px-page py-8 text-cream"
     >
       <div className="absolute inset-0 -z-20 isolate">
         {quotes.map(({ src, alt }, i) => (

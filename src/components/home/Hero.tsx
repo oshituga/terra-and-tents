@@ -21,7 +21,7 @@ export function Hero() {
 
       <Nav />
 
-      <div className="flex flex-1 flex-col items-end justify-between px-8 pt-5 pb-[60px]">
+      <div className="flex flex-1 flex-col items-end justify-between px-page pt-5 pb-[60px]">
         <div className="fade flex w-full flex-col gap-5" style={delay(350)}>
           <p className="w-[508px] text-body">Terra &amp; Tent Studio</p>
           <div className="flex flex-col gap-1.5">

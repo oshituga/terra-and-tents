@@ -13,14 +13,14 @@ export default function NotFound() {
       <Nav variant="solid" />
 
       <div className="flex flex-1 flex-col justify-between py-[60px]">
-        <div className="fade flex flex-col gap-5 pl-8" style={delay(350)}>
+        <div className="fade flex flex-col gap-5 pl-page" style={delay(350)}>
           <p className="w-[508px] text-body">Lost in the field</p>
           <h1 className="w-[568px] font-display text-display-l font-light uppercase">
             This page has wandered off
           </h1>
         </div>
 
-        <div className="flex justify-end pr-8">
+        <div className="flex justify-end pr-page">
           <div className="flex flex-col gap-5">
             <p className="fade w-[529px] text-body" style={delay(350)}>
               The link may be broken, or the page may have moved on. Head back

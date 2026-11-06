@@ -26,7 +26,7 @@ export function Nav({
 
   return (
     <header
-      className={`relative flex items-center justify-between px-8 py-5 ${header}`}
+      className={`relative flex items-center justify-between px-page py-5 ${header}`}
     >
       <nav
         aria-label="Main"

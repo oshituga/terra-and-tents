@@ -42,7 +42,7 @@ export function JournalTeaser() {
       aria-label="From the journal"
       className="flex min-h-svh flex-col items-center justify-center gap-10 bg-ink py-10 text-cream"
     >
-      <FadeIn className="flex w-full items-start justify-between px-8 py-10">
+      <FadeIn className="flex w-full items-start justify-between px-page py-10">
         <p className="w-[395px] text-body">
           Read about how we plan a room, choose flowers through the year, and
           style outdoor weddings from the ground up.
@@ -52,7 +52,7 @@ export function JournalTeaser() {
         </h2>
       </FadeIn>
 
-      <div className="flex w-full items-start gap-2 px-8 py-10">
+      <div className="flex w-full items-start gap-2 px-page py-10">
         {articles.map((article, i) => (
           <FadeIn key={article.slug} delay={i * 100} className="w-[395px]">
             <Link
@@ -90,7 +90,7 @@ export function JournalTeaser() {
         ))}
       </div>
 
-      <div className="flex w-full justify-end px-8">
+      <div className="flex w-full justify-end px-page">
         <FadeIn>
           <ButtonLink href="/journal" variant="underline" compact>
             Read the journal

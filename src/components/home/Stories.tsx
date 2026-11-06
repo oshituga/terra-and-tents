@@ -29,9 +29,9 @@ export function Stories() {
   return (
     <section
       aria-label="Recent weddings"
-      className="flex min-h-svh flex-col items-center gap-[14px] bg-cream pt-[70px] text-ink"
+      className="flex min-h-svh flex-col items-center justify-center gap-[14px] bg-cream pt-[70px] text-ink"
     >
-      <FadeIn className="flex flex-col items-center gap-8 px-8 py-10">
+      <FadeIn className="flex flex-col items-center gap-8 px-page py-10">
         <h2 className="w-[781px] text-center font-display text-display-m font-light uppercase">
           Every wedding starts with a patch of ground and ends as someone’s
           favourite day
@@ -41,7 +41,7 @@ export function Stories() {
         </ButtonLink>
       </FadeIn>
 
-      <div className="flex w-full gap-2">
+      <div className="max-page flex gap-2">
         {stories.map((story, i) => (
           <FadeIn
             key={story.couple}
@@ -71,7 +71,7 @@ export function Stories() {
         ))}
       </div>
 
-      <FadeIn className="px-8 py-10">
+      <FadeIn className="px-page py-10">
         <p className="w-[574px] text-center text-body">
           These are a few of the days we have styled recently, from garden
           marquees to lakeside lawns. Each one began with the site and the

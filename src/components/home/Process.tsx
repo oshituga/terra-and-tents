@@ -28,13 +28,13 @@ export function Process() {
       aria-label="How we work"
       className="flex min-h-svh flex-col items-center gap-20 bg-ink pt-[70px] text-cream"
     >
-      <FadeIn className="px-8 py-10">
+      <FadeIn className="px-page py-10">
         <h2 className="w-[358px] text-center font-display text-display-m font-light uppercase">
           From first hello to the last candle
         </h2>
       </FadeIn>
 
-      <div className="flex w-full justify-end px-8 py-5">
+      <div className="flex w-full justify-end px-page py-5">
         <FadeIn className="flex flex-col items-start gap-10">
           <p className="w-[508px] text-body">
             Every wedding follows the same four steps. They give us room to be
@@ -47,7 +47,7 @@ export function Process() {
         </FadeIn>
       </div>
 
-      <InView className="mt-auto flex h-[519px] w-full gap-2">
+      <InView className="max-page mt-auto flex h-[519px] gap-2">
         {steps.map(({ title, body }, i) => (
           <article
             key={title}

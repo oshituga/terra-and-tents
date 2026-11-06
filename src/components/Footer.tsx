@@ -26,7 +26,7 @@ function Label({ children }: { children: string }) {
 export function Footer() {
   return (
     <footer className="flex min-h-svh flex-col justify-between gap-24 bg-cream pt-[70px] text-ink">
-      <div className="flex w-full flex-col gap-10 px-8 py-10">
+      <div className="flex w-full flex-col gap-10 px-page py-10">
         <div className="flex items-start justify-between gap-10">
           <FadeIn className="flex flex-col gap-[7px]">
             <p className="font-display text-display-s font-light whitespace-nowrap uppercase">
@@ -91,10 +91,10 @@ export function Footer() {
       </div>
 
       <FadeIn className="flex w-full flex-col">
-        <div className="px-8">
+        <div className="px-page">
           <span aria-hidden className="tent-mark block h-[32.8965px] w-9" />
         </div>
-        <div className="flex items-end justify-between gap-10 px-8 py-5 text-body whitespace-nowrap">
+        <div className="flex items-end justify-between gap-10 px-page py-5 text-body whitespace-nowrap">
           <p>© 2026 Terra &amp; Tent. All rights reserved.</p>
           <div className="dim-group flex gap-10">
             <Link href="/privacy" className={smallLink}>

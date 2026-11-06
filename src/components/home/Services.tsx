@@ -71,7 +71,7 @@ export function Services() {
       aria-label="What we do"
       className="flex min-h-svh flex-col items-center gap-20 bg-ink pt-[70px] pb-5 text-cream"
     >
-      <div className="flex w-full flex-col items-end px-8 py-10">
+      <div className="flex w-full flex-col items-end px-page py-10">
         <FadeIn>
           <h2 className="w-[616px] text-center font-display text-display-m font-light uppercase">
             From an empty field to a room people talk about for years
@@ -79,7 +79,7 @@ export function Services() {
         </FadeIn>
       </div>
 
-      <div ref={row} className="flex w-full gap-3 px-8">
+      <div ref={row} className="flex w-full gap-3 px-page">
         {services.map(({ title, body, src, alt }, i) => (
           <article
             key={title}
@@ -107,7 +107,7 @@ export function Services() {
         ))}
       </div>
 
-      <FadeIn className="mt-auto flex w-full items-end justify-between px-8 py-5">
+      <FadeIn className="mt-auto flex w-full items-end justify-between px-page py-5">
         <p className="w-[508px] text-body">
           We design the look, source the flowers, and build everything
           ourselves. That includes the tents, the arches, the tables and the

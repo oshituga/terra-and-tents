@@ -99,7 +99,7 @@ export function Intro() {
         ref={pin}
         className="sticky top-0 flex min-h-svh flex-col items-center justify-center gap-[14px] overflow-hidden pt-[70px]"
       >
-        <div className="px-8 py-10">
+        <div className="px-page py-10">
           <p
             className="w-[781px] text-center font-display text-display-m font-light uppercase"
             style={{ "--n": words.length } as CSSProperties}
@@ -121,7 +121,7 @@ export function Intro() {
             {photos.map(({ src, alt }) => (
               <div
                 key={src.src}
-                className="relative h-[37.986vw] w-[28.611vw] shrink-0 overflow-hidden"
+                className="relative h-[min(37.986vw,820.5px)] w-[min(28.611vw,618px)] shrink-0 overflow-hidden"
               >
                 <Image
                   src={src}

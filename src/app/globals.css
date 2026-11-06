@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+/* Page gutter: 32px, growing on screens wider than 2160px so content stays
+   within a 2160px column while backgrounds still run edge to edge. */
+@utility px-page {
+  padding-inline: max(2rem, calc((100% - 2160px) / 2 + 2rem));
+}
+
+@utility pl-page {
+  padding-left: max(2rem, calc((100% - 2160px) / 2 + 2rem));
+}
+
+@utility pr-page {
+  padding-right: max(2rem, calc((100% - 2160px) / 2 + 2rem));
+}
+
+@utility max-page {
+  width: 100%;
+  max-width: 2160px;
+  margin-inline: auto;
+}
+
 @theme {
   --color-ink: #2d211c;
   --color-cream: #faf7f2;
