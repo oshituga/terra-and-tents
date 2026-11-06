@@ -11,30 +11,31 @@ import flowers from "@/assets/about-story-flowers.webp";
 import candles from "@/assets/about-story-candles.webp";
 import feeling from "@/assets/about-story-feeling.webp";
 
-const photos = [
+const photos: { src: typeof field; alt: string; position?: string }[] = [
   {
     src: field,
-    alt: "A grassy field sloping toward a line of trees in low evening sun",
+    alt: "A harvested golden field rolling toward low hills under a heavy grey sky",
   },
   {
     src: tent,
-    alt: "Canvas bell tents pitched on a grassy field beside a hedge",
+    alt: "The white peak of a canvas tent against a clear blue sky",
   },
   {
     src: longTable,
-    alt: "One long dinner table set on a lawn beneath trees and strings of lights",
+    alt: "A long wooden table set with white plates and greenery under strings of lights",
   },
   {
     src: flowers,
-    alt: "A jar of small white flowers tied with twine and lace on a table",
+    alt: "A tangle of red, pink, white and orange garden flowers in soft evening light",
   },
   {
     src: candles,
-    alt: "Pillar and taper candles glowing on a table as the sun sets",
+    alt: "Pillar candles in glass on a white-draped stand among foxgloves and daisies",
+    position: "50% 34%",
   },
   {
     src: feeling,
-    alt: "A timber pavilion glowing from inside at dusk, full of guests, with trees behind",
+    alt: "Guests seated on a hillside lawn watching an outdoor ceremony under a floral arch",
   },
 ];
 
@@ -155,7 +156,7 @@ export function AboutStory() {
 
         <div className="max-page flex items-stretch gap-[114px]">
           <div className="relative h-[625px] min-w-0 flex-1 overflow-hidden bg-oat">
-            {photos.map(({ src, alt }, i) => (
+            {photos.map(({ src, alt, position }, i) => (
               <div
                 key={src.src}
                 aria-hidden={i !== active}
@@ -170,6 +171,7 @@ export function AboutStory() {
                   placeholder="blur"
                   quality={90}
                   className="object-cover"
+                  style={position ? { objectPosition: position } : undefined}
                 />
               </div>
             ))}
