@@ -55,6 +55,24 @@ body {
   will-change: transform;
 }
 
+/* In view: sections fade in once as they scroll into view. */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1000ms ease-out var(--d, 0ms);
+}
+
+.fade-in[data-in] {
+  opacity: 1;
+}
+
+/* Scroll-linked cards: each rises and fades in a little behind the one before. */
+.rise-card {
+  --t: clamp(0, calc((var(--q, 0) - var(--i) * 0.12) / 0.55), 1);
+  opacity: var(--t);
+  transform: translate3d(0, calc((1 - var(--t)) * 140px), 0);
+  will-change: transform, opacity;
+}
+
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
   --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -119,8 +137,12 @@ body {
     animation: none !important;
   }
 
-  .reveal-word {
+  .reveal-word,
+  .fade-in,
+  .rise-card {
     opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .swap > *,
