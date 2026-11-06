@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "./ButtonLink";
 import { delay } from "./motion";
+import { RollText } from "./RollText";
 
 const links = [
   { href: "/about", label: "About" },
@@ -22,9 +23,9 @@ export function Nav() {
           <Link
             key={href}
             href={href}
-            className="px-[18px] py-2 text-body transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+            className="group px-[18px] py-2 text-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
           >
-            {label}
+            <RollText>{label}</RollText>
           </Link>
         ))}
       </nav>
