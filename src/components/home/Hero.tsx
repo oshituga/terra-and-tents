@@ -14,6 +14,7 @@ export function Hero() {
         sizes="100vw"
         preload
         placeholder="blur"
+        quality={90}
         className="-z-20 object-cover"
       />
       <div aria-hidden className="absolute inset-0 -z-10 bg-[#121212]/30" />
@@ -21,10 +22,8 @@ export function Hero() {
       <Nav />
 
       <div className="flex flex-1 flex-col items-end justify-between px-8 pt-5 pb-[60px]">
-        <div className="fade flex w-full flex-col gap-5" style={delay(700)}>
-          <p className="w-[508px] text-body">
-            Terra &amp; Tent Studio
-          </p>
+        <div className="fade flex w-full flex-col gap-5" style={delay(350)}>
+          <p className="w-[508px] text-body">Terra &amp; Tent Studio</p>
           <div className="flex flex-col gap-1.5">
             <h1 className="w-[592px] font-display text-display-l font-light uppercase">
               Styled for the day you’ll remember
@@ -42,7 +41,7 @@ export function Hero() {
             href="/contact"
             variant="solid"
             className="fade"
-            style={delay(1150)}
+            style={delay(600)}
           >
             Begin your enquiry
           </ButtonLink>
@@ -50,7 +49,7 @@ export function Hero() {
             href="/weddings"
             variant="underline"
             className="fade"
-            style={delay(1250)}
+            style={delay(680)}
           >
             See our work
           </ButtonLink>

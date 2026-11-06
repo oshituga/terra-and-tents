@@ -17,6 +17,14 @@
   --text-display-l: 64px;
   --text-display-l--line-height: 0.88;
   --text-display-l--letter-spacing: -0.05em;
+
+  --text-display-m: 40px;
+  --text-display-m--line-height: 0.88;
+  --text-display-m--letter-spacing: -0.05em;
+
+  --text-display-s: 32px;
+  --text-display-s--line-height: 0.88;
+  --text-display-s--letter-spacing: -0.05em;
 }
 
 :root {
@@ -30,6 +38,12 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Logo drawn in the current text colour, from the original SVG. */
+.tent-mark {
+  background: currentColor;
+  mask: url("/brand/tent-mark.svg") center / contain no-repeat;
+}
+
 /* Entrance: plain fades in sequence. Delay comes from --d. */
 @keyframes fade {
   from {
@@ -38,7 +52,7 @@ body {
 }
 
 .fade {
-  animation: fade 900ms ease-out var(--d, 0ms) both;
+  animation: fade 700ms ease-out var(--d, 0ms) both;
 }
 
 /* Scroll reveal: words fill from 30% to full ink as --p goes 0 to 1. */
@@ -58,7 +72,7 @@ body {
 /* In view: sections fade in once as they scroll into view. */
 .fade-in {
   opacity: 0;
-  transition: opacity 1000ms ease-out var(--d, 0ms);
+  transition: opacity 800ms cubic-bezier(0.33, 0, 0.2, 1) var(--d, 0ms);
 }
 
 .fade-in[data-in] {
@@ -71,6 +85,110 @@ body {
   opacity: var(--t);
   transform: translate3d(0, calc((1 - var(--t)) * 140px), 0);
   will-change: transform, opacity;
+}
+
+/* Steps load in turn: each card fills upward, its title and text follow. */
+.step-fill {
+  --step: calc(var(--i) * 380ms);
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1100ms cubic-bezier(0.65, 0, 0.35, 1) var(--step);
+}
+
+.step-title,
+.step-text {
+  opacity: 0;
+  transition: opacity 900ms ease-out var(--step, calc(var(--i) * 380ms));
+}
+
+.step-text {
+  transition-delay: calc(var(--i) * 380ms + 700ms);
+}
+
+[data-in] .step-fill {
+  clip-path: inset(0);
+}
+
+[data-in] .step-title,
+[data-in] .step-text {
+  opacity: 1;
+}
+
+/* Carousel: photos slide in the direction of travel; the new quote arrives once the old one has gone. */
+.tslide {
+  visibility: hidden;
+  --slide: 1100ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.tslide[data-state] {
+  visibility: visible;
+}
+
+.tslide[data-state^="in"] {
+  z-index: 1;
+}
+
+.tslide[data-state="in-next"] {
+  animation: slide-from-right var(--slide);
+}
+
+.tslide[data-state="in-prev"] {
+  animation: slide-from-left var(--slide);
+}
+
+.tslide[data-state="out-next"] {
+  animation: slide-to-left var(--slide);
+}
+
+.tslide[data-state="out-prev"] {
+  animation: slide-to-right var(--slide);
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes slide-to-right {
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.slide-text {
+  opacity: 0;
+  transition: opacity 450ms ease-in;
+}
+
+.slide-text[data-active] {
+  opacity: 1;
+  transition: opacity 800ms ease-out 550ms;
+}
+
+.arrow-nudge {
+  transition: translate 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Article cards: the photo dims and "Read article" fades in on hover or focus. */
+.card-hover {
+  opacity: 0;
+  transition: opacity 600ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.group:focus-visible .card-hover {
+  opacity: 1;
 }
 
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
@@ -120,6 +238,18 @@ body {
   .group:hover .underline-line {
     transform: scaleX(0.3);
   }
+
+  .group:hover .arrow-nudge {
+    translate: -4px 0;
+  }
+
+  .group:hover .arrow-next {
+    translate: 4px 0;
+  }
+
+  .group:hover .card-hover {
+    opacity: 1;
+  }
 }
 
 .group:focus-visible .swap-out {
@@ -139,7 +269,9 @@ body {
 
   .reveal-word,
   .fade-in,
-  .rise-card {
+  .rise-card,
+  .step-title,
+  .step-text {
     opacity: 1;
     transform: none;
     transition: none;
@@ -148,5 +280,24 @@ body {
   .swap > *,
   .underline-line {
     transition: none;
+  }
+
+  .step-fill {
+    clip-path: none;
+    transition: none;
+  }
+
+  .slide-text,
+  .arrow-nudge,
+  .card-hover {
+    transition: none;
+  }
+
+  .tslide[data-state] {
+    animation: none;
+  }
+
+  .tslide[data-state^="out"] {
+    visibility: hidden;
   }
 }
