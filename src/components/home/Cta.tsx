@@ -24,13 +24,13 @@ export function Cta() {
         </h2>
       </FadeIn>
 
-      <FadeIn delay={250}>
+      <FadeIn delay={120}>
         <ButtonLink href="/contact" variant="underline" compact>
           Start planning your day
         </ButtonLink>
       </FadeIn>
 
-      <FadeIn delay={500}>
+      <FadeIn delay={240}>
         <p className="w-[776px] text-center text-body">
           Every wedding we style began with a date, a place and a feeling that
           was hard to put into words. Tell us yours, even if it is only half

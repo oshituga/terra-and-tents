@@ -18,9 +18,9 @@ export function InView({
     const el = ref.current;
     if (!el) return;
     // Wait until it is properly on screen, or fully visible for anything at
-    // the very end of the page that can never scroll past the bottom fifth.
+    // the very end of the page that can never scroll past the bottom tenth.
     const observers = [
-      { threshold: 0, rootMargin: "0px 0px -20% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
       { threshold: 1 },
     ].map((options) => {
       const io = new IntersectionObserver(([entry]) => {

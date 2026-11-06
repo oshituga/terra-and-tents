@@ -13,7 +13,7 @@ export default function NotFound() {
       <Nav variant="solid" />
 
       <div className="flex flex-1 flex-col justify-between py-[60px]">
-        <div className="fade flex flex-col gap-5 pl-8" style={delay(700)}>
+        <div className="fade flex flex-col gap-5 pl-8" style={delay(350)}>
           <p className="w-[508px] text-body">Lost in the field</p>
           <h1 className="w-[568px] font-display text-display-l font-light uppercase">
             This page has wandered off
@@ -22,7 +22,7 @@ export default function NotFound() {
 
         <div className="flex justify-end pr-8">
           <div className="flex flex-col gap-5">
-            <p className="fade w-[529px] text-body" style={delay(700)}>
+            <p className="fade w-[529px] text-body" style={delay(350)}>
               The link may be broken, or the page may have moved on. Head back
               to the weddings, or tell us what you were looking for and we will
               point you the right way.
@@ -32,7 +32,7 @@ export default function NotFound() {
                 href="/"
                 variant="solid"
                 className="fade"
-                style={delay(1150)}
+                style={delay(600)}
               >
                 Back to home
               </ButtonLink>
@@ -40,7 +40,7 @@ export default function NotFound() {
                 href="/weddings"
                 variant="underline"
                 className="fade"
-                style={delay(1250)}
+                style={delay(680)}
               >
                 See our weddings
               </ButtonLink>

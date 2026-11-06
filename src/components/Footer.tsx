@@ -37,7 +37,7 @@ export function Footer() {
           </FadeIn>
 
           <div className="flex min-w-0 flex-1 items-start gap-20">
-            <FadeIn delay={150} className="w-[455px] shrink-0">
+            <FadeIn delay={80} className="w-[455px] shrink-0">
               <nav aria-label="Footer" className="flex flex-col gap-8">
                 <Label>Explore</Label>
                 <ul className="flex flex-col gap-5">
@@ -51,7 +51,7 @@ export function Footer() {
                 </ul>
               </nav>
             </FadeIn>
-            <FadeIn delay={300} className="flex shrink-0 flex-col gap-8">
+            <FadeIn delay={160} className="flex shrink-0 flex-col gap-8">
               <Label>Explore</Label>
               <ul className="flex flex-col gap-5">
                 {social.map(({ href, label }) => (
@@ -83,7 +83,7 @@ export function Footer() {
               </a>
             </div>
           </FadeIn>
-          <FadeIn delay={150} className="flex flex-col gap-8">
+          <FadeIn delay={80} className="flex flex-col gap-8">
             <Label>Studio</Label>
             <address className="w-[359px] font-display text-display-s font-light not-italic uppercase">
               14 Orchard Lane, Chipping Campden, GL55 6AB

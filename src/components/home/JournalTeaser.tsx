@@ -54,7 +54,7 @@ export function JournalTeaser() {
 
       <div className="flex w-full items-start gap-2 px-8 py-10">
         {articles.map((article, i) => (
-          <FadeIn key={article.slug} delay={i * 200} className="w-[395px]">
+          <FadeIn key={article.slug} delay={i * 100} className="w-[395px]">
             <Link
               href={`/journal/${article.slug}`}
               className="group flex flex-col gap-[59px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
