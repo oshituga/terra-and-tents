@@ -127,12 +127,8 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      noValidate
-      onSubmit={onSubmit}
-      className="flex flex-col gap-[clamp(12px,1.6vh,32px)]"
-    >
-      <div className="flex flex-col gap-[clamp(10px,1.6vh,32px)]">
+    <form noValidate onSubmit={onSubmit} className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8">
         {rows.map((row) => (
           <div key={row[0].name} className="flex gap-8">
             {row.map((field) => {
@@ -141,7 +137,7 @@ export function ContactForm() {
               return (
                 <div
                   key={field.name}
-                  className="flex min-w-0 flex-1 flex-col gap-[clamp(6px,1.4vh,32px)]"
+                  className="flex min-w-0 flex-1 flex-col gap-8"
                 >
                   <label htmlFor={id} className="text-body">
                     {field.label}
@@ -160,14 +156,14 @@ export function ContactForm() {
                       onInput={() =>
                         error && setErrors((e) => ({ ...e, [field.name]: "" }))
                       }
-                      className="field-input w-full bg-transparent py-[clamp(4px,0.8vh,15px)] pr-6 pl-4 font-display text-display-s font-light uppercase outline-none placeholder:text-ink/60"
+                      className="field-input box-border h-[59.5px] w-full bg-transparent pt-[13px] pr-6 pb-[17px] pl-4 font-display text-display-s font-light uppercase outline-none placeholder:text-ink/60"
                     />
                     <span aria-hidden className="field-line" />
                   </div>
                   {error && (
                     <p
                       id={`${id}-error`}
-                      className="-mt-[clamp(2px,0.8vh,20px)] text-body opacity-70"
+                      className="-mt-5 text-body opacity-70"
                     >
                       {error}
                     </p>
