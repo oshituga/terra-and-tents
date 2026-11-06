@@ -104,17 +104,14 @@ export function Footer() {
               <span className="sheen">Terms &amp; Conditions</span>
             </Link>
           </div>
-          <p className="flex gap-1">
-            <span>Designed by:</span>
-            <a
-              href="https://www.ayomide.website/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={smallLink}
-            >
-              <span className="sheen">Ayo</span>
-            </a>
-          </p>
+          <a
+            href="https://www.ayomide.website/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={smallLink}
+          >
+            <span className="sheen">Designed by: Ayo</span>
+          </a>
         </div>
       </FadeIn>
     </footer>
