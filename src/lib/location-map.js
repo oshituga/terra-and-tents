@@ -23,26 +23,17 @@
 const DEFAULTS = {
   svgUrl: "location-map.svg",
   dataUrl: "map-data.json",
-  data: null, // pass the parsed JSON instead of dataUrl if preferred
-  svgMarkup: null, // pass the SVG string instead of svgUrl if preferred
-  minZoom: 1, // 1 = map exactly covers the container
+  data: null,              // pass the parsed JSON instead of dataUrl if preferred
+  svgMarkup: null,         // pass the SVG string instead of svgUrl if preferred
+  minZoom: 1,              // 1 = map exactly covers the container
   maxZoom: 6,
-  initialZoom: 1.8, // opens centred on the studio at this zoom
+  initialZoom: 1.8,        // opens centred on the studio at this zoom
   cooperativeGestures: true, // plain wheel / one-finger scroll the page, not the map
   showLabels: true,
   directionsLink: true,
   ariaLabel: "Map showing the Terra & Tent studio near Chipping Campden",
   // zoom level (relative to minZoom fit) at which each label kind appears
-  labelThresholds: {
-    town: 0,
-    village: 0,
-    hamlet: 1.3,
-    hill: 1.3,
-    road: 1.6,
-    wood: 1.9,
-    water: 1.9,
-    spot: 2.2,
-  },
+  labelThresholds: { town: 0, village: 0, hamlet: 1.3, hill: 1.3, road: 1.6, wood: 1.9, water: 1.9, spot: 2.2 },
 };
 
 const STYLE_ID = "tt-location-map-styles";
@@ -115,14 +106,10 @@ const CSS = `
 @media (prefers-reduced-motion:reduce){.tt-map__pin-pulse{animation:none;display:none}.tt-map__label,.tt-map__hint,.tt-map__scale-bar{transition:none}}
 `;
 
-const ICON_PLUS =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
-const ICON_MINUS =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>';
-const ICON_HOME =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>';
-const COMPASS =
-  '<svg viewBox="0 0 54 72" fill="none"><text x="27" y="11" text-anchor="middle" font-size="12" font-weight="600" fill="#2D211C" font-family="inherit">N</text><circle cx="27" cy="44" r="21" stroke="#2D211C" stroke-width="1.2"/><circle cx="27" cy="44" r="16" stroke="#2D211C" stroke-width="1.2"/><path d="M27 16L33 44L27 40L21 44Z" fill="#2D211C"/><path d="M27 72L33 44L27 48L21 44Z" fill="#FAF7F2" stroke="#2D211C" stroke-width="1.2"/></svg>';
+const ICON_PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+const ICON_MINUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>';
+const ICON_HOME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>';
+const COMPASS = '<svg viewBox="0 0 54 72" fill="none"><text x="27" y="11" text-anchor="middle" font-size="12" font-weight="600" fill="#2D211C" font-family="inherit">N</text><circle cx="27" cy="44" r="21" stroke="#2D211C" stroke-width="1.2"/><circle cx="27" cy="44" r="16" stroke="#2D211C" stroke-width="1.2"/><path d="M27 16L33 44L27 40L21 44Z" fill="#2D211C"/><path d="M27 72L33 44L27 48L21 44Z" fill="#FAF7F2" stroke="#2D211C" stroke-width="1.2"/></svg>';
 
 function injectStyles() {
   if (document.getElementById(STYLE_ID)) return;
@@ -133,39 +120,18 @@ function injectStyles() {
 }
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-const easeInOut = (t) =>
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-const reducedMotion = () =>
-  window.matchMedia &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const reducedMotion = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export async function createLocationMap(container, userOptions = {}) {
-  const o = {
-    ...DEFAULTS,
-    ...userOptions,
-    labelThresholds: {
-      ...DEFAULTS.labelThresholds,
-      ...(userOptions.labelThresholds || {}),
-    },
-  };
+  const o = { ...DEFAULTS, ...userOptions, labelThresholds: { ...DEFAULTS.labelThresholds, ...(userOptions.labelThresholds || {}) } };
   injectStyles();
 
   const [data, svgText] = await Promise.all([
-    o.data
-      ? Promise.resolve(o.data)
-      : fetch(o.dataUrl).then((r) => {
-          if (!r.ok) throw new Error(`map data ${r.status}`);
-          return r.json();
-        }),
-    o.svgMarkup
-      ? Promise.resolve(o.svgMarkup)
-      : fetch(o.svgUrl).then((r) => {
-          if (!r.ok) throw new Error(`map svg ${r.status}`);
-          return r.text();
-        }),
+    o.data ? Promise.resolve(o.data) : fetch(o.dataUrl).then((r) => { if (!r.ok) throw new Error(`map data ${r.status}`); return r.json(); }),
+    o.svgMarkup ? Promise.resolve(o.svgMarkup) : fetch(o.svgUrl).then((r) => { if (!r.ok) throw new Error(`map svg ${r.status}`); return r.text(); }),
   ]);
-  const W = data.map.width,
-    H = data.map.height;
+  const W = data.map.width, H = data.map.height;
 
   // ---------- DOM ----------
   container.classList.add("tt-map");
@@ -205,12 +171,7 @@ export async function createLocationMap(container, userOptions = {}) {
       const e = el("span", "tt-map__spot");
       e.textContent = S.text.toUpperCase();
       overlay.appendChild(e);
-      labelEls.push({
-        e,
-        L: { ...S, angle: 0 },
-        threshold: o.labelThresholds.spot,
-        spot: true,
-      });
+      labelEls.push({ e, L: { ...S, angle: 0 }, threshold: o.labelThresholds.spot, spot: true });
     }
   }
 
@@ -218,13 +179,9 @@ export async function createLocationMap(container, userOptions = {}) {
   pin.innerHTML = `<span class="tt-map__pin-pulse"></span><span class="tt-map__pin-dot"></span>`;
   const tag = el("div", "tt-map__tag");
   const dirHref = `https://www.google.com/maps/dir/?api=1&destination=${data.studio.lat},${data.studio.lon}`;
-  tag.innerHTML =
-    `<span class="tt-map__tag-name"></span><span class="tt-map__tag-address"></span>` +
-    (o.directionsLink
-      ? `<a target="_blank" rel="noopener" href="${dirHref}">Get directions</a>`
-      : "");
-  tag.querySelector(".tt-map__tag-name").textContent =
-    data.studio.name.toUpperCase();
+  tag.innerHTML = `<span class="tt-map__tag-name"></span><span class="tt-map__tag-address"></span>` +
+    (o.directionsLink ? `<a target="_blank" rel="noopener" href="${dirHref}">Get directions</a>` : "");
+  tag.querySelector(".tt-map__tag-name").textContent = data.studio.name.toUpperCase();
   tag.querySelector(".tt-map__tag-address").textContent = data.studio.address;
   pin.appendChild(tag);
   overlay.appendChild(pin);
@@ -242,47 +199,21 @@ export async function createLocationMap(container, userOptions = {}) {
   const scale = el("div", "tt-map__scale");
   scale.setAttribute("aria-hidden", "true");
   scale.innerHTML = `<span class="tt-map__scale-text"></span><div class="tt-map__scale-bar"></div>`;
-  const scaleText = scale.firstElementChild,
-    scaleBar = scale.lastElementChild;
+  const scaleText = scale.firstElementChild, scaleBar = scale.lastElementChild;
 
   const attribution = el("div", "tt-map__attribution");
-  attribution.innerHTML = (data.attribution || [])
-    .map(
-      (a) =>
-        `<a href="${a.href}" target="_blank" rel="noopener">${escapeHtml(a.text)}</a>`,
-    )
-    .join(" · ");
+  attribution.innerHTML = (data.attribution || []).map((a) => `<a href="${a.href}" target="_blank" rel="noopener">${escapeHtml(a.text)}</a>`).join(" · ");
 
   const hint = el("div", "tt-map__hint");
   hint.setAttribute("aria-hidden", "true");
 
-  container.append(
-    desc,
-    stage,
-    overlay,
-    controls,
-    compass,
-    scale,
-    attribution,
-    hint,
-  );
+  container.append(desc, stage, overlay, controls, compass, scale, attribution, hint);
 
   // ---------- state ----------
-  let cw = 0,
-    ch = 0,
-    fit = 1,
-    compact = false,
-    tagW = 0,
-    tagH = 0;
-  let z = o.initialZoom,
-    s = 1,
-    tx = 0,
-    ty = 0;
+  let cw = 0, ch = 0, fit = 1, compact = false, tagW = 0, tagH = 0;
+  let z = o.initialZoom, s = 1, tx = 0, ty = 0;
   let drawnS = 0; // scale the SVG is currently laid out at (strokes stay constant width at this scale)
-  let anim = null,
-    animTarget = null,
-    settleTimer = null,
-    hintTimer = null;
+  let anim = null, animTarget = null, settleTimer = null, hintTimer = null;
 
   function measure() {
     const r = container.getBoundingClientRect();
@@ -316,8 +247,7 @@ export async function createLocationMap(container, userOptions = {}) {
 
   function zoomAt(nz, sx, sy) {
     nz = clamp(nz, o.minZoom, o.maxZoom);
-    const mx = (sx - tx) / s,
-      my = (sy - ty) / s;
+    const mx = (sx - tx) / s, my = (sy - ty) / s;
     const ns = fit * nz;
     setView(nz, sx - mx * ns, sy - my * ns);
   }
@@ -334,8 +264,7 @@ export async function createLocationMap(container, userOptions = {}) {
     const small = cw < 480 ? 0.62 : cw < 720 ? 0.8 : 1;
     for (const item of labelEls) {
       const { e, L, threshold } = item;
-      const sx = L.x * s + tx,
-        sy = L.y * s + ty;
+      const sx = L.x * s + tx, sy = L.y * s + ty;
       const onScreen = sx > -200 && sx < cw + 200 && sy > -60 && sy < ch + 60;
       const show = onScreen && z >= threshold;
       e.classList.toggle("is-hidden", !show);
@@ -346,25 +275,15 @@ export async function createLocationMap(container, userOptions = {}) {
         e.style.transform = `translate(${sx}px,${sy}px) translate(-50%,-50%) rotate(${L.angle}deg) scale(${small})`;
       }
     }
-    const px = data.studio.x * s + tx,
-      py = data.studio.y * s + ty;
+    const px = data.studio.x * s + tx, py = data.studio.y * s + ty;
     pin.style.transform = `translate(${px}px,${py}px)`;
     // keep the studio tag on screen and clear of the controls
     const controlsW = compact ? 0 : 72;
     const fitsRight = px + 34 + tagW <= cw - controlsW - 8;
     const fitsLeft = px - 34 - tagW >= 8;
-    const fitsBelow =
-      py + 34 + tagH <= ch - 40 &&
-      px - tagW / 2 >= 8 &&
-      px + tagW / 2 <= cw - 8;
-    pin.classList.toggle(
-      "is-left",
-      !fitsRight && fitsLeft && !(compact && fitsBelow),
-    );
-    pin.classList.toggle(
-      "is-below",
-      (compact && fitsBelow) || (!fitsRight && !fitsLeft),
-    );
+    const fitsBelow = py + 34 + tagH <= ch - 40 && px - tagW / 2 >= 8 && px + tagW / 2 <= cw - 8;
+    pin.classList.toggle("is-left", !fitsRight && fitsLeft && !(compact && fitsBelow));
+    pin.classList.toggle("is-below", (compact && fitsBelow) || (!fitsRight && !fitsLeft));
 
     // scale bar: largest round distance that fits in ~140px
     const mPerScreenPx = data.map.metresPerPx / s;
@@ -393,52 +312,33 @@ export async function createLocationMap(container, userOptions = {}) {
   function animateTo(targetZ, mx, my, ms = 480) {
     cancelAnim();
     const startZ = z;
-    const startCx = (cw / 2 - tx) / s,
-      startCy = (ch / 2 - ty) / s;
-    if (reducedMotion() || ms === 0) {
-      centreOn(mx, my, targetZ);
-      return;
-    }
+    const startCx = (cw / 2 - tx) / s, startCy = (ch / 2 - ty) / s;
+    if (reducedMotion() || ms === 0) { centreOn(mx, my, targetZ); return; }
     const t0 = performance.now();
     const step = (now) => {
-      const t = Math.min(1, (now - t0) / ms),
-        k = easeInOut(t);
+      const t = Math.min(1, (now - t0) / ms), k = easeInOut(t);
       const iz = startZ * Math.pow(targetZ / startZ, k);
       centreOn(startCx + (mx - startCx) * k, startCy + (my - startCy) * k, iz);
-      if (t < 1) anim = requestAnimationFrame(step);
-      else anim = null;
+      if (t < 1) anim = requestAnimationFrame(step); else anim = null;
     };
     anim = requestAnimationFrame(step);
   }
   function animateZoomAt(targetZ, sx, sy, ms = 260) {
     cancelAnim();
     targetZ = clamp(targetZ, o.minZoom, o.maxZoom);
-    if (reducedMotion()) {
-      zoomAt(targetZ, sx, sy);
-      return;
-    }
-    const startZ = z,
-      t0 = performance.now();
+    if (reducedMotion()) { zoomAt(targetZ, sx, sy); return; }
+    const startZ = z, t0 = performance.now();
     animTarget = targetZ;
     const step = (now) => {
-      const t = Math.min(1, (now - t0) / ms),
-        k = easeInOut(t);
+      const t = Math.min(1, (now - t0) / ms), k = easeInOut(t);
       zoomAt(startZ * Math.pow(targetZ / startZ, k), sx, sy);
-      if (t < 1) anim = requestAnimationFrame(step);
-      else {
-        anim = null;
-        animTarget = null;
-      }
+      if (t < 1) anim = requestAnimationFrame(step); else { anim = null; animTarget = null; }
     };
     anim = requestAnimationFrame(step);
   }
-  function cancelAnim() {
-    if (anim) cancelAnimationFrame(anim);
-    anim = null;
-    animTarget = null;
-  }
+  function cancelAnim() { if (anim) cancelAnimationFrame(anim); anim = null; animTarget = null; }
   // rapid clicks/keys build on where the zoom is heading, not where it is mid-animation
-  const zoomBase = () => animTarget ?? z;
+  const zoomBase = () => (animTarget ?? z);
 
   function showHint(text) {
     hint.textContent = text;
@@ -447,18 +347,13 @@ export async function createLocationMap(container, userOptions = {}) {
     hintTimer = setTimeout(() => hint.classList.remove("is-visible"), 1300);
   }
 
-  const isMac = /Mac|iPhone|iPad/.test(
-    navigator.platform || navigator.userAgent,
-  );
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
 
   // ---------- mouse / pen drag ----------
   let drag = null;
   function onPointerDown(e) {
     if (e.pointerType === "touch" || e.button !== 0) return;
-    if (
-      e.target.closest(".tt-map__controls, .tt-map__tag, .tt-map__attribution")
-    )
-      return;
+    if (e.target.closest(".tt-map__controls, .tt-map__tag, .tt-map__attribution")) return;
     cancelAnim();
     drag = { id: e.pointerId, x: e.clientX, y: e.clientY, tx, ty };
     container.setPointerCapture(e.pointerId);
@@ -478,46 +373,28 @@ export async function createLocationMap(container, userOptions = {}) {
   function onWheel(e) {
     const wantsZoom = !o.cooperativeGestures || e.ctrlKey || e.metaKey;
     if (!wantsZoom) {
-      showHint(
-        isMac
-          ? "Use ⌘ + scroll to zoom the map"
-          : "Use Ctrl + scroll to zoom the map",
-      );
+      showHint(isMac ? "Use ⌘ + scroll to zoom the map" : "Use Ctrl + scroll to zoom the map");
       return; // let the page scroll
     }
     e.preventDefault();
     cancelAnim();
     const r = container.getBoundingClientRect();
     const delta = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
-    const factor = Math.exp(
-      -delta * (e.ctrlKey && Math.abs(delta) < 50 ? 0.01 : 0.0025),
-    );
+    const factor = Math.exp(-delta * (e.ctrlKey && Math.abs(delta) < 50 ? 0.01 : 0.0025));
     zoomAt(z * factor, e.clientX - r.left, e.clientY - r.top);
   }
 
   function onDblClick(e) {
-    if (
-      e.target.closest(".tt-map__controls, .tt-map__tag, .tt-map__attribution")
-    )
-      return;
+    if (e.target.closest(".tt-map__controls, .tt-map__tag, .tt-map__attribution")) return;
     const r = container.getBoundingClientRect();
-    animateZoomAt(
-      z * (e.shiftKey ? 0.5 : 2),
-      e.clientX - r.left,
-      e.clientY - r.top,
-    );
+    animateZoomAt(z * (e.shiftKey ? 0.5 : 2), e.clientX - r.left, e.clientY - r.top);
   }
 
   // ---------- touch (two fingers = map, one finger = page) ----------
   let pinch = null;
   function touchInfo(t, r) {
-    const a = t[0],
-      b = t[1];
-    return {
-      mx: (a.clientX + b.clientX) / 2 - r.left,
-      my: (a.clientY + b.clientY) / 2 - r.top,
-      d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY),
-    };
+    const a = t[0], b = t[1];
+    return { mx: (a.clientX + b.clientX) / 2 - r.left, my: (a.clientY + b.clientY) / 2 - r.top, d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) };
   }
   function onTouchStart(e) {
     if (e.touches.length >= 2) {
@@ -533,18 +410,14 @@ export async function createLocationMap(container, userOptions = {}) {
       e.preventDefault();
       const i = touchInfo(e.touches, pinch.r);
       const nz = clamp(pinch.z * (i.d / pinch.d), o.minZoom, o.maxZoom);
-      const ps = fit * pinch.z,
-        ns = fit * nz;
-      const mx = (pinch.mx - pinch.tx) / ps,
-        my = (pinch.my - pinch.ty) / ps;
+      const ps = fit * pinch.z, ns = fit * nz;
+      const mx = (pinch.mx - pinch.tx) / ps, my = (pinch.my - pinch.ty) / ps;
       setView(nz, i.mx - mx * ns, i.my - my * ns);
     } else if (e.touches.length === 1 && o.cooperativeGestures && !pinch) {
       showHint("Use two fingers to move the map");
     }
   }
-  function onTouchEnd(e) {
-    if (e.touches.length < 2) pinch = null;
-  }
+  function onTouchEnd(e) { if (e.touches.length < 2) pinch = null; }
 
   // ---------- keyboard ----------
   function onKey(e) {
@@ -552,49 +425,22 @@ export async function createLocationMap(container, userOptions = {}) {
     const step = 90;
     let handled = true;
     switch (e.key) {
-      case "ArrowLeft":
-        cancelAnim();
-        setView(z, tx + step, ty);
-        break;
-      case "ArrowRight":
-        cancelAnim();
-        setView(z, tx - step, ty);
-        break;
-      case "ArrowUp":
-        cancelAnim();
-        setView(z, tx, ty + step);
-        break;
-      case "ArrowDown":
-        cancelAnim();
-        setView(z, tx, ty - step);
-        break;
-      case "+":
-      case "=":
-        zoomIn();
-        break;
-      case "-":
-      case "_":
-        zoomOut();
-        break;
-      case "0":
-        reset();
-        break;
-      default:
-        handled = false;
+      case "ArrowLeft": cancelAnim(); setView(z, tx + step, ty); break;
+      case "ArrowRight": cancelAnim(); setView(z, tx - step, ty); break;
+      case "ArrowUp": cancelAnim(); setView(z, tx, ty + step); break;
+      case "ArrowDown": cancelAnim(); setView(z, tx, ty - step); break;
+      case "+": case "=": zoomIn(); break;
+      case "-": case "_": zoomOut(); break;
+      case "0": reset(); break;
+      default: handled = false;
     }
     if (handled) e.preventDefault();
   }
 
   // ---------- public ----------
-  function zoomIn() {
-    animateZoomAt(zoomBase() * 1.6, cw / 2, ch / 2);
-  }
-  function zoomOut() {
-    animateZoomAt(zoomBase() / 1.6, cw / 2, ch / 2);
-  }
-  function reset() {
-    animateTo(o.initialZoom, data.studio.x, data.studio.y, 650);
-  }
+  function zoomIn() { animateZoomAt(zoomBase() * 1.6, cw / 2, ch / 2); }
+  function zoomOut() { animateZoomAt(zoomBase() / 1.6, cw / 2, ch / 2); }
+  function reset() { animateTo(o.initialZoom, data.studio.x, data.studio.y, 650); }
 
   bIn.addEventListener("click", zoomIn);
   bOut.addEventListener("click", zoomOut);
@@ -612,12 +458,10 @@ export async function createLocationMap(container, userOptions = {}) {
   container.addEventListener("keydown", onKey);
 
   const ro = new ResizeObserver(() => {
-    const cx = (cw / 2 - tx) / s,
-      cy = (ch / 2 - ty) / s;
+    const cx = (cw / 2 - tx) / s, cy = (ch / 2 - ty) / s;
     const had = cw > 1;
     measure();
-    if (had) centreOn(cx, cy, z);
-    else centreOn(data.studio.x, data.studio.y, z);
+    if (had) centreOn(cx, cy, z); else centreOn(data.studio.x, data.studio.y, z);
   });
   ro.observe(container);
 
@@ -644,15 +488,7 @@ export async function createLocationMap(container, userOptions = {}) {
     container.classList.remove("tt-map", "is-dragging");
   }
 
-  return {
-    zoomIn,
-    zoomOut,
-    reset,
-    destroy,
-    get zoom() {
-      return z;
-    },
-  };
+  return { zoomIn, zoomOut, reset, destroy, get zoom() { return z; } };
 }
 
 function el(tag, cls) {
@@ -669,11 +505,5 @@ function button(icon, label) {
   return b;
 }
 function escapeHtml(s) {
-  return String(s).replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        c
-      ],
-  );
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
