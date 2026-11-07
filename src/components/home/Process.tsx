@@ -29,14 +29,14 @@ export function Process() {
       className="flex min-h-svh flex-col items-center gap-20 bg-ink pt-[70px] text-cream"
     >
       <FadeIn className="px-page py-10">
-        <h2 className="w-[358px] text-center font-display text-display-m font-light uppercase">
+        <h2 className="w-[358px] max-w-full text-center font-display text-display-m font-light uppercase">
           From first hello to the last candle
         </h2>
       </FadeIn>
 
       <div className="flex w-full justify-end px-page py-5">
         <FadeIn className="flex flex-col items-start gap-10">
-          <p className="w-[508px] text-body">
+          <p className="w-[508px] max-w-full text-body">
             Every wedding follows the same four steps. They give us room to be
             thorough, and they keep you informed from the first call to the
             final guest.
@@ -47,7 +47,7 @@ export function Process() {
         </FadeIn>
       </div>
 
-      <InView className="max-page mt-auto flex h-[519px] gap-2">
+      <InView className="max-page mt-auto grid grid-cols-1 gap-x-2 gap-y-10 px-page md:grid-cols-2 lg:flex lg:h-[519px] lg:gap-y-0 lg:px-0">
         {steps.map(({ title, body }, i) => (
           <article
             key={title}
@@ -58,7 +58,7 @@ export function Process() {
               {title}
             </h3>
             <div
-              className={`step-fill flex flex-1 items-end bg-cream pb-8 text-ink ${i === steps.length - 1 ? "px-8" : "px-5"}`}
+              className={`step-fill flex min-h-[200px] flex-1 items-end bg-cream pt-8 pb-8 text-ink lg:min-h-0 lg:pt-0 ${i === steps.length - 1 ? "px-8" : "px-5"}`}
             >
               <p className="step-text text-body">{body}</p>
             </div>

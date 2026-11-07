@@ -171,16 +171,16 @@ export function Details() {
   return (
     <section
       aria-label="Details"
-      className="flex min-h-svh flex-col items-center justify-between gap-[130px] bg-cream pt-[70px] text-ink"
+      className="flex min-h-svh flex-col items-center justify-between gap-16 bg-cream pt-[70px] text-ink lg:gap-[130px]"
     >
       <div className="flex w-full flex-col gap-[14px]">
         <FadeIn className="flex justify-center px-page py-10">
-          <h2 className="w-[506px] text-center font-display text-display-m font-light uppercase">
+          <h2 className="w-[506px] max-w-full text-center font-display text-display-m font-light uppercase">
             The details you only notice when you look twice
           </h2>
         </FadeIn>
-        <FadeIn className="flex items-end justify-between px-page py-5">
-          <p className="w-[426px] text-body">
+        <FadeIn className="flex flex-col items-start gap-8 px-page py-5 lg:flex-row lg:items-end lg:justify-between lg:gap-0">
+          <p className="w-[426px] max-w-full text-body">
             Hand-tied posies, pressed linen, the candle that lasts until the
             final dance. We plan the small things as carefully as the big ones.
           </p>
@@ -190,34 +190,38 @@ export function Details() {
         </FadeIn>
       </div>
 
-      <div
-        ref={strip}
-        className="max-page relative aspect-[1440/449] overflow-hidden [container-type:inline-size]"
-      >
-        {photos.map(({ src, alt }, i) => (
-          <div
-            key={src.src}
-            ref={(node) => {
-              tiles.current[i] = node;
-            }}
-            className="absolute bottom-2 left-0 origin-bottom-left overflow-hidden bg-clay will-change-transform"
-            style={{
-              width: "calc(100cqw * " + TILE_W / 1440 + ")",
-              height: "calc(100cqw * " + TILE_H / 1440 + ")",
-              transform: initial[i],
-            }}
-          >
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              sizes="25vw"
-              placeholder="blur"
-              quality={90}
-              className="object-cover"
-            />
-          </div>
-        ))}
+      {/* On smaller screens the strip is drawn wider than the screen and
+          centred, so the photos keep a useful size. */}
+      <div className="max-page overflow-hidden">
+        <div
+          ref={strip}
+          className="relative left-1/2 aspect-[1440/449] w-[250vw] -translate-x-1/2 overflow-hidden [container-type:inline-size] md:w-[160vw] lg:w-full"
+        >
+          {photos.map(({ src, alt }, i) => (
+            <div
+              key={src.src}
+              ref={(node) => {
+                tiles.current[i] = node;
+              }}
+              className="absolute bottom-2 left-0 origin-bottom-left overflow-hidden bg-clay will-change-transform"
+              style={{
+                width: "calc(100cqw * " + TILE_W / 1440 + ")",
+                height: "calc(100cqw * " + TILE_H / 1440 + ")",
+                transform: initial[i],
+              }}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                sizes="(min-width: 1024px) 25vw, 60vw"
+                placeholder="blur"
+                quality={90}
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

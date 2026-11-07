@@ -25,9 +25,9 @@ function Label({ children }: { children: string }) {
 
 export function Footer() {
   return (
-    <footer className="flex min-h-svh flex-col justify-between gap-24 bg-cream pt-[70px] text-ink">
-      <div className="flex w-full flex-col gap-10 px-page py-10">
-        <div className="flex items-start justify-between gap-10">
+    <footer className="flex min-h-svh flex-col justify-between gap-16 bg-cream pt-[70px] text-ink lg:gap-24">
+      <div className="flex w-full flex-col gap-12 px-page py-10 lg:gap-10">
+        <div className="flex flex-col items-start gap-12 md:flex-row md:justify-between md:gap-10">
           <FadeIn className="flex flex-col gap-[7px]">
             <p className="font-display text-display-s font-light whitespace-nowrap uppercase">
               Terra &amp; Tent
@@ -69,7 +69,7 @@ export function Footer() {
           </FadeIn>
         </div>
 
-        <div className="flex items-end justify-between gap-10">
+        <div className="flex flex-col items-start gap-12 md:flex-row md:items-end md:justify-between md:gap-10">
           <FadeIn className="flex flex-col gap-8">
             <Label>Get in touch</Label>
             <div className="dim-group flex flex-col items-start gap-5">
@@ -83,7 +83,7 @@ export function Footer() {
           </FadeIn>
           <FadeIn delay={80} className="flex flex-col gap-8">
             <Label>Studio</Label>
-            <address className="w-[359px] font-display text-display-s font-light not-italic uppercase">
+            <address className="w-[359px] max-w-full font-display text-display-s font-light not-italic uppercase">
               14 Orchard Lane, Chipping Campden, GL55 6AB
             </address>
           </FadeIn>
@@ -94,9 +94,9 @@ export function Footer() {
         <div className="px-page">
           <span aria-hidden className="tent-mark block h-[32.8965px] w-9" />
         </div>
-        <div className="flex items-end justify-between gap-10 px-page py-5 text-body whitespace-nowrap">
+        <div className="flex flex-col items-start gap-4 px-page py-5 text-body md:flex-row md:flex-wrap md:items-end md:justify-between md:gap-x-10 lg:flex-nowrap lg:whitespace-nowrap">
           <p>© 2026 Terra &amp; Tent. All rights reserved.</p>
-          <div className="dim-group flex gap-10">
+          <div className="dim-group flex flex-wrap gap-x-10 gap-y-4">
             <Link href="/privacy" className={smallLink}>
               <span className="sheen">Privacy Policy</span>
             </Link>

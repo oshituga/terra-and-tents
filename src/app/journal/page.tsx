@@ -19,15 +19,18 @@ export default function Journal() {
       <main className="bg-ink text-cream">
         <Nav variant="solid" />
 
-        <header className="flex flex-col items-end gap-[51px] py-[60px] pl-page">
+        <header className="flex flex-col items-end gap-8 py-10 pl-page lg:gap-[51px] lg:py-[60px]">
           <div className="fade flex w-full flex-col gap-5" style={delay(350)}>
-            <p className="w-[508px] text-body">Our journal</p>
-            <h1 className="w-[568px] font-display text-display-l font-light uppercase">
+            <p className="w-[508px] max-w-full text-body">Our journal</p>
+            <h1 className="w-[568px] max-w-full font-display text-display-l font-light uppercase">
               Notes from the ground up
             </h1>
           </div>
           <div className="flex w-full justify-end pr-page">
-            <p className="fade w-[508px] text-body" style={delay(450)}>
+            <p
+              className="fade w-[508px] max-w-full text-body"
+              style={delay(450)}
+            >
               Short stories on how we build, what each place teaches us and the
               small decisions behind every setting we style.
             </p>
@@ -35,16 +38,19 @@ export default function Journal() {
         </header>
 
         <section aria-label="Articles" className="py-5">
-          <ul className="flex items-start gap-2 px-page pt-10 pb-8">
+          <ul className="flex snap-x snap-mandatory scroll-px-8 items-start gap-2 overflow-x-auto px-page pt-10 pb-8 [scrollbar-width:none]">
             {articles.map((article, i) => (
-              <li key={article.slug} className="shrink-0">
+              <li
+                key={article.slug}
+                className="w-[82vw] max-w-[429px] shrink-0 snap-start lg:w-[min(429px,calc((100vw-80px)/3))]"
+              >
                 <FadeIn delay={i * 100}>
                   <Link
                     href={`/journal/${article.slug}`}
                     className="group flex flex-col gap-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
                   >
                     <div className="flex flex-col gap-2.5">
-                      <h2 className="w-[429px] px-8 font-display text-display-s font-light uppercase">
+                      <h2 className="w-full px-8 font-display text-display-s font-light uppercase">
                         {article.title}
                       </h2>
                       <p className="text-body whitespace-nowrap">
@@ -56,7 +62,7 @@ export default function Journal() {
                         src={article.cover.src}
                         alt={article.cover.alt}
                         fill
-                        sizes="(min-width: 768px) 30vw, 90vw"
+                        sizes="(min-width: 1024px) 30vw, 82vw"
                         placeholder="blur"
                         quality={90}
                         className="object-cover"

@@ -34,9 +34,9 @@ export default function Contact() {
       <main className="flex min-h-svh flex-col justify-between bg-ink text-cream">
         <Nav variant="solid" />
 
-        <header className="flex flex-col items-center gap-[50px] px-page pt-[60px] pb-5 text-center">
+        <header className="flex flex-col items-center gap-8 px-page pt-10 pb-5 text-center lg:gap-[50px] lg:pt-[60px]">
           <div
-            className="fade flex flex-col items-center gap-5"
+            className="fade flex max-w-full flex-col items-center gap-5"
             style={delay(350)}
           >
             <p className="text-body">Say hello</p>
@@ -44,17 +44,17 @@ export default function Contact() {
               Tell us about your day
             </h1>
           </div>
-          <p className="fade w-[643px] text-body" style={delay(450)}>
+          <p className="fade w-[643px] max-w-full text-body" style={delay(450)}>
             Share the place, the date and the feeling you are after, even if it
             is only a rough idea. We read every message ourselves and reply
             within two working days.
           </p>
         </header>
 
-        <div className="max-page flex items-end gap-8">
-          <FadeIn className="dim-group flex min-w-0 flex-1 flex-col gap-8 pt-[70px] pl-8">
+        <div className="max-page flex flex-col gap-12 lg:flex-row lg:items-end lg:gap-8">
+          <FadeIn className="dim-group flex min-w-0 flex-1 flex-col gap-8 px-8 pt-10 lg:pt-[70px] lg:pr-0">
             <Detail label="Studio">
-              <address className="w-[455px] font-display text-display-s font-light not-italic uppercase">
+              <address className="w-[455px] max-w-full font-display text-display-s font-light not-italic uppercase">
                 14 Orchard Lane, Chipping Campden, GL55 6AB
               </address>
             </Detail>
@@ -82,7 +82,7 @@ export default function Contact() {
 
           <FadeIn
             delay={100}
-            className="w-[861px] shrink-0 bg-cream pt-[62px] pb-8 pl-8 text-ink"
+            className="w-full shrink-0 bg-cream px-6 pt-10 pb-8 text-ink md:px-8 lg:w-[861px] lg:pt-[62px] lg:pr-0"
           >
             <ContactForm />
           </FadeIn>

@@ -71,13 +71,16 @@ export default async function JournalArticle({
           <div className="bg-cream text-ink">
             <Nav variant="light" />
 
-            <div className="flex flex-col items-end gap-[51px] py-[60px]">
-              <header className="flex w-full justify-end pr-page">
-                <div className="fade flex flex-col gap-5" style={delay(350)}>
+            <div className="flex flex-col items-end gap-8 py-10 lg:gap-[51px] lg:py-[60px]">
+              <header className="flex w-full justify-end px-page lg:pl-0">
+                <div
+                  className="fade flex max-w-full flex-col gap-5"
+                  style={delay(350)}
+                >
                   <p className="text-right text-body">
                     <time dateTime={article.date}>{article.dateLabel}</time>
                   </p>
-                  <h1 className="w-[618px] font-display text-display-l font-light uppercase">
+                  <h1 className="w-[618px] max-w-full font-display text-display-l font-light uppercase">
                     {article.title}
                   </h1>
                   <p className="text-body">
@@ -86,14 +89,17 @@ export default async function JournalArticle({
                 </div>
               </header>
 
-              <div className="flex h-[818px] w-full items-end gap-8 pb-[9px] pl-page">
-                <p className="fade w-[413px] shrink-0 text-body" style={delay(550)}>
+              <div className="flex w-full flex-col gap-6 lg:h-[818px] lg:flex-row lg:items-end lg:gap-8 lg:pb-[9px] lg:pl-page">
+                <p
+                  className="fade order-last w-full shrink-0 px-page text-body lg:order-none lg:w-[413px] lg:px-0"
+                  style={delay(550)}
+                >
                   {article.summary}
                 </p>
-                <FadeIn className="h-full min-w-0 flex-1">
+                <FadeIn className="h-[72vw] w-full min-w-0 md:h-[60vw] lg:h-full lg:w-auto lg:flex-1">
                   <Photo
                     image={article.cover}
-                    sizes="70vw"
+                    sizes="(min-width: 1024px) 70vw, 100vw"
                     className="h-full w-full"
                     preload
                   />
@@ -103,7 +109,7 @@ export default async function JournalArticle({
           </div>
 
           <div className="flex flex-col gap-2 bg-ink pt-[70px] pb-2 text-cream">
-            <div className="max-page flex items-start gap-[9px]">
+            <div className="max-page flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[9px]">
               <div className="flex min-w-0 flex-1 flex-col gap-[9px]">
                 <FadeIn className="flex flex-col gap-10 px-8 py-5 text-body">
                   {article.opening.map((p) => (
@@ -120,7 +126,7 @@ export default async function JournalArticle({
                       <Photo
                         image={image}
                         sizes="(min-width: 768px) 16vw, 33vw"
-                        className="h-[221px] w-full"
+                        className="h-[40vw] w-full md:h-[221px]"
                       />
                     </FadeIn>
                   ))}
@@ -135,11 +141,11 @@ export default async function JournalArticle({
                   <Photo
                     image={article.tall}
                     sizes="(min-width: 768px) 50vw, 100vw"
-                    className="h-[587px] w-full"
+                    className="h-[120vw] w-full md:h-[587px]"
                   />
                 </FadeIn>
                 <FadeIn>
-                  <p className="pr-8 text-body">{article.closing}</p>
+                  <p className="px-8 text-body lg:pl-0">{article.closing}</p>
                 </FadeIn>
               </div>
             </div>
@@ -148,10 +154,10 @@ export default async function JournalArticle({
               aria-label="Next journal"
               className="max-page flex justify-end pl-8"
             >
-              <FadeIn className="flex flex-col gap-[37px] bg-cream p-4 text-ink">
+              <FadeIn className="flex w-full flex-col gap-[37px] bg-cream p-4 text-ink md:w-auto">
                 <p className="text-body">Next journal</p>
-                <div className="flex items-center gap-1.5 px-8">
-                  <p className="w-[365px] font-display text-display-s font-light uppercase">
+                <div className="flex flex-col items-start gap-4 px-8 md:flex-row md:items-center md:gap-1.5">
+                  <p className="w-[365px] max-w-full font-display text-display-s font-light uppercase">
                     {next.title}
                   </p>
                   <ButtonLink

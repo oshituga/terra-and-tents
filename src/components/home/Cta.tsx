@@ -19,7 +19,7 @@ export function Cta() {
       <div aria-hidden className="absolute inset-0 -z-10 bg-[#121212]/40" />
 
       <FadeIn>
-        <h2 className="w-[668px] text-center font-display text-display-m font-light uppercase">
+        <h2 className="w-[668px] max-w-full text-center font-display text-display-m font-light uppercase">
           Somewhere there is a field waiting to become your favourite room
         </h2>
       </FadeIn>
@@ -31,7 +31,7 @@ export function Cta() {
       </FadeIn>
 
       <FadeIn delay={240}>
-        <p className="w-[776px] text-center text-body">
+        <p className="w-[776px] max-w-full text-center text-body">
           Every wedding we style began with a date, a place and a feeling that
           was hard to put into words. Tell us yours, even if it is only half
           formed. We will listen, sketch the first ideas and show you how that

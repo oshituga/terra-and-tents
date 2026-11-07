@@ -62,6 +62,11 @@ export function AboutPrinciples() {
       cards.current.forEach((card, i) => {
         const next = cards.current[i + 1];
         if (!card || !next) return;
+        // Below the desktop layout the cards simply stack, with no easing back.
+        if (getComputedStyle(card).position !== "sticky") {
+          card.style.setProperty("--t", "0");
+          return;
+        }
         const stuckTop = parseFloat(getComputedStyle(card).top) || 0;
         const travel = vh - stuckTop;
         const t = Math.min(
@@ -91,41 +96,47 @@ export function AboutPrinciples() {
       aria-label="What we never compromise on"
       className="bg-ink pt-[70px] pb-[60px] text-cream"
     >
-      <div className="flex flex-col items-end gap-[50px] px-page py-10">
+      <div className="flex flex-col items-end gap-10 px-page py-10 lg:gap-[50px]">
         <FadeIn>
-          <h2 className="w-[384px] text-right font-display text-display-m font-light uppercase">
+          <h2 className="w-[384px] max-w-full text-right font-display text-display-m font-light uppercase">
             A few things we never compromise on
           </h2>
         </FadeIn>
 
-        <div className="flex w-full flex-col gap-[50px]">
+        <div className="flex w-full flex-col gap-16 xl:gap-[50px]">
           {principles.map((p, i) => (
             <div
               key={p.label}
               ref={(node) => {
                 cards.current[i] = node;
               }}
-              className="stack-card sticky top-[max(0px,calc((100svh-845px)/2))] flex justify-center bg-ink"
+              className="stack-card relative flex justify-center bg-ink xl:sticky xl:top-[max(0px,calc((100svh-845px)/2))]"
             >
-              <article className="stack-card-inner relative h-[845px] w-[1216px] shrink-0">
+              <article className="stack-card-inner relative flex w-full flex-col xl:block xl:h-[845px] xl:w-[1216px] xl:shrink-0">
                 <div
-                  className={`absolute top-0 left-24 flex h-[754px] w-[1120px] flex-col p-8 text-ink ${p.panel}`}
+                  className={`flex flex-col p-6 text-ink md:p-8 xl:absolute xl:top-0 xl:left-24 xl:h-[754px] xl:w-[1120px] ${p.panel}`}
                 >
-                  <FadeIn className="flex flex-1 flex-col justify-between pl-[743px]">
+                  <FadeIn className="flex flex-1 flex-col justify-between gap-10 xl:gap-0 xl:pl-[743px]">
                     <p className="text-body">{p.label}</p>
                     <div className="flex flex-col gap-5">
-                      <h3 className="font-display text-display-s font-light whitespace-nowrap uppercase">
+                      <h3 className="font-display text-display-s font-light uppercase xl:whitespace-nowrap">
                         {p.title}
                       </h3>
                       <p className="text-body">{p.body}</p>
                     </div>
                   </FadeIn>
                 </div>
-                <div className="absolute top-8 left-0 h-[751px] w-[836px] overflow-hidden">
-                  <ParallaxImage src={p.src} alt={p.alt} sizes="836px" />
+                <div className="relative order-first h-[100vw] w-full overflow-hidden md:h-[64vw] xl:absolute xl:top-8 xl:left-0 xl:order-none xl:h-[751px] xl:w-[836px]">
+                  <ParallaxImage
+                    src={p.src}
+                    alt={p.alt}
+                    sizes="(min-width: 1280px) 836px, 100vw"
+                  />
                 </div>
-                <p className="absolute top-[804px] left-24 w-[1120px] px-8 py-2.5">
-                  <span className="block w-[508px] text-body">{p.caption}</span>
+                <p className="py-2.5 xl:absolute xl:top-[804px] xl:left-24 xl:w-[1120px] xl:px-8">
+                  <span className="block w-[508px] max-w-full text-body">
+                    {p.caption}
+                  </span>
                 </p>
               </article>
               <div

@@ -13,15 +13,15 @@ export const metadata: Metadata = {
 
 export default function Gallery() {
   return (
-    <main className="flex h-svh flex-col overflow-hidden bg-cream text-ink">
+    <main className="flex min-h-svh flex-col bg-cream text-ink lg:h-svh lg:overflow-hidden">
       <Nav variant="light" />
 
-      <header className="flex items-start justify-between px-page pt-[60px] pb-5">
+      <header className="flex flex-col-reverse items-start gap-8 px-page pt-10 pb-5 lg:flex-row lg:justify-between lg:gap-0 lg:pt-[60px]">
         <div
-          className="fade flex w-[1026px] flex-col items-start gap-2.5 pt-10"
+          className="fade flex max-w-full flex-col items-start gap-2.5 lg:min-w-0 lg:flex-1 lg:pt-10"
           style={delay(450)}
         >
-          <p className="w-[643px] text-body">
+          <p className="w-[643px] max-w-full text-body">
             Every wedding we style begins with a place and ends with a feeling.
             These are the arches, aisles and long tables we have built, from
             lakeside docks to open lawns at golden hour.
@@ -30,8 +30,8 @@ export default function Gallery() {
             See our weddings
           </ButtonLink>
         </div>
-        <div className="fade flex flex-col gap-5" style={delay(350)}>
-          <p className="text-right text-body">Set and styled</p>
+        <div className="fade flex max-w-full flex-col gap-5" style={delay(350)}>
+          <p className="text-body lg:text-right">Set and styled</p>
           <h1 className="font-display text-display-l font-light uppercase">
             Gallery
           </h1>
@@ -44,7 +44,7 @@ export default function Gallery() {
 
       <div className="flex justify-end px-page pt-8 pb-5">
         <FadeIn>
-          <p className="w-[648px] text-body">
+          <p className="w-[648px] max-w-full text-body">
             Every photograph here began as a conversation about a lawn, a
             lakeshore or a long table under the trees. Tell us where you are
             dreaming of, and we will start shaping the details around it.

@@ -10,24 +10,29 @@ export function JournalTeaser() {
       aria-label="From the journal"
       className="flex min-h-svh flex-col items-center justify-center gap-10 bg-ink py-10 text-cream"
     >
-      <FadeIn className="flex w-full items-start justify-between px-page py-10">
-        <p className="w-[395px] text-body">
+      <FadeIn className="flex w-full flex-col-reverse items-start gap-6 px-page py-10 lg:flex-row lg:justify-between lg:gap-0">
+        <p className="w-[395px] max-w-full text-body">
           Read about how we plan a room, choose flowers through the year, and
           style outdoor weddings from the ground up.
         </p>
-        <h2 className="w-[490px] pt-[92.5px] font-display text-display-m font-light uppercase">
+        <h2 className="w-[490px] max-w-full font-display lg:pt-[92.5px] text-display-m font-light uppercase">
           Notes on styling, seasons and the days we love
         </h2>
       </FadeIn>
 
-      <div className="flex w-full items-start gap-2 px-page py-10">
+      {/* Below the desktop layout the cards become a row you swipe through. */}
+      <div className="flex w-full snap-x snap-mandatory scroll-px-8 items-start gap-2 overflow-x-auto px-page py-10 [scrollbar-width:none]">
         {articles.map((article, i) => (
-          <FadeIn key={article.slug} delay={i * 100} className="w-[395px]">
+          <FadeIn
+            key={article.slug}
+            delay={i * 100}
+            className="w-[82vw] max-w-[395px] shrink-0 snap-start lg:w-[min(395px,calc((100vw-80px)/3))]"
+          >
             <Link
               href={`/journal/${article.slug}`}
               className="group flex flex-col gap-[59px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
             >
-              <h3 className="w-[365px] font-display text-display-s font-light uppercase">
+              <h3 className="w-[365px] max-w-full font-display text-display-s font-light uppercase">
                 {article.title}
               </h3>
               <div className="relative h-[455px] w-full overflow-hidden bg-tan">
@@ -35,7 +40,7 @@ export function JournalTeaser() {
                   src={article.cover.src}
                   alt={article.cover.alt}
                   fill
-                  sizes="(min-width: 768px) 28vw, 90vw"
+                  sizes="(min-width: 1024px) 28vw, 82vw"
                   placeholder="blur"
                   quality={90}
                   className="object-cover"
@@ -49,7 +54,7 @@ export function JournalTeaser() {
                   </span>
                 </span>
               </div>
-              <p className="flex justify-between text-body whitespace-nowrap">
+              <p className="flex justify-between gap-4 text-body whitespace-nowrap">
                 <span>{article.author}</span>
                 <time dateTime={article.date}>{article.dateLabel}</time>
               </p>

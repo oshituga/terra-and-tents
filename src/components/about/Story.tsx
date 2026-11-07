@@ -139,13 +139,13 @@ export function AboutStory() {
         className="sticky top-0 flex min-h-svh flex-col justify-center gap-[14px] pt-[70px]"
       >
         <FadeIn className="flex justify-center px-page py-10">
-          <h2 className="w-[539px] text-center font-display text-display-m font-light uppercase">
+          <h2 className="w-[539px] max-w-full text-center font-display text-display-m font-light uppercase">
             It began with one borrowed field and a lot of candles
           </h2>
         </FadeIn>
 
         <FadeIn className="px-page py-5">
-          <p className="w-[574px] text-body">
+          <p className="w-[574px] max-w-full text-body">
             Our first wedding was a friend’s, held on her family’s farm in late
             September. We had a rented tent, an armful of garden flowers and no
             idea what we were doing. By evening the candles were lit, the field
@@ -154,8 +154,8 @@ export function AboutStory() {
           </p>
         </FadeIn>
 
-        <div className="max-page flex items-stretch gap-[114px]">
-          <div className="relative h-[625px] min-w-0 flex-1 overflow-hidden bg-oat">
+        <div className="max-page flex flex-col gap-8 px-page lg:flex-row lg:items-stretch lg:gap-[114px] lg:px-0">
+          <div className="relative h-[60vw] w-full min-w-0 overflow-hidden bg-oat lg:h-[625px] lg:w-auto lg:flex-1">
             {photos.map(({ src, alt, position }, i) => (
               <div
                 key={src.src}
@@ -167,7 +167,7 @@ export function AboutStory() {
                   src={src}
                   alt={alt}
                   fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   placeholder="blur"
                   quality={90}
                   className="object-cover"
@@ -177,7 +177,7 @@ export function AboutStory() {
             ))}
           </div>
 
-          <div className="flex w-[638px] shrink-0 flex-col justify-between">
+          <div className="flex w-full shrink-0 flex-col justify-between gap-6 lg:w-[638px] lg:gap-0">
             <ol className="flex flex-col">
               {beats.map(({ title }, i) => (
                 <li key={title}>
@@ -198,7 +198,7 @@ export function AboutStory() {
               ))}
             </ol>
 
-            <div className="grid pr-8 pb-8">
+            <div className="grid pb-8 lg:pr-8">
               {beats.map(({ title, body }, i) => (
                 <p
                   key={title}

@@ -115,7 +115,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="flex min-h-[420px] flex-col justify-end gap-5 pr-8"
+        className="flex min-h-[320px] flex-col justify-end gap-5 lg:min-h-[420px] lg:pr-8"
       >
         <p className="text-body opacity-50">Message sent</p>
         <p className="max-w-[560px] font-display text-display-s font-light uppercase">
@@ -130,7 +130,7 @@ export function ContactForm() {
     <form noValidate onSubmit={onSubmit} className="flex flex-col gap-8">
       <div className="flex flex-col gap-8">
         {rows.map((row) => (
-          <div key={row[0].name} className="flex gap-8">
+          <div key={row[0].name} className="flex flex-col gap-8 md:flex-row">
             {row.map((field) => {
               const id = `field-${field.name}`;
               const error = errors[field.name];
@@ -175,7 +175,7 @@ export function ContactForm() {
         ))}
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center gap-6">
         <button
           type="submit"
           disabled={status === "sending"}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { photos } from "./photos";
 
@@ -24,6 +24,19 @@ export function GalleryViewer() {
   const [prev, setPrev] = useState<number | null>(null);
   const thumbs = useRef<(HTMLButtonElement | null)[]>([]);
 
+  const strip = useRef<HTMLDivElement>(null);
+
+  // When the strip scrolls (smaller screens), keep the chosen thumb centred.
+  useEffect(() => {
+    const row = strip.current;
+    const thumb = thumbs.current[active];
+    if (!row || !thumb || row.scrollWidth <= row.clientWidth) return;
+    row.scrollTo({
+      left: thumb.offsetLeft - (row.clientWidth - thumb.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  }, [active]);
+
   const show = (i: number) => {
     if (i === active) return;
     setPrev(active);
@@ -31,8 +44,7 @@ export function GalleryViewer() {
   };
 
   const onKey = (e: React.KeyboardEvent) => {
-    const step =
-      e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
     const to =
       e.key === "Home"
         ? 0
@@ -49,12 +61,12 @@ export function GalleryViewer() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-5">
-      <div className="max-page flex max-h-[715px] min-h-0 flex-1">
+      <div className="max-page flex max-h-[715px] min-h-0 lg:flex-1">
         <div
           role="img"
           aria-roledescription="gallery photo"
           aria-label={photos[active].alt}
-          className="relative aspect-[1039/715] h-full max-h-[715px] min-h-40 max-w-full overflow-hidden bg-oat"
+          className="relative aspect-[1039/715] w-full max-w-full overflow-hidden bg-oat lg:h-full lg:max-h-[715px] lg:min-h-40 lg:w-auto"
         >
           {[prev, active].map((i) =>
             i === null ? null : (
@@ -68,7 +80,7 @@ export function GalleryViewer() {
                   src={photos[i].src}
                   alt=""
                   fill
-                  sizes="(min-width: 768px) 72vw, 100vw"
+                  sizes="(min-width: 1024px) 72vw, 100vw"
                   placeholder="blur"
                   quality={90}
                   preload={i === START}
@@ -85,9 +97,10 @@ export function GalleryViewer() {
           changes it and the photo above stays still. */}
       <div className="@container px-page">
         <div
+          ref={strip}
           role="group"
           aria-label="Choose a photo"
-          className="max-page flex h-[calc((100cqw-159px)*108/1217)] items-end gap-[6.625px]"
+          className="max-page relative flex h-[108px] items-end gap-[6.625px] overflow-x-auto [scrollbar-width:none] lg:h-[calc((100cqw-159px)*108/1217)] lg:overflow-visible"
           onKeyDown={onKey}
         >
           {photos.map((photo, i) => {
@@ -106,10 +119,12 @@ export function GalleryViewer() {
                 onPointerEnter={(e) => {
                   if (e.pointerType === "mouse") show(i);
                 }}
-                style={{
-                  "--size": size,
-                  opacity: opacityAt(Math.abs(i - active)),
-                } as React.CSSProperties}
+                style={
+                  {
+                    "--size": size,
+                    opacity: opacityAt(Math.abs(i - active)),
+                  } as React.CSSProperties
+                }
                 className="gallery-thumb relative overflow-hidden outline-none"
               >
                 <Image

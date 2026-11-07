@@ -92,18 +92,18 @@ export function Testimonials() {
         <ArrowButton label="Next testimonial" onClick={() => go(1)} flip />
       </FadeIn>
 
-      <FadeIn className="grid w-full">
+      <FadeIn className="grid w-full grid-cols-1">
         {quotes.map(({ quote, by }, i) => (
           <figure
             key={by}
             aria-hidden={i !== active}
             data-active={i === active ? "" : undefined}
-            className="slide-text col-start-1 row-start-1 flex items-end justify-between gap-8 font-display font-light uppercase"
+            className="slide-text col-start-1 row-start-1 flex flex-col items-start justify-end gap-8 font-display font-light uppercase lg:flex-row lg:items-end lg:justify-between"
           >
-            <blockquote className="w-[553px] text-display-m">
+            <blockquote className="w-[553px] max-w-full text-display-m">
               <p>“{quote}”</p>
             </blockquote>
-            <figcaption className="text-display-s whitespace-nowrap">
+            <figcaption className="text-display-s lg:whitespace-nowrap">
               - {by}
             </figcaption>
           </figure>

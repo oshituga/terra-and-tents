@@ -47,6 +47,23 @@
   --text-display-s--letter-spacing: -0.05em;
 }
 
+/* Display type steps down below the desktop layout. */
+@media (width < 64rem) {
+  :root {
+    --text-display-l: 52px;
+    --text-display-m: 34px;
+    --text-display-s: 28px;
+  }
+}
+
+@media (width < 48rem) {
+  :root {
+    --text-display-l: 42px;
+    --text-display-m: 30px;
+    --text-display-s: 26px;
+  }
+}
+
 :root {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-flow: cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -293,6 +310,14 @@ body {
   transition:
     flex-grow 600ms cubic-bezier(0.32, 0.72, 0, 1),
     opacity 400ms ease-out;
+}
+
+/* Below the desktop layout the strip keeps the Figma sizes and scrolls. */
+@media (width < 64rem) {
+  .gallery-thumb {
+    flex: none;
+    width: calc(var(--size) * 1px);
+  }
 }
 
 @media (hover: hover) {

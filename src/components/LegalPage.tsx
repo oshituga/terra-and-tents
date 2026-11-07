@@ -24,21 +24,24 @@ export function LegalPage({
       <main className="bg-cream text-ink">
         <Nav variant="light" />
 
-        <header className="flex items-end justify-between gap-10 px-page pt-20 pb-5">
-          <div className="fade flex flex-col gap-5" style={delay(350)}>
+        <header className="flex flex-col items-start gap-8 px-page pt-10 pb-5 lg:flex-row lg:items-end lg:justify-between lg:gap-10 lg:pt-20">
+          <div
+            className="fade flex max-w-full flex-col gap-5"
+            style={delay(350)}
+          >
             <p className="text-body">Legal</p>
-            <h1 className="font-display text-display-l font-light whitespace-nowrap uppercase">
+            <h1 className="font-display text-display-l font-light uppercase lg:whitespace-nowrap">
               {title}
             </h1>
-            <p className="w-[435px] text-body">{intro}</p>
+            <p className="w-[435px] max-w-full text-body">{intro}</p>
           </div>
-          <p className="fade text-body whitespace-nowrap" style={delay(450)}>
+          <p className="fade text-body lg:whitespace-nowrap" style={delay(450)}>
             Last updated {updated}.
           </p>
         </header>
 
-        <div className="max-page py-10 pr-8 pl-[53%]">
-          <div className="flex flex-col gap-10 pr-8 pl-8 py-5">
+        <div className="max-page px-page py-10 lg:pr-8 lg:pl-[53%]">
+          <div className="flex flex-col gap-10 py-5 lg:px-8">
             {sections.map(({ title, body }) => (
               <FadeIn key={title} className="flex flex-col gap-4">
                 <h2 className="font-display text-display-s font-light uppercase">

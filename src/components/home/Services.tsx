@@ -73,21 +73,24 @@ export function Services() {
     >
       <div className="flex w-full flex-col items-end px-page py-10">
         <FadeIn>
-          <h2 className="w-[616px] text-center font-display text-display-m font-light uppercase">
+          <h2 className="w-[616px] max-w-full text-center font-display text-display-m font-light uppercase">
             From an empty field to a room people talk about for years
           </h2>
         </FadeIn>
       </div>
 
-      <div ref={row} className="flex w-full gap-3 px-page">
+      <div
+        ref={row}
+        className="grid w-full grid-cols-1 gap-x-3 gap-y-12 px-page md:grid-cols-2 lg:flex lg:gap-y-0"
+      >
         {services.map(({ title, body, src, alt }, i) => (
           <article
             key={title}
             className="rise-card flex min-w-0 flex-1 flex-col gap-2"
             style={{ "--i": i } as CSSProperties}
           >
-            <div className="flex h-5 items-center">
-              <h3 className="font-display text-display-s leading-[47px] font-light whitespace-nowrap uppercase">
+            <div className="flex min-h-5 items-end min-[90rem]:h-5 min-[90rem]:items-center">
+              <h3 className="font-display text-display-s font-light uppercase min-[90rem]:leading-[47px] min-[90rem]:whitespace-nowrap">
                 {title}
               </h3>
             </div>
@@ -96,7 +99,7 @@ export function Services() {
                 src={src}
                 alt={alt}
                 fill
-                sizes="(min-width: 768px) 25vw, 90vw"
+                sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                 placeholder="blur"
                 quality={90}
                 className="object-cover"
@@ -107,8 +110,8 @@ export function Services() {
         ))}
       </div>
 
-      <FadeIn className="mt-auto flex w-full items-end justify-between px-page py-5">
-        <p className="w-[508px] text-body">
+      <FadeIn className="mt-auto flex w-full flex-col items-start gap-8 px-page py-5 lg:flex-row lg:items-end lg:justify-between lg:gap-0">
+        <p className="w-[508px] max-w-full text-body">
           We design the look, source the flowers, and build everything
           ourselves. That includes the tents, the arches, the tables and the
           lighting. Each wedding is planned around its own site, so the finished
