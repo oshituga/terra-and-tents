@@ -83,7 +83,7 @@ export function GalleryViewer() {
         <div
           role="group"
           aria-label="Choose a photo"
-          className="max-page flex items-end justify-between"
+          className="max-page flex items-end gap-1"
           onKeyDown={onKey}
         >
           {photos.map((photo, i) => {
