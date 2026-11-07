@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Gallery() {
   return (
-    <main className="bg-cream text-ink">
+    <main className="flex h-svh flex-col overflow-hidden bg-cream text-ink">
       <Nav variant="light" />
 
       <header className="flex items-start justify-between px-page pt-[60px] pb-5">
@@ -38,7 +38,7 @@ export default function Gallery() {
         </div>
       </header>
 
-      <div className="fade" style={delay(550)}>
+      <div className="fade flex min-h-0 flex-1 flex-col" style={delay(550)}>
         <GalleryViewer />
       </div>
 

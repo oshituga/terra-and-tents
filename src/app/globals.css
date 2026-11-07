@@ -287,6 +287,8 @@ body {
 }
 
 .gallery-thumb {
+  width: var(--size);
+  height: var(--size);
   transition:
     width 600ms cubic-bezier(0.32, 0.72, 0, 1),
     height 600ms cubic-bezier(0.32, 0.72, 0, 1),
@@ -295,6 +297,8 @@ body {
 
 @media (hover: hover) {
   .gallery-thumb:hover {
+    width: 108px;
+    height: 108px;
     opacity: 1 !important;
   }
 }

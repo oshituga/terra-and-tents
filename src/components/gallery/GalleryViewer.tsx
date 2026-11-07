@@ -47,13 +47,13 @@ export function GalleryViewer() {
   };
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="max-page flex items-center">
+    <div className="flex min-h-0 flex-1 flex-col gap-5">
+      <div className="max-page flex max-h-[715px] min-h-0 flex-1">
         <div
           role="img"
           aria-roledescription="gallery photo"
           aria-label={photos[active].alt}
-          className="relative h-[715px] w-[1039px] shrink-0 overflow-hidden bg-oat"
+          className="relative h-full max-h-[715px] min-h-40 w-[1039px] max-w-full overflow-hidden bg-oat"
         >
           {[prev, active].map((i) =>
             i === null ? null : (
@@ -100,10 +100,9 @@ export function GalleryViewer() {
                 aria-current={i === active ? "true" : undefined}
                 onClick={() => show(i)}
                 style={{
-                  width: size,
-                  height: size,
+                  "--size": `${size}px`,
                   opacity: opacityAt(Math.abs(i - active)),
-                }}
+                } as React.CSSProperties}
                 className="gallery-thumb relative shrink-0 overflow-hidden outline-none"
               >
                 <Image
