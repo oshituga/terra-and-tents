@@ -104,7 +104,7 @@ export function GalleryViewer() {
                   height: size,
                   opacity: opacityAt(Math.abs(i - active)),
                 }}
-                className="gallery-thumb relative shrink-0 overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                className="gallery-thumb relative shrink-0 overflow-hidden outline-none"
               >
                 <Image
                   src={photo.src}
