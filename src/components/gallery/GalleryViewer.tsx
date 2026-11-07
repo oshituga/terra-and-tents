@@ -4,8 +4,9 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { photos } from "./photos";
 
-// Thumbnail sizes from the Figma strip, slot by slot. The active slot grows
-// to 108px; the rest keep their own size so the strip's rhythm stays put.
+// Thumbnail sizes from the Figma strip, slot by slot, used as proportions:
+// the strip always runs edge to edge and each square takes its share. The
+// active slot gets 108; the rest keep their own size so the rhythm stays put.
 const SLOT = [
   32, 47, 39, 54, 35, 51, 42, 58, 37, 53, 46, 60, 50, 49, 40, 56, 33, 53, 44,
   61, 37, 51, 40, 56, 35,
@@ -53,7 +54,7 @@ export function GalleryViewer() {
           role="img"
           aria-roledescription="gallery photo"
           aria-label={photos[active].alt}
-          className="relative aspect-[1039/715] h-full max-h-[715px] min-h-40 max-w-full overflow-hidden bg-oat"
+          className="relative aspect-[717/715] h-full max-h-[715px] min-h-40 max-w-full overflow-hidden bg-oat"
         >
           {[prev, active].map((i) =>
             i === null ? null : (
@@ -83,7 +84,7 @@ export function GalleryViewer() {
         <div
           role="group"
           aria-label="Choose a photo"
-          className="max-page flex items-end gap-1"
+          className="max-page flex items-end gap-[6.625px]"
           onKeyDown={onKey}
         >
           {photos.map((photo, i) => {
@@ -100,10 +101,10 @@ export function GalleryViewer() {
                 aria-current={i === active ? "true" : undefined}
                 onClick={() => show(i)}
                 style={{
-                  "--size": `${size}px`,
+                  "--size": size,
                   opacity: opacityAt(Math.abs(i - active)),
                 } as React.CSSProperties}
-                className="gallery-thumb relative shrink-0 overflow-hidden outline-none"
+                className="gallery-thumb relative overflow-hidden outline-none"
               >
                 <Image
                   src={photo.src}

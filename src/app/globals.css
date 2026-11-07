@@ -287,18 +287,17 @@ body {
 }
 
 .gallery-thumb {
-  width: var(--size);
-  height: var(--size);
+  flex: var(--size) 1 0%;
+  min-width: 0;
+  aspect-ratio: 1;
   transition:
-    width 600ms cubic-bezier(0.32, 0.72, 0, 1),
-    height 600ms cubic-bezier(0.32, 0.72, 0, 1),
+    flex-grow 600ms cubic-bezier(0.32, 0.72, 0, 1),
     opacity 400ms ease-out;
 }
 
 @media (hover: hover) {
   .gallery-thumb:hover {
-    width: 108px;
-    height: 108px;
+    flex-grow: 108;
     opacity: 1 !important;
   }
 }
