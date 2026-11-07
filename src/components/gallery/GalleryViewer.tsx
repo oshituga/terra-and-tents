@@ -53,7 +53,7 @@ export function GalleryViewer() {
           role="img"
           aria-roledescription="gallery photo"
           aria-label={photos[active].alt}
-          className="relative h-full max-h-[715px] min-h-40 w-[1039px] max-w-full overflow-hidden bg-oat"
+          className="relative aspect-[1039/715] h-full max-h-[715px] min-h-40 max-w-full overflow-hidden bg-oat"
         >
           {[prev, active].map((i) =>
             i === null ? null : (
