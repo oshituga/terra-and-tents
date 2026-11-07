@@ -103,6 +103,9 @@ export function GalleryViewer() {
                 aria-label={`Photo ${i + 1} of ${photos.length}: ${photo.alt}`}
                 aria-current={i === active ? "true" : undefined}
                 onClick={() => show(i)}
+                onPointerEnter={(e) => {
+                  if (e.pointerType === "mouse") show(i);
+                }}
                 style={{
                   "--size": size,
                   opacity: opacityAt(Math.abs(i - active)),
