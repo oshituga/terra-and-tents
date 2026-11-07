@@ -54,7 +54,7 @@ export function GalleryViewer() {
           role="img"
           aria-roledescription="gallery photo"
           aria-label={photos[active].alt}
-          className="relative aspect-[717/715] h-full max-h-[715px] min-h-40 max-w-full overflow-hidden bg-oat"
+          className="relative aspect-[1039/715] h-full max-h-[715px] min-h-40 max-w-full overflow-hidden bg-oat"
         >
           {[prev, active].map((i) =>
             i === null ? null : (
@@ -80,11 +80,14 @@ export function GalleryViewer() {
         </div>
       </div>
 
-      <div className="px-page pb-8">
+      {/* The strip's height is fixed to the selected square's (108 of the
+          1217 Figma units across the width), so hovering a thumb never
+          changes it and the photo above stays still. */}
+      <div className="@container px-page">
         <div
           role="group"
           aria-label="Choose a photo"
-          className="max-page flex items-end gap-[6.625px]"
+          className="max-page flex h-[calc((100cqw-159px)*108/1217)] items-end gap-[6.625px]"
           onKeyDown={onKey}
         >
           {photos.map((photo, i) => {

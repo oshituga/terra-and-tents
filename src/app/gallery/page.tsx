@@ -42,7 +42,7 @@ export default function Gallery() {
         <GalleryViewer />
       </div>
 
-      <div className="flex justify-end px-page py-[30px]">
+      <div className="flex justify-end px-page py-5">
         <FadeIn>
           <p className="w-[648px] text-body">
             Every photograph here began as a conversation about a lawn, a
