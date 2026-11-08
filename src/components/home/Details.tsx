@@ -145,9 +145,17 @@ export function Details() {
     let t = 0;
     let last = 0;
     let raf = 0;
+    // Hovering eases the ticker down to a slower pace, and back up on leave.
+    let speed = 1;
+    let target = 1;
+    const slow = () => (target = 0.45);
+    const resume = () => (target = 1);
+    el.addEventListener("pointerenter", slow);
+    el.addEventListener("pointerleave", resume);
 
     const frame = (now: number) => {
-      if (last) t += (now - last) / SLOT_MS;
+      speed += (target - speed) * 0.05;
+      if (last) t += ((now - last) / SLOT_MS) * speed;
       last = now;
       const transforms = layout(t);
       tiles.current.forEach((tile, i) => {
@@ -165,6 +173,8 @@ export function Details() {
     return () => {
       io.disconnect();
       cancelAnimationFrame(raf);
+      el.removeEventListener("pointerenter", slow);
+      el.removeEventListener("pointerleave", resume);
     };
   }, []);
 

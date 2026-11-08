@@ -16,7 +16,7 @@ const principles = [
     caption: "Your land has a story. We start by listening to it.",
     panel: "bg-cream",
     src: siteFirst,
-    alt: "Long meadow grass and an old wooden fence along a field edge, with trees beyond",
+    alt: "A figure in a red jacket walking through long dry meadow grass beneath old trees",
   },
   {
     label: "Real over artificial",
@@ -25,7 +25,7 @@ const principles = [
     caption: "If it didn’t grow, we didn’t use it.",
     panel: "bg-[#fefbe8]",
     src: madeFromLand,
-    alt: "A hand-tied bouquet of pink, white and purple flowers with dried grasses",
+    alt: "A single orange marigold floating on rippling blue water",
   },
   {
     label: "Built by us",
@@ -34,7 +34,7 @@ const principles = [
     caption: "The hands that plan your day are the hands that build it.",
     panel: "bg-oat",
     src: ownHands,
-    alt: "Open wooden doors framing a straw aisle that leads into a clear marquee with white chairs",
+    alt: "White chairs and parasols set out on a lawn before a stone chapel as the crew finishes the set-up",
   },
   {
     label: "Nothing left behind",
@@ -99,7 +99,7 @@ export function AboutPrinciples() {
       <div className="flex flex-col items-end gap-10 px-page py-10 lg:gap-[50px]">
         <FadeIn>
           <h2 className="w-[384px] max-w-full text-right font-display text-display-m font-light uppercase">
-            A few things we never compromise on
+            A few things we never compromise on.
           </h2>
         </FadeIn>
 

@@ -14,28 +14,27 @@ import feeling from "@/assets/about-story-feeling.webp";
 const photos: { src: typeof field; alt: string; position?: string }[] = [
   {
     src: field,
-    alt: "A harvested golden field rolling toward low hills under a heavy grey sky",
+    alt: "An aerial view of a small red truck parked on a dirt track beside a green field",
   },
   {
     src: tent,
-    alt: "The white peak of a canvas tent against a clear blue sky",
+    alt: "A painted canvas tipi pitched in dry grass under a cloudy sky",
   },
   {
     src: longTable,
-    alt: "A long wooden table set with white plates and greenery under strings of lights",
+    alt: "A long grazing table of bread, fruit and flowers set against an old brick wall",
   },
   {
     src: flowers,
-    alt: "A tangle of red, pink, white and orange garden flowers in soft evening light",
+    alt: "A single red and white tulip in soft light",
   },
   {
     src: candles,
-    alt: "Pillar candles in glass on a white-draped stand among foxgloves and daisies",
-    position: "50% 34%",
+    alt: "Brass candelabras with tall white candles beside white flowers under draped fabric",
   },
   {
     src: feeling,
-    alt: "Guests seated on a hillside lawn watching an outdoor ceremony under a floral arch",
+    alt: "Wedding guests gathered on a lawn beside a white house in late afternoon light",
   },
 ];
 
@@ -149,7 +148,7 @@ export function AboutStory() {
         >
           <FadeIn className="flex justify-center px-page py-3 lg:py-10">
             <h2 className="w-[539px] max-w-full text-center font-display text-display-m font-light uppercase">
-              It began with one borrowed field and a lot of candles
+              It began with one borrowed field and a lot of candles.
             </h2>
           </FadeIn>
 
