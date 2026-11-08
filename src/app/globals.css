@@ -1,17 +1,31 @@
 @import "tailwindcss";
 
-/* Page gutter: 32px, growing on screens wider than 2160px so content stays
-   within a 2160px column while backgrounds still run edge to edge. */
+/* Page gutter: 24px on phones and 32px from tablet up, growing on screens
+   wider than 2160px so content stays within a 2160px column while
+   backgrounds still run edge to edge. */
 @utility px-page {
-  padding-inline: max(2rem, calc((100% - 2160px) / 2 + 2rem));
+  padding-inline: max(var(--gutter), calc((100% - 2160px) / 2 + var(--gutter)));
 }
 
 @utility pl-page {
-  padding-left: max(2rem, calc((100% - 2160px) / 2 + 2rem));
+  padding-left: max(var(--gutter), calc((100% - 2160px) / 2 + var(--gutter)));
 }
 
 @utility pr-page {
-  padding-right: max(2rem, calc((100% - 2160px) / 2 + 2rem));
+  padding-right: max(var(--gutter), calc((100% - 2160px) / 2 + var(--gutter)));
+}
+
+/* The same gutter for edges inside a capped 2160px column. */
+@utility px-gutter {
+  padding-inline: var(--gutter);
+}
+
+@utility pl-gutter {
+  padding-left: var(--gutter);
+}
+
+@utility pr-gutter {
+  padding-right: var(--gutter);
 }
 
 @utility max-page {
@@ -83,8 +97,15 @@
 }
 
 :root {
+  --gutter: 2rem;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-flow: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@media (width < 48rem) {
+  :root {
+    --gutter: 1.5rem;
+  }
 }
 
 body {

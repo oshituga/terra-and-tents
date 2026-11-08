@@ -111,7 +111,7 @@ export default async function JournalArticle({
           <div className="flex flex-col gap-2 bg-ink pt-[70px] pb-2 text-cream">
             <div className="max-page flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[9px]">
               <div className="flex min-w-0 flex-1 flex-col gap-[9px]">
-                <FadeIn className="flex flex-col gap-10 px-8 py-5 text-body">
+                <FadeIn className="flex flex-col gap-10 px-gutter py-5 text-body">
                   {article.opening.map((p) => (
                     <p key={p.slice(0, 24)}>{p}</p>
                   ))}
@@ -131,7 +131,7 @@ export default async function JournalArticle({
                     </FadeIn>
                   ))}
                 </div>
-                <FadeIn className="px-8 py-5">
+                <FadeIn className="px-gutter py-5">
                   <p className="text-body">{article.middle}</p>
                 </FadeIn>
               </div>
@@ -145,14 +145,16 @@ export default async function JournalArticle({
                   />
                 </FadeIn>
                 <FadeIn>
-                  <p className="px-8 pt-6 pb-12 text-body lg:py-0 lg:pl-0">{article.closing}</p>
+                  <p className="px-gutter pt-6 pb-12 text-body lg:py-0 lg:pl-0">
+                    {article.closing}
+                  </p>
                 </FadeIn>
               </div>
             </div>
 
             <nav
               aria-label="Next journal"
-              className="max-page flex justify-end pl-8"
+              className="max-page flex justify-end pl-gutter"
             >
               <FadeIn className="flex w-full flex-col gap-[37px] bg-cream p-4 text-ink md:w-auto">
                 <p className="text-body">Next journal</p>

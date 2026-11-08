@@ -52,7 +52,7 @@ export default function Contact() {
         </header>
 
         <div className="max-page flex flex-col gap-12 lg:flex-row lg:items-end lg:gap-8">
-          <FadeIn className="dim-group flex min-w-0 flex-1 flex-col gap-8 px-8 pt-10 lg:pt-[70px] lg:pr-0">
+          <FadeIn className="dim-group flex min-w-0 flex-1 flex-col gap-8 px-gutter pt-10 lg:pt-[70px] lg:pr-0">
             <Detail label="Studio">
               <address className="w-[455px] max-w-full font-display text-display-s font-light not-italic uppercase">
                 14 Orchard Lane, Chipping Campden, GL55 6AB

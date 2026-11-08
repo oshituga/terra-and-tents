@@ -10,8 +10,8 @@ export function AboutLocation() {
     >
       <div aria-hidden className="h-8 lg:h-[74px]" />
 
-      <div className="max-page flex flex-col gap-8 pl-8">
-        <div className="flex flex-col items-start gap-10 pr-8 lg:flex-row lg:justify-between lg:gap-0 lg:pr-0">
+      <div className="max-page flex flex-col gap-8 pl-gutter">
+        <div className="flex flex-col items-start gap-10 pr-gutter lg:flex-row lg:justify-between lg:gap-0 lg:pr-0">
           <FadeIn>
             <p className="w-[438px] max-w-full text-body">
               Our studio and garden sit in the Gloucestershire countryside, a
@@ -37,7 +37,7 @@ export function AboutLocation() {
           <FadeIn>
             <StudioMap className="h-[110vw] w-full md:h-[70vw] lg:h-[688px]" />
           </FadeIn>
-          <FadeIn className="flex flex-col items-end gap-[14px] pr-8">
+          <FadeIn className="flex flex-col items-end gap-[14px] pr-gutter">
             <address className="w-[350px] max-w-full font-display text-display-s font-light not-italic uppercase">
               14 Orchard Lane, Chipping Campden, GL55 6AB
             </address>
