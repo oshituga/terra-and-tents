@@ -54,8 +54,8 @@ export const articles: JournalArticle[] = [
       "The best flowers for your day are the ones already growing near it. Here is how we choose stems through the year, from the first spring bulbs to the last dahlias of autumn.",
     cover: {
       src: flowersCover,
-      alt: "A florist gathering an armful of cut flowers in a meadow garden",
-      position: "50% 62%",
+      alt: "A gardener in a straw hat cutting white flowers among green foliage",
+      position: "50% 52%",
     },
     opening: [
       "Every couple asks us for their favourite flower, and we always ask a question back: when is the wedding? A peony in June is generous and cheap and smells of the garden it came from. The same peony in October has crossed an ocean, costs four times as much and droops by the speeches. Choosing by season is not a compromise. It is how you get flowers at their best.",
@@ -96,7 +96,7 @@ export const articles: JournalArticle[] = [
       "No two days we style look alike, because no two couples, fields or families are the same. Browse the weddings we’ve built, from quiet garden lunches to long marquee evenings.",
     cover: {
       src: landCover,
-      alt: "A wide green field lined with white marquees and canopies under a pale, cloudy sky",
+      alt: "Rows of dark chairs and a flower-lined aisle beneath a broad old tree, set for a ceremony",
     },
     opening: [
       "Before we place a single flower, we spend a day doing almost nothing. We walk the site in the morning and again in the evening, and we sit in the places where guests will sit. We watch where the light falls and where the wind comes from, and we notice what the ground already does well. It sounds slow, but every good decision we have made started on that walk.",
@@ -137,7 +137,7 @@ export const articles: JournalArticle[] = [
       "A tent turns any field into a room, but only if you plan it from the ground up. These are the questions we answer long before the canvas goes up.",
     cover: {
       src: tentedCover,
-      alt: "The peaked white roof of a large marquee against a deep blue sky",
+      alt: "An aerial view of a white stretch tent between vineyard rows and trees",
     },
     opening: [
       "A tent can turn almost any field into a room, which is exactly why it needs more planning than a venue. A venue arrives with floors, power, toilets and a kitchen. A field arrives with grass. Everything else, from the first tent peg to the last light switch, is something we choose, carry in and take away again.",

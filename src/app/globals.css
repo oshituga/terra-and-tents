@@ -61,8 +61,16 @@
   --text-display-s--letter-spacing: -0.05em;
 }
 
-/* Below the desktop layout, headlines balance their lines and running text
-   avoids leaving a single word on the last line. */
+/* Running text avoids a lone last word at every size. Headlines keep their
+   last two words together (see NoOrphans), so Figma's breaks are kept. */
+p,
+blockquote,
+figcaption,
+address {
+  text-wrap: pretty;
+}
+
+/* Below the desktop layout, headlines also balance their lines. */
 @media (width < 64rem) {
   h1,
   h2,

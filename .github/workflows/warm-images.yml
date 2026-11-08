@@ -1,0 +1,21 @@
+name: Warm images
+
+# After Vercel finishes a deployment, request every optimised image once so
+# visitors never wait for first-time encoding.
+on:
+  deployment_status:
+
+jobs:
+  warm:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Warm the image cache
+        run: node scripts/warm-images.mjs "${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}"
+        env:
+          VERCEL_BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}

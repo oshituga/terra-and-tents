@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import { NoOrphans } from "@/components/NoOrphans";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
 const outfit = Outfit({
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body>
         <SmoothScroll />
+        <NoOrphans />
         {children}
       </body>
     </html>

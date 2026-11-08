@@ -204,7 +204,7 @@ export default async function WeddingPage({
               className="scroll-mt-6 py-10 lg:py-20"
             >
               <div className="flex flex-col gap-2 px-page lg:h-[519px] lg:flex-row lg:items-stretch lg:justify-between lg:gap-0 lg:px-0">
-                <FadeIn className="flex min-h-[360px] flex-col justify-between gap-10 bg-ink px-5 py-8 text-cream lg:w-[421px] lg:shrink-0">
+                <FadeIn className="flex min-h-[360px] flex-col justify-between gap-10 bg-ink px-5 py-8 text-cream lg:w-1/3 lg:shrink-0 min-[90rem]:w-[421px]">
                   <p className="text-body">{approach.left.body}</p>
                   <h3 className="font-display text-display-s font-light uppercase">
                     {approach.left.title}
@@ -221,7 +221,7 @@ export default async function WeddingPage({
                 </FadeIn>
                 <FadeIn
                   delay={160}
-                  className="flex min-h-[360px] flex-col justify-between gap-10 bg-ink px-5 py-8 text-cream lg:w-[421px] lg:shrink-0"
+                  className="flex min-h-[360px] flex-col justify-between gap-10 bg-ink px-5 py-8 text-cream lg:w-1/3 lg:shrink-0 min-[90rem]:w-[421px]"
                 >
                   <p className="text-body">{approach.right.body}</p>
                   <h3 className="font-display text-display-s font-light uppercase">
