@@ -513,16 +513,20 @@ body {
    repaint, no sub-pixel drift, no wait before it starts. */
 .swap-ch {
   display: inline-block;
-  will-change: transform;
+  will-change: transform, filter, opacity;
   backface-visibility: hidden;
   transition:
-    transform 850ms var(--swap-ease),
-    opacity 650ms var(--swap-ease);
+    transform 900ms var(--swap-ease),
+    opacity 700ms var(--swap-ease),
+    filter 900ms var(--swap-ease);
   transition-delay: calc(var(--i) * var(--swap-step));
 }
 
+/* A light focus pull: letters soften as they leave and sharpen as they
+   arrive. Kept small so it reads as depth, not smear. */
 .swap-in .swap-ch {
   opacity: 0;
+  filter: blur(2px);
   transform: translate3d(0, 70%, 0);
 }
 
@@ -546,11 +550,13 @@ body {
 
   .group:hover .swap-out .swap-ch {
     opacity: 0;
+    filter: blur(2px);
     transform: translate3d(0, -70%, 0);
   }
 
   .group:hover .swap-in .swap-ch {
     opacity: 1;
+    filter: blur(0);
     transform: translate3d(0, 0, 0);
   }
 
@@ -586,11 +592,13 @@ body {
 
 .group:focus-visible .swap-out .swap-ch {
   opacity: 0;
+  filter: blur(2px);
   transform: translate3d(0, -70%, 0);
 }
 
 .group:focus-visible .swap-in .swap-ch {
   opacity: 1;
+  filter: blur(0);
   transform: translate3d(0, 0, 0);
 }
 
