@@ -44,12 +44,29 @@ export function Services() {
     if (!el) return;
     let frame = 0;
 
+    const progress = (node: HTMLElement, vh: number) =>
+      Math.min(
+        1,
+        Math.max(0, (vh - node.getBoundingClientRect().top) / (vh * 0.85)),
+      );
+
     const update = () => {
       frame = 0;
       const vh = window.innerHeight;
-      const top = el.getBoundingClientRect().top;
-      const q = Math.min(1, Math.max(0, (vh - top) / (vh * 0.85)));
-      el.style.setProperty("--q", q.toFixed(4));
+      const cards = el.querySelectorAll<HTMLElement>(".rise-card");
+      if (window.innerWidth >= 1024) {
+        // One row: the cards rise in turn as the row comes up the screen.
+        el.style.setProperty("--q", progress(el, vh).toFixed(4));
+        cards.forEach((card) => card.style.removeProperty("--q"));
+        return;
+      }
+      // Stacked: each card rises on its own as it reaches the screen.
+      cards.forEach((card) => {
+        const q =
+          progress(card, vh) +
+          (Number(card.style.getPropertyValue("--i")) || 0) * 0.12;
+        card.style.setProperty("--q", Math.min(1.4, q).toFixed(4));
+      });
     };
 
     const onScroll = () => {
@@ -94,7 +111,7 @@ export function Services() {
                 {title}
               </h3>
             </div>
-            <div className="relative aspect-[335/547] w-full overflow-hidden">
+            <div className="relative aspect-[4/3] w-full overflow-hidden md:aspect-[3/4] lg:aspect-[335/547]">
               <Image
                 src={src}
                 alt={alt}

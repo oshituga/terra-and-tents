@@ -6,6 +6,7 @@ const explore = [
   { href: "/about", label: "About" },
   { href: "/weddings", label: "Weddings" },
   { href: "/journal", label: "Journal" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 

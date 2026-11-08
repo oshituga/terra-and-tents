@@ -38,11 +38,11 @@ export default function Journal() {
         </header>
 
         <section aria-label="Articles" className="py-5">
-          <ul className="flex snap-x snap-mandatory scroll-px-8 items-start gap-2 overflow-x-auto px-page pt-10 pb-8 [scrollbar-width:none]">
+          <ul className="flex flex-col gap-12 px-page pt-10 pb-8 md:grid md:grid-cols-2 md:gap-x-2 lg:flex lg:flex-row lg:items-start lg:gap-2">
             {articles.map((article, i) => (
               <li
                 key={article.slug}
-                className="w-[82vw] max-w-[429px] shrink-0 snap-start lg:w-[min(429px,calc((100vw-80px)/3))]"
+                className="w-full lg:w-[min(429px,calc((100vw-80px)/3))] lg:shrink-0"
               >
                 <FadeIn delay={i * 100}>
                   <Link
@@ -57,12 +57,12 @@ export default function Journal() {
                         {article.author}
                       </p>
                     </div>
-                    <div className="relative h-[455px] w-full overflow-hidden bg-tan">
+                    <div className="relative h-[100vw] max-h-[455px] w-full overflow-hidden bg-tan md:h-[455px]">
                       <Image
                         src={article.cover.src}
                         alt={article.cover.alt}
                         fill
-                        sizes="(min-width: 1024px) 30vw, 82vw"
+                        sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
                         placeholder="blur"
                         quality={90}
                         className="object-cover"

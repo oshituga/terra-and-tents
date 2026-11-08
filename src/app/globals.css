@@ -47,6 +47,24 @@
   --text-display-s--letter-spacing: -0.05em;
 }
 
+/* Below the desktop layout, headlines balance their lines and running text
+   avoids leaving a single word on the last line. */
+@media (width < 64rem) {
+  h1,
+  h2,
+  h3,
+  blockquote,
+  figcaption,
+  address,
+  .font-display {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
 /* Display type steps down below the desktop layout. */
 @media (width < 64rem) {
   :root {

@@ -145,7 +145,7 @@ export default async function JournalArticle({
                   />
                 </FadeIn>
                 <FadeIn>
-                  <p className="px-8 text-body lg:pl-0">{article.closing}</p>
+                  <p className="px-8 pt-6 pb-12 text-body lg:py-0 lg:pl-0">{article.closing}</p>
                 </FadeIn>
               </div>
             </div>

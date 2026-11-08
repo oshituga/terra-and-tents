@@ -58,7 +58,7 @@ export function Process() {
               {title}
             </h3>
             <div
-              className={`step-fill flex min-h-[200px] flex-1 items-end bg-cream pt-8 pb-8 text-ink lg:min-h-0 lg:pt-0 ${i === steps.length - 1 ? "px-8" : "px-5"}`}
+              className={`step-fill flex min-h-[300px] flex-1 items-end bg-cream pt-8 pb-8 text-ink lg:min-h-0 lg:pt-0 ${i === steps.length - 1 ? "px-5 lg:px-8" : "px-5"}`}
             >
               <p className="step-text text-body">{body}</p>
             </div>

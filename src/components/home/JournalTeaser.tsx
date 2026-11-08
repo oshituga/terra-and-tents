@@ -20,27 +20,26 @@ export function JournalTeaser() {
         </h2>
       </FadeIn>
 
-      {/* Below the desktop layout the cards become a row you swipe through. */}
-      <div className="flex w-full snap-x snap-mandatory scroll-px-8 items-start gap-2 overflow-x-auto px-page py-10 [scrollbar-width:none]">
+      <div className="flex w-full flex-col gap-12 px-page py-10 md:grid md:grid-cols-2 md:gap-x-2 lg:flex lg:flex-row lg:items-start lg:gap-2">
         {articles.map((article, i) => (
           <FadeIn
             key={article.slug}
             delay={i * 100}
-            className="w-[82vw] max-w-[395px] shrink-0 snap-start lg:w-[min(395px,calc((100vw-80px)/3))]"
+            className="w-full lg:w-[min(395px,calc((100vw-80px)/3))] lg:shrink-0"
           >
             <Link
               href={`/journal/${article.slug}`}
-              className="group flex flex-col gap-[59px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+              className="group flex flex-col gap-6 lg:gap-[59px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
             >
               <h3 className="w-[365px] max-w-full font-display text-display-s font-light uppercase">
                 {article.title}
               </h3>
-              <div className="relative h-[455px] w-full overflow-hidden bg-tan">
+              <div className="relative h-[100vw] max-h-[455px] w-full overflow-hidden bg-tan md:h-[455px]">
                 <Image
                   src={article.cover.src}
                   alt={article.cover.alt}
                   fill
-                  sizes="(min-width: 1024px) 28vw, 82vw"
+                  sizes="(min-width: 1024px) 28vw, (min-width: 768px) 50vw, 100vw"
                   placeholder="blur"
                   quality={90}
                   className="object-cover"
