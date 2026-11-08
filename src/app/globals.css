@@ -306,11 +306,11 @@ body {
 }
 
 .beat-num {
-  color: rgb(45 33 28 / 0.4);
+  color: rgb(45 33 28 / 0.65);
 }
 
 .beat-title {
-  color: rgb(45 33 28 / 0.5);
+  color: rgb(45 33 28 / 0.65);
 }
 
 .beat[aria-current] .beat-num {
@@ -330,9 +330,16 @@ body {
   opacity: 1;
 }
 
+/* The map package marks its directions link with a faint underline only;
+   give keyboard users the same clear outline as the rest of the site. */
+.tt-map .tt-map__tag a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
 /* Wedding contents list: the current section gains a dash and full ink. */
 .toc-link {
-  opacity: 0.5;
+  opacity: 0.65;
   transition: opacity 300ms ease-out;
 }
 

@@ -66,17 +66,14 @@ const rows: [Field, Field][] = [
 ];
 
 const fields = rows.flat();
-// Optional: set NEXT_PUBLIC_FORM_ENDPOINT (for example a Formspree form URL)
-// to have enquiries delivered. Without it the form confirms locally.
-const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
+// Terra & Tent is a fictional studio: the form checks what was entered and
+// confirms on the page, but never sends anything anywhere.
 
 export function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -95,20 +92,9 @@ export function ContactForm() {
       return;
     }
 
+    // A brief pause so the confirmation feels considered, not instant.
     setStatus("sending");
-    try {
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: data,
-        });
-        if (!res.ok) throw new Error(String(res.status));
-      }
-      setStatus("sent");
-    } catch {
-      setStatus("failed");
-    }
+    window.setTimeout(() => setStatus("sent"), 700);
   }
 
   if (status === "sent") {
@@ -117,7 +103,7 @@ export function ContactForm() {
         role="status"
         className="flex min-h-[320px] flex-col justify-end gap-5 lg:min-h-[420px] lg:pr-8"
       >
-        <p className="text-body opacity-50">Message sent</p>
+        <p className="text-body opacity-65">Message sent</p>
         <p className="max-w-[560px] font-display text-display-s font-light uppercase">
           Thank you, we have your message. Expect a reply from us within two
           working days.
@@ -185,12 +171,6 @@ export function ContactForm() {
             {status === "sending" ? "Sending" : "Begin your story"}
           </SwapText>
         </button>
-        {status === "failed" && (
-          <p role="alert" className="text-body">
-            Something went wrong on our side. Please try again, or email us
-            directly.
-          </p>
-        )}
       </div>
     </form>
   );

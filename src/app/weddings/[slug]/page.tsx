@@ -152,7 +152,7 @@ export default async function WeddingPage({
                     <dl className="grid grid-cols-2 gap-x-2.5 gap-y-8 text-body md:grid-cols-3">
                       {overview.facts.map(([k, v]) => (
                         <div key={k} className="flex flex-col gap-1.5">
-                          <dt className="opacity-50">{k}</dt>
+                          <dt className="opacity-65">{k}</dt>
                           <dd>{v}</dd>
                         </div>
                       ))}

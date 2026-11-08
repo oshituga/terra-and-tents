@@ -21,7 +21,7 @@ const bigLink = `sheen-link font-display text-display-s font-light whitespace-no
 const smallLink = `sheen-link ${focus}`;
 
 function Label({ children }: { children: string }) {
-  return <p className="text-body opacity-50">{children}</p>;
+  return <p className="text-body opacity-65">{children}</p>;
 }
 
 export function Footer() {

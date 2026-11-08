@@ -1,11 +1,9 @@
 import { ButtonLink } from "../ButtonLink";
 import { FadeIn } from "../FadeIn";
 import { ParallaxImage } from "../ParallaxImage";
-import elenaTom from "@/assets/story-elena-tom.webp";
-import sofiaHenry from "@/assets/story-sofia-henry.webp";
 import { getWedding } from "@/lib/weddings";
 
-// The two cards show the Figma photos, with each wedding's own details.
+// Two weddings, each shown with its own cover photo and details.
 const pick = (slug: string) => {
   const w = getWedding(slug);
   if (!w) throw new Error(`Unknown wedding: ${slug}`);
@@ -20,8 +18,9 @@ const stories = [
     place: maria.location,
     body: maria.summary,
     href: `/weddings/${maria.slug}`,
-    src: elenaTom,
-    alt: "A large tree shading a lawn set with rattan chairs and a wooden ceremony frame",
+    src: maria.cover.src,
+    alt: maria.cover.alt,
+    position: maria.cover.position,
     align: "items-start",
   },
   {
@@ -29,8 +28,9 @@ const stories = [
     place: sofia.location,
     body: sofia.summary,
     href: `/weddings/${sofia.slug}`,
-    src: sofiaHenry,
-    alt: "Round tables with lilac chair sashes and a tall flower arrangement on a lawn outside a cream villa",
+    src: sofia.cover.src,
+    alt: sofia.cover.alt,
+    position: sofia.cover.position,
     align: "items-end",
   },
 ];
@@ -61,7 +61,8 @@ export function Stories() {
             <ParallaxImage
               src={story.src}
               alt={story.alt}
-              sizes="(min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              position={story.position}
             />
             <div className="relative w-[449px] max-w-full bg-cream p-6 md:p-8">
               <article className="flex flex-col items-start gap-11">
