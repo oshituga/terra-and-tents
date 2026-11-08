@@ -23,7 +23,7 @@ export default function Weddings() {
       <main className="bg-cream text-ink">
         {/* On desktop the nav and the opening section fill one screen; the
             ticker takes the height that is left, keeping its proportions. */}
-        <div className="lg:flex lg:h-svh lg:min-h-[720px] lg:flex-col">
+        <div className="lg:flex lg:h-svh lg:min-h-[900px] lg:flex-col">
           <Nav variant="light" />
 
           <section
