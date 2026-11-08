@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { delay } from "@/components/motion";
 import { OnThisPage } from "@/components/weddings/OnThisPage";
+import { ParallaxImage } from "@/components/ParallaxImage";
 import { getWedding, weddings, type Photo } from "@/lib/weddings";
 
 export function generateStaticParams() {
@@ -39,25 +40,18 @@ function Picture({
   photo,
   sizes,
   className,
-  preload = false,
 }: {
   photo: Photo;
   sizes: string;
   className: string;
-  preload?: boolean;
 }) {
   return (
     <div className={`relative overflow-hidden bg-oat ${className}`}>
-      <Image
+      <ParallaxImage
         src={photo.src}
         alt={photo.alt}
-        fill
         sizes={sizes}
-        placeholder="blur"
-        quality={90}
-        preload={preload}
-        className="object-cover"
-        style={photo.position ? { objectPosition: photo.position } : undefined}
+        position={photo.position}
       />
     </div>
   );
@@ -182,20 +176,14 @@ export default async function WeddingPage({
               className="scroll-mt-6 py-10 lg:py-20"
             >
               <div className="relative isolate flex h-[110vw] max-h-[879px] flex-col items-center overflow-hidden px-page py-10 text-cream md:h-[80vw] lg:h-[879px] lg:py-[60px]">
-                <Image
-                  src={brief.photo.src}
-                  alt={brief.photo.alt}
-                  fill
-                  sizes="(min-width: 1024px) 88vw, 100vw"
-                  placeholder="blur"
-                  quality={90}
-                  className="-z-20 object-cover"
-                  style={
-                    brief.photo.position
-                      ? { objectPosition: brief.photo.position }
-                      : undefined
-                  }
-                />
+                <div className="absolute inset-0 -z-20">
+                  <ParallaxImage
+                    src={brief.photo.src}
+                    alt={brief.photo.alt}
+                    sizes="(min-width: 1024px) 88vw, 100vw"
+                    position={brief.photo.position}
+                  />
+                </div>
                 <div
                   aria-hidden
                   className="absolute inset-0 -z-10 bg-[#121212]/30"

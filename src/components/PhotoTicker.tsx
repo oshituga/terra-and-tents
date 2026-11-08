@@ -82,12 +82,15 @@ export function PhotoTicker({
   items,
   align = "bottom",
   aspect = "aspect-[1440/449]",
+  desktopWidth = "lg:w-full",
 }: {
   items: TickerPhoto[];
   /** Tiles sit on a shared baseline, or are centred on one line. */
   align?: "bottom" | "center";
   /** Tailwind aspect class for the strip, from the 1440px design. */
   aspect?: string;
+  /** Tailwind width class for the strip in the desktop layout. */
+  desktopWidth?: string;
 }) {
   const count = items.length;
   const initial = layout(0, count);
@@ -142,7 +145,7 @@ export function PhotoTicker({
       <div className="max-page overflow-hidden">
         <div
           ref={strip}
-          className={`relative left-1/2 w-[250vw] ${aspect} -translate-x-1/2 overflow-hidden [container-type:inline-size] md:w-[160vw] lg:w-full`}
+          className={`relative left-1/2 w-[250vw] ${aspect} -translate-x-1/2 overflow-hidden [container-type:inline-size] md:w-[160vw] ${desktopWidth}`}
         >
           {items.map((item, i) => (
             <div
