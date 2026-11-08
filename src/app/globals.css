@@ -330,6 +330,35 @@ body {
   opacity: 1;
 }
 
+/* Wedding contents list: the current section gains a dash and full ink. */
+.toc-link {
+  opacity: 0.5;
+  transition: opacity 300ms ease-out;
+}
+
+.toc-dash {
+  width: 0;
+  margin-right: -2px;
+  transition:
+    width 400ms var(--ease-out),
+    margin 400ms var(--ease-out);
+}
+
+.toc-link[aria-current] {
+  opacity: 1;
+}
+
+.toc-link[aria-current] .toc-dash {
+  width: 12px;
+  margin-right: 0;
+}
+
+@media (hover: hover) {
+  .toc-link:hover {
+    opacity: 1;
+  }
+}
+
 /* Mobile menu: the panel fades in, then its links rise in turn. */
 .menu-panel {
   opacity: 0;

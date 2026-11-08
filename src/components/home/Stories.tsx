@@ -3,22 +3,32 @@ import { FadeIn } from "../FadeIn";
 import { ParallaxImage } from "../ParallaxImage";
 import elenaTom from "@/assets/story-elena-tom.webp";
 import sofiaHenry from "@/assets/story-sofia-henry.webp";
+import { getWedding } from "@/lib/weddings";
+
+// The two cards show the Figma photos, with each wedding's own details.
+const pick = (slug: string) => {
+  const w = getWedding(slug);
+  if (!w) throw new Error(`Unknown wedding: ${slug}`);
+  return w;
+};
+const maria = pick("maria-and-israel");
+const sofia = pick("sofia-and-henry");
 
 const stories = [
   {
-    couple: "Elena & Tom",
-    place: "Val d’Orcia, Tuscany",
-    body: "A hilltop marquee dressed in olive branches and warm lantern light, with the whole valley as the backdrop. Elena and Tom kept it small, so every guest had a seat at the same long table.",
-    href: "/weddings/elena-and-tom",
+    couple: maria.couple,
+    place: maria.location,
+    body: maria.summary,
+    href: `/weddings/${maria.slug}`,
     src: elenaTom,
     alt: "A large tree shading a lawn set with rattan chairs and a wooden ceremony frame",
     align: "items-start",
   },
   {
-    couple: "Sofia & Henry",
-    place: "Padstow, Cornwall",
-    body: "Vows on a cliff path, then a sea-salt supper in a tent tucked into the dunes. Sofia and Henry wanted the day to taste of the coast, so the table was set with driftwood, shells and wild grasses.",
-    href: "/weddings/sofia-and-henry",
+    couple: sofia.couple,
+    place: sofia.location,
+    body: sofia.summary,
+    href: `/weddings/${sofia.slug}`,
     src: sofiaHenry,
     alt: "Round tables with lilac chair sashes and a tall flower arrangement on a lawn outside a cream villa",
     align: "items-end",

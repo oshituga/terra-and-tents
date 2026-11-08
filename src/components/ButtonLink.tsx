@@ -2,10 +2,11 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { SwapText } from "./SwapText";
 
-type Variant = "solid" | "underline";
+type Variant = "solid" | "dark" | "underline";
 
 const variants: Record<Variant, string> = {
   solid: "rounded-[25px] bg-cream text-ink",
+  dark: "rounded-[25px] bg-ink text-cream",
   underline: "",
 };
 

@@ -4,33 +4,16 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FadeIn } from "../FadeIn";
 import { ParallaxImage } from "../ParallaxImage";
-import majaOliver from "@/assets/quote-maja-oliver.webp";
-import amaraJames from "@/assets/quote-amara-james.webp";
-import islaBen from "@/assets/quote-isla-ben.webp";
+import { weddings } from "@/lib/weddings";
 
-const quotes = [
-  {
-    quote:
-      "The moment we walked in, we stopped talking. It looked better than anything we had pictured, and it felt like us.",
-    by: "Maja & Oliver, Dalarna, Sweden",
-    src: majaOliver,
-    alt: "A newly married couple kissing in a long grass meadow below red farm barns and pine trees under a cloudy sky",
-  },
-  {
-    quote:
-      "We asked for one long table under the trees. They built it, lit it and somehow made forty guests feel like family.",
-    by: "Amara & James, Herefordshire",
-    src: amaraJames,
-    alt: "A long dinner table with orange chairs, flowers and candles set beneath trees in the evening",
-  },
-  {
-    quote:
-      "The arch framed the sea exactly where we stood. Every guest took the same photo, and it is still on our wall.",
-    by: "Isla & Ben, Isle of Wight",
-    src: islaBen,
-    alt: "A flower arch of white blooms and greenery on a stone terrace above the sea",
-  },
-];
+// One quote per wedding, over that wedding's photo.
+const quotes = weddings.map((w) => ({
+  quote: w.testimonial.quote,
+  by: `${w.couple}, ${w.region}`,
+  src: w.testimonial.photo.src,
+  alt: w.testimonial.photo.alt,
+  position: w.testimonial.photo.position,
+}));
 
 const ADVANCE_MS = 8000;
 
@@ -74,14 +57,19 @@ export function Testimonials() {
       className="relative isolate flex min-h-svh flex-col items-end justify-center gap-20 overflow-hidden bg-ink px-page py-8 text-cream"
     >
       <div className="absolute inset-0 -z-20 isolate">
-        {quotes.map(({ src, alt }, i) => (
+        {quotes.map(({ src, alt, position }, i) => (
           <div
             key={src.src}
             aria-hidden={i !== active}
             className="tslide absolute inset-0"
             data-state={slideState(i)}
           >
-            <ParallaxImage src={src} alt={alt} sizes="100vw" />
+            <ParallaxImage
+              src={src}
+              alt={alt}
+              sizes="100vw"
+              position={position}
+            />
           </div>
         ))}
       </div>
