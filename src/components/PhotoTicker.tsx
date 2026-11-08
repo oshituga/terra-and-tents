@@ -35,6 +35,8 @@ const TILE_W = 331;
 const TILE_H = 441;
 const LAST = slots.length - 1;
 const SLOT_MS = 2600;
+// The smallest scale at which the row still spans the full width.
+export const MIN_FIT = 0.74;
 
 // Catmull-Rom curve through the slot values, so size and speed change
 // gradually instead of jumping at each slot.
@@ -54,7 +56,9 @@ function along(values: number[], f: number) {
 
 // Lay the photos out edge to edge from the leftmost one, always GAP apart,
 // so they can never overlap. At whole slot positions this is the design.
-function layout(t: number, n: number) {
+type Frame = { u: number; dx: number; dy: number };
+
+function layout(t: number, n: number, fr?: Frame) {
   const order = Array.from({ length: n }, (_, i) => i)
     .map((i) => ({ i, f: (((i - t) % n) + n) % n }))
     .sort((a, b) => a.f - b.f);
@@ -65,8 +69,13 @@ function layout(t: number, n: number) {
     const w = along(widths, slot);
     const h = along(heights, slot);
     const left = f > LAST ? lefts[LAST] : x;
+    // Before measuring (server render) positions are in cqw at design scale;
+    // after, in pixels at the measured scale.
+    const tx = fr
+      ? `${(left * fr.u + fr.dx).toFixed(2)}px, ${fr.dy.toFixed(2)}px`
+      : `${(left / 14.4).toFixed(4)}cqw, 0`;
     out[i] =
-      `translate3d(${(left / 14.4).toFixed(4)}cqw, 0, 0) ` +
+      `translate3d(${tx}, 0) ` +
       `scale(${(w / TILE_W).toFixed(4)}, ${(h / TILE_H).toFixed(4)})`;
     x += w + GAP;
   }
@@ -83,6 +92,8 @@ export function PhotoTicker({
   align = "bottom",
   aspect = "aspect-[1440/449]",
   desktopWidth = "lg:w-full",
+  designHeight = 449,
+  fit = false,
 }: {
   items: TickerPhoto[];
   /** Tiles sit on a shared baseline, or are centred on one line. */
@@ -91,6 +102,13 @@ export function PhotoTicker({
   aspect?: string;
   /** Tailwind width class for the strip in the desktop layout. */
   desktopWidth?: string;
+  /** Height of the strip in the 1440px design. */
+  designHeight?: number;
+  /**
+   * In the desktop layout, fill the parent's height: tiles scale down to fit
+   * it while the row still runs edge to edge.
+   */
+  fit?: boolean;
 }) {
   const count = items.length;
   const initial = layout(0, count);
@@ -100,9 +118,40 @@ export function PhotoTicker({
   useEffect(() => {
     const el = strip.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // Scale so the tiles fit both the strip's width and height, and centre
+    // the row (which is wider than the design) on the strip.
+    let fr: Frame = { u: 1, dx: 0, dy: 0 };
+    const measure = () => {
+      const W = el.clientWidth;
+      const H = el.clientHeight;
+      // Never so small that the row stops short of the edges.
+      const u = Math.max(
+        Math.min(W / 1440, H / designHeight),
+        (W / 1440) * MIN_FIT,
+      );
+      const dx = (W - 1440 * u) / 2;
+      const dy = align === "center" ? (H - TILE_H * u) / 2 : 0;
+      fr = { u, dx, dy };
+      el.style.setProperty("--u", `${u}px`);
+    };
+    const paint = (t: number) => {
+      const transforms = layout(t, count, fr);
+      tiles.current.forEach((tile, i) => {
+        if (tile) tile.style.transform = transforms[i];
+      });
+    };
     let t = 0;
+    measure();
+    paint(0);
+    const ro = new ResizeObserver(() => {
+      measure();
+      paint(t);
+    });
+    ro.observe(el);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      return () => ro.disconnect();
+
     let last = 0;
     let raf = 0;
     // Hovering eases the ticker down to a slower pace, and back up on leave.
@@ -117,10 +166,7 @@ export function PhotoTicker({
       speed += (target - speed) * 0.05;
       if (last) t += ((now - last) / SLOT_MS) * speed;
       last = now;
-      const transforms = layout(t, count);
-      tiles.current.forEach((tile, i) => {
-        if (tile) tile.style.transform = transforms[i];
-      });
+      paint(t);
       raf = requestAnimationFrame(frame);
     };
 
@@ -131,21 +177,22 @@ export function PhotoTicker({
     });
     io.observe(el);
     return () => {
+      ro.disconnect();
       io.disconnect();
       cancelAnimationFrame(raf);
       el.removeEventListener("pointerenter", slow);
       el.removeEventListener("pointerleave", resume);
     };
-  }, [count]);
+  }, [count, designHeight, align]);
 
   return (
     <>
       {/* On smaller screens the strip is drawn wider than the screen and
           centred, so the photos keep a useful size. */}
-      <div className="max-page overflow-hidden">
+      <div className={`max-page overflow-hidden ${fit ? "lg:h-full" : ""}`}>
         <div
           ref={strip}
-          className={`relative left-1/2 w-[250vw] ${aspect} -translate-x-1/2 overflow-hidden [container-type:inline-size] md:w-[160vw] ${desktopWidth}`}
+          className={`relative left-1/2 w-[250vw] ${aspect} -translate-x-1/2 overflow-hidden [container-type:inline-size] md:w-[160vw] ${desktopWidth} ${fit ? "lg:aspect-auto lg:h-full" : ""}`}
         >
           {items.map((item, i) => (
             <div
@@ -153,10 +200,10 @@ export function PhotoTicker({
               ref={(node) => {
                 tiles.current[i] = node;
               }}
-              className={`absolute left-0 overflow-hidden will-change-transform ${align === "center" ? "top-0 origin-left" : "bottom-2 origin-bottom-left"} ${item ? "bg-clay" : placeholderTones[i % placeholderTones.length]}`}
+              className={`absolute top-0 left-0 overflow-hidden will-change-transform ${align === "center" ? "origin-left" : "top-auto bottom-2 origin-bottom-left"} ${item ? "bg-clay" : placeholderTones[i % placeholderTones.length]}`}
               style={{
-                width: "calc(100cqw * " + TILE_W / 1440 + ")",
-                height: "calc(100cqw * " + TILE_H / 1440 + ")",
+                width: `calc(var(--u, calc(100cqw / 1440)) * ${TILE_W})`,
+                height: `calc(var(--u, calc(100cqw / 1440)) * ${TILE_H})`,
                 transform: initial[i],
               }}
             >

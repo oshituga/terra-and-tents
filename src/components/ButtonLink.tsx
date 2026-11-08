@@ -5,8 +5,8 @@ import { SwapText } from "./SwapText";
 type Variant = "solid" | "dark" | "underline";
 
 const variants: Record<Variant, string> = {
-  solid: "rounded-[25px] bg-cream text-ink",
-  dark: "rounded-[25px] bg-ink text-cream",
+  solid: "pill rounded-[25px] bg-cream text-ink",
+  dark: "pill rounded-[25px] bg-ink text-cream",
   underline: "",
 };
 

@@ -494,26 +494,32 @@ body {
 
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
-  --swap-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --swap-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --swap-step: 14ms;
   display: inline-grid;
   overflow: hidden;
   vertical-align: top;
 }
 
-/* Both copies stay on their own layer, so the text never re-rasterises or
-   shifts by a fraction of a pixel when the hover starts or ends. */
-.swap > * {
+.swap-out,
+.swap-in {
   grid-area: 1 / 1;
-  will-change: transform;
-  backface-visibility: hidden;
-  transition:
-    transform 550ms var(--swap-ease),
-    opacity 400ms var(--swap-ease);
+  display: inline-flex;
+  white-space: pre;
 }
 
-.swap-in {
-  opacity: 0;
-  transform: translate3d(0, 100%, 0);
+/* Each letter rides its own layer, so the roll is pure compositing: no
+   repaint, no sub-pixel drift, no wait before it starts. */
+.swap-ch {
+  display: inline-block;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 520ms var(--swap-ease);
+  transition-delay: calc(var(--i) * var(--swap-step));
+}
+
+.swap-in .swap-ch {
+  transform: translate3d(0, 105%, 0);
 }
 
 .underline-line {
@@ -522,22 +528,30 @@ body {
   bottom: 0;
   height: 1.5px;
   background: currentColor;
-  transition: transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
+  transform-origin: right;
+  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @media (hover: hover) {
-  .group:hover .swap-out {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
+  .pill {
+    transition: transform 520ms cubic-bezier(0.65, 0, 0.35, 1);
   }
 
-  .group:hover .swap-in {
-    opacity: 1;
+  .pill:hover {
+    transform: scale(0.97);
+  }
+
+  .group:hover .swap-out .swap-ch {
+    transform: translate3d(0, -105%, 0);
+  }
+
+  .group:hover .swap-in .swap-ch {
     transform: translate3d(0, 0, 0);
   }
 
+  /* The underline wipes off to the right, then draws back in from the left. */
   .group:hover .underline-line {
-    transform: scaleX(0.3);
+    animation: line-redraw 900ms cubic-bezier(0.65, 0, 0.35, 1);
   }
 
   .group:hover .arrow-nudge {
@@ -565,17 +579,31 @@ body {
   }
 }
 
-.group:focus-visible .swap-out {
-  opacity: 0;
+.group:focus-visible .swap-out .swap-ch {
+  transform: translate3d(0, -105%, 0);
 }
 
-.group:focus-visible .swap-out {
-  transform: translate3d(0, -100%, 0);
-}
-
-.group:focus-visible .swap-in {
-  opacity: 1;
+.group:focus-visible .swap-in .swap-ch {
   transform: translate3d(0, 0, 0);
+}
+
+@keyframes line-redraw {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  45% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  55% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -594,9 +622,10 @@ body {
     transition: none;
   }
 
-  .swap > *,
+  .swap-ch,
   .underline-line {
     transition: none;
+    animation: none !important;
   }
 
   .step-fill {

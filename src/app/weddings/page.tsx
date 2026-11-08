@@ -69,12 +69,14 @@ export default function Weddings() {
   return (
     <>
       <main className="bg-cream text-ink">
-        <div>
+        {/* On desktop the nav and the opening section fill one screen; the
+            ticker scales its tiles to the height left, still edge to edge. */}
+        <div className="lg:flex lg:h-[max(100svh,calc(100vw*499/1440*0.74+531px))] lg:flex-col">
           <Nav variant="light" />
 
           <section
             aria-label="Our weddings"
-            className="flex flex-col gap-10 py-10 lg:gap-[51px] lg:py-[60px]"
+            className="flex flex-col gap-10 py-10 lg:min-h-0 lg:flex-1 lg:gap-[51px] lg:py-[60px]"
           >
             <header className="flex justify-end px-page">
               <div
@@ -88,11 +90,13 @@ export default function Weddings() {
               </div>
             </header>
 
-            <div className="fade" style={delay(550)}>
+            <div className="fade lg:min-h-0 lg:flex-1" style={delay(550)}>
               <PhotoTicker
                 items={tickerItems}
                 align="center"
                 aspect="aspect-[1440/499]"
+                designHeight={499}
+                fit
               />
             </div>
 
