@@ -66,6 +66,9 @@ const beats = [
   },
 ];
 
+const intro =
+  "Our first wedding was a friend’s, held on her family’s farm in late September. We had a rented tent, an armful of garden flowers and no idea what we were doing. By evening the candles were lit, the field had gone gold, and the whole room felt as if it had grown there. We have chased that feeling at every wedding since.";
+
 export function AboutStory() {
   const section = useRef<HTMLElement>(null);
   const pin = useRef<HTMLDivElement>(null);
@@ -129,95 +132,96 @@ export function AboutStory() {
   };
 
   return (
-    <section
-      ref={section}
-      aria-label="How it began"
-      className="relative bg-cream text-ink"
-    >
-      <div
-        ref={pin}
-        className="sticky top-0 flex h-svh flex-col justify-center gap-3 pt-4 lg:h-auto lg:min-h-svh lg:gap-[14px] lg:pt-[70px]"
+    <>
+      {/* On short phone screens the intro is read before the pinned part,
+          so the photo has room while the headline stays in view. */}
+      <FadeIn className="hidden bg-cream px-page pt-16 text-ink max-lg:[@media(max-height:780px)]:block">
+        <p className="text-body">{intro}</p>
+      </FadeIn>
+      <section
+        ref={section}
+        aria-label="How it began"
+        className="relative bg-cream text-ink"
       >
-        <FadeIn className="flex justify-center px-page py-3 lg:py-10">
-          <h2 className="w-[539px] max-w-full text-center font-display text-display-m font-light uppercase">
-            It began with one borrowed field and a lot of candles
-          </h2>
-        </FadeIn>
+        <div
+          ref={pin}
+          className="sticky top-0 flex h-svh flex-col justify-center gap-3 pt-4 lg:h-auto lg:min-h-svh lg:gap-[14px] lg:pt-[70px]"
+        >
+          <FadeIn className="flex justify-center px-page py-3 lg:py-10">
+            <h2 className="w-[539px] max-w-full text-center font-display text-display-m font-light uppercase">
+              It began with one borrowed field and a lot of candles
+            </h2>
+          </FadeIn>
 
-        <FadeIn className="px-page py-1 lg:py-5">
-          <p className="w-[574px] max-w-full text-body">
-            Our first wedding was a friend’s, held on her family’s farm in late
-            September. We had a rented tent, an armful of garden flowers and no
-            idea what we were doing. By evening the candles were lit, the field
-            had gone gold, and the whole room felt as if it had grown there. We
-            have chased that feeling at every wedding since.
-          </p>
-        </FadeIn>
+          <FadeIn className="px-page py-1 lg:py-5 max-lg:[@media(max-height:780px)]:hidden">
+            <p className="w-[574px] max-w-full text-body">{intro}</p>
+          </FadeIn>
 
-        <div className="max-page flex min-h-0 flex-1 flex-col gap-4 px-page lg:flex-none lg:flex-row lg:items-stretch lg:gap-[114px] lg:px-0">
-          <div className="relative min-h-24 w-full min-w-0 flex-1 overflow-hidden bg-oat lg:h-[625px] lg:w-auto">
-            {photos.map(({ src, alt, position }, i) => (
-              <div
-                key={src.src}
-                aria-hidden={i !== active}
-                data-active={i === active ? "" : undefined}
-                className="story-photo absolute inset-0"
-              >
-                <Image
-                  src={src}
-                  alt={alt}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  placeholder="blur"
-                  quality={90}
-                  className="object-cover"
-                  style={position ? { objectPosition: position } : undefined}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="flex w-full shrink-0 flex-col justify-between gap-4 lg:w-[638px] lg:gap-0">
-            {/* Below the desktop layout the beats shrink to a row of numbers and
-                the current title sits above its text, leaving room for the photo. */}
-            <ol className="grid grid-cols-6 lg:flex lg:flex-col">
-              {beats.map(({ title }, i) => (
-                <li key={title}>
-                  <button
-                    type="button"
-                    onClick={() => goTo(i)}
-                    aria-current={i === active ? "step" : undefined}
-                    className="beat flex w-full items-center gap-4 border-b border-ink/20 py-3 text-left lg:py-[11px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
-                  >
-                    <span className="beat-num text-[13px] leading-[16.38px] tracking-[-0.03em]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="beat-title sr-only text-body leading-[20.16px] lg:not-sr-only">
-                      {title}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ol>
-
-            <div className="grid pb-4 lg:pr-8 lg:pb-8">
-              {beats.map(({ title, body }, i) => (
+          <div className="max-page flex min-h-0 flex-1 flex-col gap-4 px-page lg:flex-none lg:flex-row lg:items-stretch lg:gap-[114px] lg:px-0">
+            <div className="relative min-h-24 w-full min-w-0 flex-1 overflow-hidden bg-oat lg:h-[625px] lg:w-auto">
+              {photos.map(({ src, alt, position }, i) => (
                 <div
-                  key={title}
+                  key={src.src}
                   aria-hidden={i !== active}
                   data-active={i === active ? "" : undefined}
-                  className="slide-text col-start-1 row-start-1 flex flex-col gap-3"
+                  className="story-photo absolute inset-0"
                 >
-                  <h3 className="font-display text-display-s font-light uppercase lg:hidden">
-                    {title}
-                  </h3>
-                  <p className="text-body">{body}</p>
+                  <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    placeholder="blur"
+                    quality={90}
+                    className="object-cover"
+                    style={position ? { objectPosition: position } : undefined}
+                  />
                 </div>
               ))}
             </div>
+
+            <div className="flex w-full shrink-0 flex-col justify-between gap-4 lg:w-[638px] lg:gap-0">
+              {/* Below the desktop layout the beats shrink to a row of numbers and
+                the current title sits above its text, leaving room for the photo. */}
+              <ol className="grid grid-cols-6 lg:flex lg:flex-col">
+                {beats.map(({ title }, i) => (
+                  <li key={title}>
+                    <button
+                      type="button"
+                      onClick={() => goTo(i)}
+                      aria-current={i === active ? "step" : undefined}
+                      className="beat flex w-full items-center gap-4 border-b border-ink/20 py-3 text-left lg:py-[11px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                    >
+                      <span className="beat-num text-[13px] leading-[16.38px] tracking-[-0.03em]">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="beat-title sr-only text-body leading-[20.16px] lg:not-sr-only">
+                        {title}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="grid pb-4 lg:pr-8 lg:pb-8">
+                {beats.map(({ title, body }, i) => (
+                  <div
+                    key={title}
+                    aria-hidden={i !== active}
+                    data-active={i === active ? "" : undefined}
+                    className="slide-text col-start-1 row-start-1 flex flex-col gap-3"
+                  >
+                    <h3 className="font-display text-display-s font-light uppercase lg:hidden">
+                      {title}
+                    </h3>
+                    <p className="text-body">{body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
