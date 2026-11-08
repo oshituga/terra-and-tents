@@ -43,7 +43,7 @@ function TextButton({
     <button
       type="button"
       style={style}
-      className={`group relative inline-flex items-center justify-center px-6 pt-[15px] pb-[16.5px] text-body whitespace-nowrap ${focus} ${className}`}
+      className={`group relative inline-flex items-center justify-center pt-1 pb-[7px] text-body whitespace-nowrap ${focus} ${className}`}
       {...props}
     >
       <SwapText>{label}</SwapText>
