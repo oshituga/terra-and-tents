@@ -117,7 +117,9 @@ export function GalleryViewer() {
                 aria-current={i === active ? "true" : undefined}
                 onClick={() => show(i)}
                 onPointerEnter={(e) => {
-                  if (e.pointerType === "mouse") show(i);
+                  // Hover previews only in the desktop layout.
+                  if (e.pointerType === "mouse" && window.innerWidth >= 1024)
+                    show(i);
                 }}
                 style={
                   {

@@ -338,7 +338,7 @@ body {
   }
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (width >= 64rem) {
   .gallery-thumb:hover {
     flex-grow: 108;
     opacity: 1 !important;
