@@ -330,6 +330,35 @@ body {
   opacity: 1;
 }
 
+/* Mobile menu: the panel fades in, then its links rise in turn. */
+.menu-panel {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 450ms var(--ease-out),
+    visibility 0s linear 450ms;
+}
+
+.menu-panel[data-open] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 450ms var(--ease-out);
+}
+
+.menu-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 500ms ease-out,
+    transform 700ms var(--ease-out);
+}
+
+[data-open] .menu-item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(150ms + var(--i, 0) * 70ms);
+}
+
 /* Gallery: the chosen photo fades in over the last one; thumbs ease to
    their new size and weight. */
 .gallery-photo {
@@ -526,6 +555,8 @@ body {
   .field-line,
   .story-photo,
   .gallery-thumb,
+  .menu-panel,
+  .menu-item,
   .beat-num,
   .beat-title,
   .card-hover,

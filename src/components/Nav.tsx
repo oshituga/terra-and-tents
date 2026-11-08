@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ButtonLink } from "./ButtonLink";
+import { MobileMenu } from "./MobileMenu";
 import { delay } from "./motion";
 import { SwapText } from "./SwapText";
 
@@ -31,7 +32,7 @@ export function Nav({
       <nav
         aria-label="Main"
         style={delay(0)}
-        className={`fade flex gap-2.5 overflow-hidden rounded-[25px] px-[18px] py-2 ${pill}`}
+        className={`fade hidden gap-2.5 overflow-hidden rounded-[25px] px-[18px] py-2 lg:flex ${pill}`}
       >
         {links.map(({ href, label, width }) => (
           <Link
@@ -48,20 +49,24 @@ export function Nav({
         href="/"
         aria-label="Terra & Tent home"
         style={delay(0)}
-        className="fade absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+        className="fade lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
       >
         <span aria-hidden className="tent-mark block h-[32.8965px] w-9" />
       </Link>
 
-      <ButtonLink
-        href="/contact"
-        variant="underline"
-        compact
-        className="fade"
-        style={delay(0)}
-      >
-        Make enquiries
-      </ButtonLink>
+      <div className="hidden lg:flex">
+        <ButtonLink
+          href="/contact"
+          variant="underline"
+          compact
+          className="fade"
+          style={delay(0)}
+        >
+          Make enquiries
+        </ButtonLink>
+      </div>
+
+      <MobileMenu />
     </header>
   );
 }
