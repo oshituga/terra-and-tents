@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FadeIn } from "@/components/FadeIn";
 import { Nav } from "@/components/Nav";
 import { GalleryViewer } from "@/components/gallery/GalleryViewer";
 import { delay } from "@/components/motion";
 
-export const metadata: Metadata = {
-  title: "Gallery | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "Gallery",
   description:
-    "The arches, aisles and long tables we have built, from lakeside docks to open lawns at golden hour.",
-};
+    "Arches, aisles and long tables we have built outdoors, from lakeside docks to open lawns at golden hour.",
+  path: "/gallery",
+});
 
 export default function Gallery() {
   return (

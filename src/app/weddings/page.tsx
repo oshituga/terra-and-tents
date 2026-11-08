@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
@@ -20,11 +21,12 @@ import t10 from "@/assets/weddings/ticker/ticker-10.webp";
 import t11 from "@/assets/weddings/ticker/ticker-11.webp";
 import t12 from "@/assets/weddings/ticker/ticker-12.webp";
 
-export const metadata: Metadata = {
-  title: "Weddings | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "Weddings",
   description:
-    "No two days we style look alike. Browse the weddings we have built, from quiet garden lunches to long marquee evenings.",
-};
+    "Every wedding, a place of its own. A lakeshore in Dalarna, a farmhouse garden in Alsace, a hillside in Madeira and a waterfall glade in Asturias.",
+  path: "/weddings",
+});
 
 const tickerItems = [
   {

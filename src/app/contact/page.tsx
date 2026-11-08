@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { FadeIn } from "@/components/FadeIn";
 import { Nav } from "@/components/Nav";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { delay } from "@/components/motion";
 import { enquiryHref } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "Tell us about your day",
   description:
-    "Tell us about your wedding. Share the place, the date and the feeling you are after, and we will reply within two working days.",
-};
+    "Share the place, the date and the feeling you are after, even if it is only a rough idea. We reply within two working days.",
+  path: "/contact",
+});
 
 const link =
   "sheen-link font-display text-display-s font-light whitespace-nowrap uppercase focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current";

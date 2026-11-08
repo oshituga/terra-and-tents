@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -21,10 +22,12 @@ export async function generateMetadata({
 }: PageProps<"/weddings/[slug]">): Promise<Metadata> {
   const w = getWedding((await params).slug);
   if (!w) return {};
-  return {
-    title: `${w.couple}, ${w.location} | Terra & Tent`,
+  return pageMetadata({
+    title: `${w.couple}, ${w.location}`,
     description: w.summary,
-  };
+    path: `/weddings/${w.slug}`,
+    type: "article",
+  });
 }
 
 const sections = [

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -22,10 +23,12 @@ export async function generateMetadata({
 }: PageProps<"/journal/[slug]">): Promise<Metadata> {
   const article = getArticle((await params).slug);
   if (!article) return {};
-  return {
-    title: `${article.title} | Terra & Tent`,
+  return pageMetadata({
+    title: article.title,
     description: article.summary,
-  };
+    path: `/journal/${article.slug}`,
+    type: "article",
+  });
 }
 
 function Photo({

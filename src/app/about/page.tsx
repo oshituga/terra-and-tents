@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Footer } from "@/components/Footer";
 import { AboutHero } from "@/components/about/Hero";
 import { AboutLocation } from "@/components/about/Location";
@@ -7,11 +8,12 @@ import { AboutPrinciples } from "@/components/about/Principles";
 import { AboutStory } from "@/components/about/Story";
 import { AboutTeam } from "@/components/about/Team";
 
-export const metadata: Metadata = {
-  title: "About | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "About the studio",
   description:
-    "Terra & Tent is a wedding styling studio in Chipping Campden. We design, build and style outdoor weddings on the ground they happen on.",
-};
+    "Two founders, one small crew and a lot of flowers. Terra & Tent styles outdoor weddings from a studio and garden in Chipping Campden.",
+  path: "/about",
+});
 
 export default function About() {
   return (

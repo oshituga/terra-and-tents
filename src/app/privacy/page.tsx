@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { EmailLink, LegalPage } from "@/components/LegalPage";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
   description:
     "What Terra & Tent collects when you visit the site or send an enquiry, why we collect it, and how we look after it.",
-};
+  path: "/privacy",
+});
 
 export default function Privacy() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeIn } from "@/components/FadeIn";
@@ -7,11 +8,12 @@ import { Nav } from "@/components/Nav";
 import { delay } from "@/components/motion";
 import { articles } from "@/lib/journal";
 
-export const metadata: Metadata = {
-  title: "Journal | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "Journal",
   description:
-    "Short stories on how we build, what each place teaches us and the small decisions behind every setting we style.",
-};
+    "Notes from the ground up: short stories on how we build, what each place teaches us and the small decisions behind every setting we style.",
+  path: "/journal",
+});
 
 export default function Journal() {
   return (

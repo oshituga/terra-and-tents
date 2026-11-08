@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { EmailLink, LegalPage } from "@/components/LegalPage";
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions | Terra & Tent",
+export const metadata: Metadata = pageMetadata({
+  title: "Terms & Conditions",
   description:
-    "How booking with Terra & Tent works, from the first quote to the morning after your wedding.",
-};
+    "How enquiries, bookings, payments and changes work when Terra & Tent styles your wedding.",
+  path: "/terms",
+});
 
 export default function Terms() {
   return (
