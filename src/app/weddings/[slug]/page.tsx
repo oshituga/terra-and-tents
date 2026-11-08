@@ -329,7 +329,7 @@ export default async function WeddingPage({
                     className="h-[80vw] w-full md:h-[337px] md:w-[253px]"
                   />
                 </FadeIn>
-                <FadeIn className="flex justify-end pb-5">
+                <FadeIn className="flex justify-end pr-gutter pb-5">
                   <h2 className="w-[430px] max-w-full font-display text-display-m font-light text-cream uppercase">
                     {note.headline}
                   </h2>
