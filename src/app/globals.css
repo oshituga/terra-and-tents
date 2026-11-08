@@ -492,41 +492,24 @@ body {
   opacity: calc(var(--t, 0) * 0.5);
 }
 
-/* Hover: the label drifts up, softening and fading, as its copy rises into
-   place sharp. All letters move together (raise --swap-step for a wave). */
+/* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
-  --swap-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --swap-step: 0ms;
+  --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
   display: inline-grid;
-  vertical-align: top;
 }
 
-.swap-out,
-.swap-in {
+.swap > * {
   grid-area: 1 / 1;
-  display: inline-flex;
-  white-space: pre;
-}
-
-/* Each letter rides its own layer, so the roll is pure compositing: no
-   repaint, no sub-pixel drift, no wait before it starts. */
-.swap-ch {
-  display: inline-block;
-  will-change: transform, filter, opacity;
-  backface-visibility: hidden;
   transition:
-    transform 550ms cubic-bezier(0.33, 0, 0.15, 1),
-    opacity 450ms cubic-bezier(0.33, 0, 0.15, 1),
-    filter 600ms cubic-bezier(0.45, 0, 0.25, 1);
-  transition-delay: calc(var(--i) * var(--swap-step));
+    transform 800ms var(--swap-ease),
+    filter 800ms var(--swap-ease),
+    opacity 520ms var(--swap-ease);
 }
 
-/* A light focus pull: letters soften as they leave and sharpen as they
-   arrive. Kept small so it reads as depth, not smear. */
-.swap-in .swap-ch {
+.swap-in {
   opacity: 0;
-  filter: blur(4px);
-  transform: translate3d(0, 70%, 0);
+  transform: translateY(45%);
+  filter: blur(3px);
 }
 
 .underline-line {
@@ -535,28 +518,22 @@ body {
   bottom: 0;
   height: 1.5px;
   background: currentColor;
-  transition: transform 550ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @media (hover: hover) {
-  .pill {
-    transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .pill:hover {
-    transform: scale(0.985);
-  }
-
-  .group:hover .swap-out .swap-ch {
+  .group:hover .swap-out {
     opacity: 0;
-    filter: blur(4px);
-    transform: translate3d(0, -70%, 0);
+    transform: translateY(-45%);
+    filter: blur(3px);
+    transition-delay: 0ms;
   }
 
-  .group:hover .swap-in .swap-ch {
+  .group:hover .swap-in {
     opacity: 1;
-    filter: blur(0);
-    transform: translate3d(0, 0, 0);
+    transform: none;
+    filter: none;
+    transition-delay: 60ms;
   }
 
   /* The underline retracts towards its centre, and extends again on leave. */
@@ -589,16 +566,14 @@ body {
   }
 }
 
-.group:focus-visible .swap-out .swap-ch {
+.group:focus-visible .swap-out {
   opacity: 0;
-  filter: blur(4px);
-  transform: translate3d(0, -70%, 0);
 }
 
-.group:focus-visible .swap-in .swap-ch {
+.group:focus-visible .swap-in {
   opacity: 1;
-  filter: blur(0);
-  transform: translate3d(0, 0, 0);
+  transform: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -617,10 +592,9 @@ body {
     transition: none;
   }
 
-  .swap-ch,
+  .swap > *,
   .underline-line {
     transition: none;
-    animation: none !important;
   }
 
   .step-fill {
