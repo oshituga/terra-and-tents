@@ -89,7 +89,7 @@ export function Testimonials() {
             className="slide-text col-start-1 row-start-1 flex flex-col items-start justify-end gap-8 font-display font-light uppercase lg:flex-row lg:items-end lg:justify-between"
           >
             <blockquote className="w-[553px] max-w-full text-display-m">
-              <p>“{quote}”</p>
+              <p>{quote}</p>
             </blockquote>
             <figcaption className="text-display-s lg:whitespace-nowrap">
               - {by}
