@@ -515,9 +515,9 @@ body {
   will-change: transform, filter, opacity;
   backface-visibility: hidden;
   transition:
-    transform 900ms cubic-bezier(0.33, 0, 0.15, 1),
-    opacity 750ms cubic-bezier(0.33, 0, 0.15, 1),
-    filter 1000ms cubic-bezier(0.45, 0, 0.25, 1);
+    transform 550ms cubic-bezier(0.33, 0, 0.15, 1),
+    opacity 450ms cubic-bezier(0.33, 0, 0.15, 1),
+    filter 600ms cubic-bezier(0.45, 0, 0.25, 1);
   transition-delay: calc(var(--i) * var(--swap-step));
 }
 
@@ -535,12 +535,12 @@ body {
   bottom: 0;
   height: 1.5px;
   background: currentColor;
-  transition: transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform 550ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @media (hover: hover) {
   .pill {
-    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .pill:hover {
