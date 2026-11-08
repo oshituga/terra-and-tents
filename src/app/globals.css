@@ -498,7 +498,6 @@ body {
   --swap-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --swap-step: 0ms;
   display: inline-grid;
-  overflow: hidden;
   vertical-align: top;
 }
 
