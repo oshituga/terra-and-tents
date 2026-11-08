@@ -7,10 +7,13 @@ export function ParallaxImage({
   src,
   alt,
   sizes,
+  position,
 }: {
   src: StaticImageData;
   alt: string;
   sizes: string;
+  /** CSS object-position, for crops set in Figma. */
+  position?: string;
 }) {
   const frame = useRef<HTMLDivElement>(null);
 
@@ -58,6 +61,7 @@ export function ParallaxImage({
           placeholder="blur"
           quality={90}
           className="object-cover"
+          style={position ? { objectPosition: position } : undefined}
         />
       </div>
     </div>

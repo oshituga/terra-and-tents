@@ -1,0 +1,226 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useLenis } from "lenis/react";
+import { FadeIn } from "../FadeIn";
+import field from "@/assets/about-story-field.webp";
+import tent from "@/assets/about-story-tent.webp";
+import longTable from "@/assets/about-story-long-table.webp";
+import flowers from "@/assets/about-story-flowers.webp";
+import candles from "@/assets/about-story-candles.webp";
+import feeling from "@/assets/about-story-feeling.webp";
+
+const photos: { src: typeof field; alt: string; position?: string }[] = [
+  {
+    src: field,
+    alt: "An aerial view of a small red truck parked on a dirt track beside a green field",
+  },
+  {
+    src: tent,
+    alt: "A painted canvas tipi pitched in dry grass under a cloudy sky",
+  },
+  {
+    src: longTable,
+    alt: "A long grazing table of bread, fruit and flowers set against an old brick wall",
+  },
+  {
+    src: flowers,
+    alt: "A single red and white tulip in soft light",
+  },
+  {
+    src: candles,
+    alt: "Brass candelabras with tall white candles beside white flowers under draped fabric",
+  },
+  {
+    src: feeling,
+    alt: "Wedding guests gathered on a lawn beside a white house in late afternoon light",
+  },
+];
+
+const beats = [
+  {
+    title: "One borrowed field",
+    body: "Our first wedding had no venue, only a friend’s family farm and a stretch of grass that sloped toward the trees. It taught us to start with the ground and let the room grow from what was already there.",
+  },
+  {
+    title: "A rented tent",
+    body: "We hired the last marquee left in the county and pitched it ourselves, a little crooked, in the wrong corner of the field. It showed us that the frame matters less than where you place it and how the light comes in.",
+  },
+  {
+    title: "One long table",
+    body: "There was no room for round tables, so we ran one long table down the middle and sat everyone together. Strangers were passing bread by the second course, and we have set a long table at almost every wedding since.",
+  },
+  {
+    title: "Flowers from the garden",
+    body: "The flowers came from the farm’s own borders and the lane outside, cut that morning and put in jam jars. Nothing matched and everything belonged, which is still how we choose: from the season and the place, never a catalogue.",
+  },
+  {
+    title: "A lot of candles",
+    body: "There was no power in the field, so we bought every candle we could find. As the sun went down the tent began to glow from the inside, and we learned that the best lighting is often the oldest kind.",
+  },
+  {
+    title: "The way it felt",
+    body: "Guests stayed long after the music stopped, and some still talk about that night. A room that grows out of its ground and its people is what we have tried to make at every wedding since.",
+  },
+];
+
+const intro =
+  "Our first wedding was a friend’s, held on her family’s farm in late September. We had a rented tent, an armful of garden flowers and no idea what we were doing. By evening the candles were lit, the field had gone gold, and the whole room felt as if it had grown there. We have chased that feeling at every wedding since.";
+
+export function AboutStory() {
+  const section = useRef<HTMLElement>(null);
+  const pin = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    const el = section.current;
+    const stuck = pin.current;
+    if (!el || !stuck) return;
+    let frame = 0;
+    let stickTop = 0;
+
+    // Pin for a screen and a half of scrolling; taller-than-screen content
+    // locks with its bottom edge on the screen's bottom edge.
+    const measure = () => {
+      stickTop = Math.min(0, window.innerHeight - stuck.offsetHeight);
+      stuck.style.top = `${stickTop}px`;
+      el.style.height = `${stuck.offsetHeight + window.innerHeight * 1.5}px`;
+    };
+
+    const update = () => {
+      frame = 0;
+      const total = el.offsetHeight - stuck.offsetHeight;
+      const p = (stickTop - el.getBoundingClientRect().top) / total;
+      const next = Math.min(
+        beats.length - 1,
+        Math.max(0, Math.floor(p * beats.length)),
+      );
+      setActive(next);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const onResize = () => {
+      measure();
+      update();
+    };
+
+    onResize();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const goTo = (i: number) => {
+    const el = section.current;
+    const stuck = pin.current;
+    if (!el || !stuck) return;
+    const stickTop = Math.min(0, window.innerHeight - stuck.offsetHeight);
+    const total = el.offsetHeight - stuck.offsetHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    const target = top - stickTop + ((i + 0.5) / beats.length) * total;
+    if (lenis) lenis.scrollTo(target);
+    else window.scrollTo({ top: target, behavior: "smooth" });
+  };
+
+  return (
+    <>
+      {/* On short phone screens the intro is read before the pinned part,
+          so the photo has room while the headline stays in view. */}
+      <FadeIn className="hidden bg-cream px-page pt-16 text-ink max-lg:[@media(max-height:780px)]:block">
+        <p className="text-body">{intro}</p>
+      </FadeIn>
+      <section
+        ref={section}
+        aria-label="How it began"
+        className="relative bg-cream text-ink"
+      >
+        <div
+          ref={pin}
+          className="sticky top-0 flex h-svh flex-col justify-center gap-3 pt-4 lg:h-auto lg:min-h-svh lg:gap-[14px] lg:pt-[70px]"
+        >
+          <FadeIn className="flex justify-center px-page py-3 lg:py-10">
+            <h2 className="w-[539px] max-w-full text-center font-display text-display-m font-light uppercase">
+              It began with one borrowed field and a lot of candles.
+            </h2>
+          </FadeIn>
+
+          <FadeIn className="px-page py-1 lg:py-5 max-lg:[@media(max-height:780px)]:hidden">
+            <p className="w-[574px] max-w-full text-body">{intro}</p>
+          </FadeIn>
+
+          <div className="max-page flex min-h-0 flex-1 flex-col gap-4 px-page lg:flex-none lg:flex-row lg:items-stretch lg:gap-[114px] lg:px-0">
+            <div className="relative min-h-24 w-full min-w-0 flex-1 overflow-hidden bg-oat lg:h-[625px] lg:w-auto">
+              {photos.map(({ src, alt, position }, i) => (
+                <div
+                  key={src.src}
+                  aria-hidden={i !== active}
+                  data-active={i === active ? "" : undefined}
+                  className="story-photo absolute inset-0"
+                >
+                  <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    placeholder="blur"
+                    quality={90}
+                    className="object-cover"
+                    style={position ? { objectPosition: position } : undefined}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="flex w-full shrink-0 flex-col justify-between gap-4 lg:w-[638px] lg:gap-0">
+              {/* Below the desktop layout the beats shrink to a row of numbers and
+                the current title sits above its text, leaving room for the photo. */}
+              <ol className="grid grid-cols-6 lg:flex lg:flex-col">
+                {beats.map(({ title }, i) => (
+                  <li key={title}>
+                    <button
+                      type="button"
+                      onClick={() => goTo(i)}
+                      aria-current={i === active ? "step" : undefined}
+                      className="beat flex w-full items-center gap-4 border-b border-ink/20 py-3 text-left lg:py-[11px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                    >
+                      <span className="beat-num text-[13px] leading-[16.38px] tracking-[-0.03em]">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="beat-title sr-only text-body leading-[20.16px] lg:not-sr-only">
+                        {title}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="grid pb-4 lg:pr-8 lg:pb-8">
+                {beats.map(({ title, body }, i) => (
+                  <div
+                    key={title}
+                    aria-hidden={i !== active}
+                    data-active={i === active ? "" : undefined}
+                    className="slide-text col-start-1 row-start-1 flex flex-col gap-3"
+                  >
+                    <h3 className="font-display text-display-s font-light uppercase lg:hidden">
+                      {title}
+                    </h3>
+                    <p className="text-body">{body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

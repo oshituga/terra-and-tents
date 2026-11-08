@@ -28,15 +28,15 @@ export function Process() {
       aria-label="How we work"
       className="flex min-h-svh flex-col items-center gap-20 bg-ink pt-[70px] text-cream"
     >
-      <FadeIn className="px-8 py-10">
-        <h2 className="w-[358px] text-center font-display text-display-m font-light uppercase">
+      <FadeIn className="px-page py-10">
+        <h2 className="w-[358px] max-w-full text-center font-display text-display-m font-light uppercase">
           From first hello to the last candle
         </h2>
       </FadeIn>
 
-      <div className="flex w-full justify-end px-8 py-5">
+      <div className="flex w-full justify-end px-page py-5">
         <FadeIn className="flex flex-col items-start gap-10">
-          <p className="w-[508px] text-body">
+          <p className="w-[508px] max-w-full text-body">
             Every wedding follows the same four steps. They give us room to be
             thorough, and they keep you informed from the first call to the
             final guest.
@@ -47,7 +47,7 @@ export function Process() {
         </FadeIn>
       </div>
 
-      <InView className="mt-auto flex h-[519px] w-full gap-2">
+      <InView className="max-page mt-auto grid grid-cols-1 gap-x-2 gap-y-10 px-page md:grid-cols-2 lg:flex lg:h-[519px] lg:gap-y-0 lg:px-0">
         {steps.map(({ title, body }, i) => (
           <article
             key={title}
@@ -57,7 +57,9 @@ export function Process() {
             <h3 className="step-title pl-5 font-display text-display-s font-light uppercase">
               {title}
             </h3>
-            <div className="step-fill flex flex-1 items-end bg-cream px-5 pb-8 text-ink">
+            <div
+              className={`step-fill flex min-h-[300px] flex-1 items-end bg-cream pt-8 pb-8 text-ink lg:min-h-0 lg:pt-0 ${i === steps.length - 1 ? "px-5 lg:px-8" : "px-5"}`}
+            >
               <p className="step-text text-body">{body}</p>
             </div>
           </article>

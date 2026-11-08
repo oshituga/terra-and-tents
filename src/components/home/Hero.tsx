@@ -21,14 +21,16 @@ export function Hero() {
 
       <Nav />
 
-      <div className="flex flex-1 flex-col items-end justify-between px-8 pt-5 pb-[60px]">
+      <div className="flex flex-1 flex-col items-end justify-between px-page pt-5 pb-[60px]">
         <div className="fade flex w-full flex-col gap-5" style={delay(350)}>
-          <p className="w-[508px] text-body">Terra &amp; Tent Studio</p>
+          <p className="w-[508px] max-w-full text-body">
+            Terra &amp; Tent Studio
+          </p>
           <div className="flex flex-col gap-1.5">
-            <h1 className="w-[592px] font-display text-display-l font-light uppercase">
+            <h1 className="w-[592px] max-w-full font-display text-display-l font-light uppercase">
               Styled for the day you’ll remember
             </h1>
-            <p className="w-[508px] text-body">
+            <p className="w-[508px] max-w-full text-body">
               From tablescapes to tents, we design and style weddings that feel
               like you, rooted in natural materials, warm light and real
               flowers.
@@ -36,7 +38,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-end gap-2">
           <ButtonLink
             href="/contact"
             variant="solid"

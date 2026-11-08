@@ -4,33 +4,16 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FadeIn } from "../FadeIn";
 import { ParallaxImage } from "../ParallaxImage";
-import majaOliver from "@/assets/quote-maja-oliver.webp";
-import amaraJames from "@/assets/quote-amara-james.webp";
-import islaBen from "@/assets/quote-isla-ben.webp";
+import { weddings } from "@/lib/weddings";
 
-const quotes = [
-  {
-    quote:
-      "The moment we walked in, we stopped talking. It looked better than anything we had pictured, and it felt like us.",
-    by: "Maja & Oliver, Dalarna, Sweden",
-    src: majaOliver,
-    alt: "A newly married couple kissing in a long grass meadow below red farm barns and pine trees under a cloudy sky",
-  },
-  {
-    quote:
-      "We asked for one long table under the trees. They built it, lit it and somehow made forty guests feel like family.",
-    by: "Amara & James, Herefordshire",
-    src: amaraJames,
-    alt: "A long dinner table with orange chairs, flowers and candles set beneath trees in the evening",
-  },
-  {
-    quote:
-      "The arch framed the sea exactly where we stood. Every guest took the same photo, and it is still on our wall.",
-    by: "Isla & Ben, Isle of Wight",
-    src: islaBen,
-    alt: "A flower arch of white blooms and greenery on a stone terrace above the sea",
-  },
-];
+// One quote per wedding, over that wedding's photo.
+const quotes = weddings.map((w) => ({
+  quote: w.testimonial.quote,
+  by: `${w.couple}, ${w.region}`,
+  src: w.testimonial.photo.src,
+  alt: w.testimonial.photo.alt,
+  position: w.testimonial.photo.position,
+}));
 
 const ADVANCE_MS = 8000;
 
@@ -71,17 +54,22 @@ export function Testimonials() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="relative isolate flex min-h-svh flex-col items-end justify-center gap-20 overflow-hidden bg-ink p-8 text-cream"
+      className="relative isolate flex min-h-svh flex-col items-end justify-center gap-20 overflow-hidden bg-ink px-page py-8 text-cream"
     >
       <div className="absolute inset-0 -z-20 isolate">
-        {quotes.map(({ src, alt }, i) => (
+        {quotes.map(({ src, alt, position }, i) => (
           <div
             key={src.src}
             aria-hidden={i !== active}
             className="tslide absolute inset-0"
             data-state={slideState(i)}
           >
-            <ParallaxImage src={src} alt={alt} sizes="100vw" />
+            <ParallaxImage
+              src={src}
+              alt={alt}
+              sizes="100vw"
+              position={position}
+            />
           </div>
         ))}
       </div>
@@ -92,18 +80,18 @@ export function Testimonials() {
         <ArrowButton label="Next testimonial" onClick={() => go(1)} flip />
       </FadeIn>
 
-      <FadeIn className="grid w-full">
+      <FadeIn className="grid w-full grid-cols-1">
         {quotes.map(({ quote, by }, i) => (
           <figure
             key={by}
             aria-hidden={i !== active}
             data-active={i === active ? "" : undefined}
-            className="slide-text col-start-1 row-start-1 flex items-end justify-between gap-8 font-display font-light uppercase"
+            className="slide-text col-start-1 row-start-1 flex flex-col items-start justify-end gap-8 font-display font-light uppercase lg:flex-row lg:items-end lg:justify-between"
           >
-            <blockquote className="w-[553px] text-display-m">
-              <p>“{quote}”</p>
+            <blockquote className="w-[553px] max-w-full text-display-m">
+              <p>{quote}</p>
             </blockquote>
-            <figcaption className="text-display-s whitespace-nowrap">
+            <figcaption className="text-display-s lg:whitespace-nowrap">
               - {by}
             </figcaption>
           </figure>
@@ -127,7 +115,7 @@ function ArrowButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="group relative flex items-center justify-center px-6 py-[15px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+      className="group relative flex items-center justify-center px-6 pt-[15px] pb-[16.5px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
     >
       <Image
         src="/brand/arrow-left.svg"

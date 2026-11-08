@@ -3,7 +3,9 @@ import { Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import { NoOrphans } from "@/components/NoOrphans";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { siteUrl } from "@/lib/site";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -17,10 +19,23 @@ const saphion = localFont({
   display: "swap",
 });
 
+const title = "Terra & Tent | Outdoor wedding styling";
+const description =
+  "Arches, aisles and long tables, styled on real ground in real light. A small studio in the Cotswolds designing and building outdoor weddings.";
+
 export const metadata: Metadata = {
-  title: "Terra & Tent",
-  description:
-    "Wedding styling and decor studio in Chipping Campden. Tablescapes, tents and ceremonies rooted in natural materials, warm light and real flowers.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName: "Terra & Tent",
+    type: "website",
+    locale: "en_GB",
+  },
+  twitter: { card: "summary_large_image", title, description },
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body>
         <SmoothScroll />
+        <NoOrphans />
         {children}
       </body>
     </html>

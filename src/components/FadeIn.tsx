@@ -12,7 +12,7 @@ export function FadeIn({
 }) {
   return (
     <InView
-      className={`fade-in ${className}`}
+      className={`fade-in max-w-full ${className}`}
       style={{ "--d": `${delay}ms` } as CSSProperties}
     >
       {children}

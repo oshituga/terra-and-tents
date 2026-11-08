@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "warm-images": "node scripts/warm-images.mjs",
+    "plans": "python3 scripts/plans/build_plans.py"
   },
   "dependencies": {
     "lenis": "^1.3.27",
@@ -15,6 +17,7 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
+    "@fontsource/outfit": "^5.1.0",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

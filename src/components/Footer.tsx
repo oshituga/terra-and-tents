@@ -1,91 +1,86 @@
 import Link from "next/link";
 import { FadeIn } from "./FadeIn";
-import { SwapText } from "./SwapText";
+import { enquiryHref, social } from "@/lib/site";
 
 const explore = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/weddings", label: "Weddings" },
   { href: "/journal", label: "Journal" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
-const social = [
-  { href: "https://www.instagram.com/terraandtent", label: "Instagram" },
-  { href: "https://www.pinterest.com/terraandtent", label: "Pinterest" },
-];
-
-const bigLink =
-  "group font-display text-display-s font-light whitespace-nowrap uppercase focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current";
-const smallLink =
-  "group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current";
+const focus =
+  "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current";
+const bigLink = `sheen-link font-display text-display-s font-light whitespace-nowrap uppercase ${focus}`;
+const smallLink = `sheen-link ${focus}`;
 
 function Label({ children }: { children: string }) {
-  return <p className="text-body opacity-50">{children}</p>;
+  return <p className="text-body opacity-65">{children}</p>;
 }
 
 export function Footer() {
   return (
-    <footer className="flex min-h-svh flex-col justify-between gap-24 bg-cream pt-[70px] text-ink">
-      <div className="flex w-full flex-col gap-10 px-8 py-10">
-        <div className="flex items-start justify-between">
-          <FadeIn className="flex w-[598.5px] shrink-0 flex-col gap-[7px]">
+    <footer className="flex min-h-svh flex-col justify-between gap-16 bg-cream pt-[70px] text-ink lg:gap-24">
+      <div className="flex w-full flex-col gap-12 px-page py-10 lg:gap-10">
+        <div className="flex flex-col items-start gap-12 md:flex-row md:justify-between md:gap-10">
+          <FadeIn className="flex flex-col gap-[7px]">
             <p className="font-display text-display-s font-light whitespace-nowrap uppercase">
               Terra &amp; Tent
             </p>
             <p className="text-body">Styled on real ground, in real light.</p>
           </FadeIn>
 
-          <div className="flex min-w-0 flex-1 items-start gap-20">
-            <FadeIn delay={80} className="w-[455px] shrink-0">
-              <nav aria-label="Footer" className="flex flex-col gap-8">
-                <Label>Explore</Label>
-                <ul className="flex flex-col gap-5">
-                  {explore.map(({ href, label }) => (
-                    <li key={href}>
-                      <Link href={href} className={bigLink}>
-                        <SwapText>{label}</SwapText>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </FadeIn>
-            <FadeIn delay={160} className="flex shrink-0 flex-col gap-8">
-              <Label>Follow</Label>
-              <ul className="flex flex-col gap-5">
-                {social.map(({ href, label }) => (
+          <FadeIn delay={80}>
+            <nav aria-label="Footer" className="flex flex-col gap-8">
+              <Label>Explore</Label>
+              <ul className="dim-group flex flex-col items-start gap-5">
+                {explore.map(({ href, label }) => (
                   <li key={href}>
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={bigLink}
-                    >
-                      <SwapText>{label}</SwapText>
-                    </a>
+                    <Link href={href} className={bigLink}>
+                      <span className="sheen">{label}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
-            </FadeIn>
-          </div>
+            </nav>
+          </FadeIn>
+
+          <FadeIn delay={160} className="flex flex-col gap-8">
+            <Label>Follow</Label>
+            <ul className="dim-group flex flex-col items-start gap-5">
+              {social.map(({ href, label }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={bigLink}
+                  >
+                    <span className="sheen">{label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
         </div>
 
-        <div className="flex items-end justify-between">
-          <FadeIn className="flex w-[455px] flex-col gap-8">
+        <div className="flex flex-col items-start gap-12 md:flex-row md:items-end md:justify-between md:gap-10">
+          <FadeIn className="flex flex-col gap-8">
             <Label>Get in touch</Label>
-            <div className="flex flex-col items-start gap-5">
+            <div className="dim-group flex flex-col items-start gap-5">
               <a href="tel:+15550142290" className={bigLink}>
-                <SwapText>+1 (555) 014 2290</SwapText>
+                <span className="sheen">+1 (555) 014 2290</span>
               </a>
-              <a href="mailto:hello@terraandtent.com" className={bigLink}>
-                <SwapText>hello@terraandtent.com</SwapText>
+              <a href={enquiryHref} className={bigLink}>
+                <span className="sheen">hello@terraandtent.com</span>
               </a>
             </div>
           </FadeIn>
           <FadeIn delay={80} className="flex flex-col gap-8">
             <Label>Studio</Label>
-            <address className="w-[359px] font-display text-display-s font-light not-italic uppercase">
+            <address className="w-[359px] max-w-full font-display text-display-s font-light not-italic uppercase">
               14 Orchard Lane, Chipping Campden, GL55 6AB
             </address>
           </FadeIn>
@@ -93,23 +88,27 @@ export function Footer() {
       </div>
 
       <FadeIn className="flex w-full flex-col">
-        <div className="px-8">
+        <div className="px-page">
           <span aria-hidden className="tent-mark block h-[32.8965px] w-9" />
         </div>
-        <div className="relative flex items-end justify-between px-8 py-5 text-body whitespace-nowrap">
+        <div className="flex flex-col items-start gap-4 px-page py-5 text-body md:flex-row md:flex-wrap md:items-end md:justify-between md:gap-x-10 lg:flex-nowrap lg:whitespace-nowrap">
           <p>© 2026 Terra &amp; Tent. All rights reserved.</p>
-          <div className="absolute top-5 left-[604.5px] flex gap-10">
+          <div className="dim-group flex flex-wrap gap-x-10 gap-y-4">
             <Link href="/privacy" className={smallLink}>
-              <SwapText>Privacy Policy</SwapText>
+              <span className="sheen">Privacy Policy</span>
             </Link>
             <Link href="/terms" className={smallLink}>
-              <SwapText>Terms &amp; Conditions</SwapText>
+              <span className="sheen">Terms &amp; Conditions</span>
             </Link>
           </div>
-          <p className="flex gap-1">
-            <span>Designed by:</span>
-            <span>Ayomide Oshituga</span>
-          </p>
+          <a
+            href="https://www.ayomide.website/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={smallLink}
+          >
+            <span className="sheen">Designed by: Ayo</span>
+          </a>
         </div>
       </FadeIn>
     </footer>

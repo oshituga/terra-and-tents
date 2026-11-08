@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+/* Page gutter: 24px on phones and 32px from tablet up, growing on screens
+   wider than 2160px so content stays within a 2160px column while
+   backgrounds still run edge to edge. */
+@utility px-page {
+  padding-inline: max(var(--gutter), calc((100% - 2160px) / 2 + var(--gutter)));
+}
+
+@utility pl-page {
+  padding-left: max(var(--gutter), calc((100% - 2160px) / 2 + var(--gutter)));
+}
+
+@utility pr-page {
+  padding-right: max(var(--gutter), calc((100% - 2160px) / 2 + var(--gutter)));
+}
+
+/* The same gutter for edges inside a capped 2160px column. */
+@utility px-gutter {
+  padding-inline: var(--gutter);
+}
+
+@utility pl-gutter {
+  padding-left: var(--gutter);
+}
+
+@utility pr-gutter {
+  padding-right: var(--gutter);
+}
+
+@utility max-page {
+  width: 100%;
+  max-width: 2160px;
+  margin-inline: auto;
+}
+
 @theme {
   --color-ink: #2d211c;
   --color-cream: #faf7f2;
@@ -27,9 +61,66 @@
   --text-display-s--letter-spacing: -0.05em;
 }
 
+/* Running text avoids a lone last word at every size. Headlines keep their
+   last two words together (see NoOrphans), so Figma's breaks are kept. */
+p,
+blockquote,
+figcaption,
+address {
+  text-wrap: pretty;
+}
+
+/* Below the desktop layout, headlines also balance their lines. */
+@media (width < 64rem) {
+  h1,
+  h2,
+  h3,
+  blockquote,
+  figcaption,
+  address,
+  .font-display {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Display type steps down below the desktop layout. */
+@media (width < 64rem) {
+  :root {
+    --text-display-l: 52px;
+    --text-display-m: 34px;
+    --text-display-s: 28px;
+  }
+}
+
+@media (width < 48rem) {
+  :root {
+    --text-display-l: 42px;
+    --text-display-m: 30px;
+    --text-display-s: 26px;
+  }
+}
+
 :root {
+  --gutter: 2rem;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-flow: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@media (width < 48rem) {
+  :root {
+    --gutter: 1.5rem;
+  }
+}
+
+/* Nothing may push the page sideways. clip (not hidden) keeps sticky
+   sections working. */
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
@@ -191,6 +282,216 @@ body {
   opacity: 1;
 }
 
+/* Text links: siblings fade back and a soft band of light sweeps the hovered word. */
+.sheen {
+  display: inline-block;
+  /* Room for Saphion's caps, which rise above the tight line box. */
+  padding-block: 0.2em;
+  margin-block: -0.2em;
+  mask-image: linear-gradient(110deg, #000 40%, rgb(0 0 0 / 0.3) 50%, #000 60%);
+  mask-size: 300% 100%;
+  mask-position: 100% 0;
+}
+
+.dim-group .sheen-link {
+  transition: opacity 500ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+@keyframes sheen {
+  from {
+    mask-position: 100% 0;
+  }
+  to {
+    mask-position: 0 0;
+  }
+}
+
+.sheen-link:focus-visible .sheen {
+  animation: sheen 900ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.dim-group:has(.sheen-link:focus-visible) .sheen-link:not(:focus-visible) {
+  opacity: 0.25;
+}
+
+/* About story: numbered lines light up in turn; the photo crossfades per pair. */
+.beat-num,
+.beat-title {
+  transition: color 400ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.beat-num {
+  color: rgb(45 33 28 / 0.65);
+}
+
+.beat-title {
+  color: rgb(45 33 28 / 0.65);
+}
+
+.beat[aria-current] .beat-num {
+  color: rgb(45 33 28 / 0.9);
+}
+
+.beat[aria-current] .beat-title {
+  color: var(--color-ink);
+}
+
+.story-photo {
+  opacity: 0;
+  transition: opacity 900ms cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.story-photo[data-active] {
+  opacity: 1;
+}
+
+/* The map package marks its directions link with a faint underline only;
+   give keyboard users the same clear outline as the rest of the site. */
+.tt-map .tt-map__tag a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Wedding contents list: the current section gains a dash and full ink. */
+.toc-link {
+  opacity: 0.65;
+  transition: opacity 300ms ease-out;
+}
+
+.toc-dash {
+  width: 0;
+  margin-right: -2px;
+  transition:
+    width 400ms var(--ease-out),
+    margin 400ms var(--ease-out);
+}
+
+.toc-link[aria-current] {
+  opacity: 1;
+}
+
+.toc-link[aria-current] .toc-dash {
+  width: 12px;
+  margin-right: 0;
+}
+
+@media (hover: hover) {
+  .toc-link:hover {
+    opacity: 1;
+  }
+}
+
+/* Mobile menu: the panel fades in, then its links rise in turn. */
+.menu-panel {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 450ms var(--ease-out),
+    visibility 0s linear 450ms;
+}
+
+.menu-panel[data-open] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 450ms var(--ease-out);
+}
+
+.menu-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 500ms ease-out,
+    transform 700ms var(--ease-out);
+}
+
+[data-open] .menu-item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(150ms + var(--i, 0) * 70ms);
+}
+
+/* Gallery: the chosen photo fades in over the last one; thumbs ease to
+   their new size and weight. */
+.gallery-photo {
+  animation: gallery-in 700ms cubic-bezier(0.33, 0, 0.2, 1) both;
+}
+
+@keyframes gallery-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.gallery-thumb {
+  flex: var(--size) 1 0%;
+  min-width: 0;
+  aspect-ratio: 1;
+  transition:
+    flex-grow 600ms cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 400ms ease-out;
+}
+
+/* Below the desktop layout the strip keeps the Figma sizes and scrolls. */
+@media (width < 64rem) {
+  .gallery-thumb {
+    flex: none;
+    width: calc(var(--size) * 1px);
+  }
+}
+
+@media (hover: hover) and (width >= 64rem) {
+  .gallery-thumb:hover {
+    flex-grow: 108;
+    opacity: 1 !important;
+  }
+}
+
+/* Form fields: a solid ink rule as designed; on focus a second line draws
+   in from the left, thickening it. */
+.field::before,
+.field-line {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1.5px;
+  background: var(--color-ink);
+}
+
+.field::before {
+  bottom: 0;
+}
+
+.field-line {
+  bottom: 1.5px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.field:focus-within .field-line {
+  transform: scaleX(1);
+}
+
+.field-input::placeholder {
+  transition: opacity 400ms ease;
+}
+
+.field-input:focus::placeholder {
+  opacity: 0.35;
+}
+
+/* About principles: a stuck card eases back as the next one slides over. */
+.stack-card-inner {
+  transform: scale(calc(1 - var(--t, 0) * 0.06));
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.stack-card-dim {
+  background: var(--color-ink);
+  opacity: calc(var(--t, 0) * 0.5);
+}
+
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
   --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -235,6 +536,7 @@ body {
     transition-delay: 60ms;
   }
 
+  /* The underline retracts towards its centre, and extends again on leave. */
   .group:hover .underline-line {
     transform: scaleX(0.3);
   }
@@ -250,6 +552,18 @@ body {
   .group:hover .card-hover {
     opacity: 1;
   }
+
+  .beat:hover .beat-title {
+    color: rgb(45 33 28 / 0.8);
+  }
+
+  .sheen-link:hover .sheen {
+    animation: sheen 900ms cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  .dim-group:has(.sheen-link:hover) .sheen-link:not(:hover) {
+    opacity: 0.25;
+  }
 }
 
 .group:focus-visible .swap-out {
@@ -263,7 +577,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade {
+  .fade,
+  .gallery-photo {
     animation: none !important;
   }
 
@@ -289,8 +604,20 @@ body {
 
   .slide-text,
   .arrow-nudge,
-  .card-hover {
+  .field-line,
+  .story-photo,
+  .gallery-thumb,
+  .menu-panel,
+  .menu-item,
+  .beat-num,
+  .beat-title,
+  .card-hover,
+  .dim-group .sheen-link {
     transition: none;
+  }
+
+  .sheen {
+    animation: none !important;
   }
 
   .tslide[data-state] {
