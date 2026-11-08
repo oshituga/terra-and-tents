@@ -1,66 +1,22 @@
-import type { StaticImageData } from "next/image";
 import { ButtonLink } from "../ButtonLink";
 import { FadeIn } from "../FadeIn";
 import { PhotoTicker } from "../PhotoTicker";
-import d01 from "@/assets/details/detail-01.webp";
-import d02 from "@/assets/details/detail-02.webp";
-import d03 from "@/assets/details/detail-03.webp";
-import d04 from "@/assets/details/detail-04.webp";
-import d05 from "@/assets/details/detail-05.webp";
-import d06 from "@/assets/details/detail-06.webp";
-import d07 from "@/assets/details/detail-07.webp";
-import d08 from "@/assets/details/detail-08.webp";
-import d09 from "@/assets/details/detail-09.webp";
-import d10 from "@/assets/details/detail-10.webp";
-import d11 from "@/assets/details/detail-11.webp";
-import d12 from "@/assets/details/detail-12.webp";
+import { photos as gallery } from "../gallery/photos";
 
-const photos: { src: StaticImageData; alt: string }[] = [
-  {
-    src: d01,
-    alt: "A wooden ceremony frame wound with greenery beside lanterns on crates",
-  },
-  {
-    src: d02,
-    alt: "A macramé dreamcatcher and peach fabric hung from a tree branch",
-  },
-  {
-    src: d03,
-    alt: "A triangle arch with pampas grass against a weathered timber wall",
-  },
-  {
-    src: d04,
-    alt: "A round floral arch with pampas on a deck overlooking the sea",
-  },
-  {
-    src: d05,
-    alt: "A lakeside lounge under a white canopy with dried flowers and cushions",
-  },
-  {
-    src: d06,
-    alt: "Low wooden benches with woven cushions and pampas on dry grass",
-  },
-  {
-    src: d07,
-    alt: "A draped post with blue and white flowers beside white chairs in a garden",
-  },
-  {
-    src: d08,
-    alt: "A wooden jetty lined with white flowers leading to a flower-covered gazebo",
-  },
-  { src: d09, alt: "A small table with flowers under a parasol on a beach" },
-  {
-    src: d10,
-    alt: "Woven pendant lanterns hanging from a tree above a garden party",
-  },
-  {
-    src: d11,
-    alt: "A tall triangle frame dressed with coral flowers on a hillside",
-  },
-  {
-    src: d12,
-    alt: "A macramé ceremony frame and a single chair in a dry meadow",
-  },
+// Twelve of the gallery photos, so the strip previews the Gallery page.
+const photos = [
+  gallery[3],
+  gallery[8],
+  gallery[4],
+  gallery[12],
+  gallery[0],
+  gallery[20],
+  gallery[14],
+  gallery[24],
+  gallery[16],
+  gallery[10],
+  gallery[18],
+  gallery[21],
 ];
 
 export function Details() {
@@ -75,7 +31,7 @@ export function Details() {
             The details you only notice when you look twice
           </h2>
         </FadeIn>
-        <FadeIn className="flex flex-col items-start gap-8 px-page py-5 lg:flex-row lg:items-end lg:justify-between lg:gap-0">
+        <FadeIn className="flex flex-col items-center gap-8 px-page py-5 text-center lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:text-left">
           <p className="w-[426px] max-w-full text-body">
             Hand-tied posies, pressed linen, the candle that lasts until the
             final dance. We plan the small things as carefully as the big ones.

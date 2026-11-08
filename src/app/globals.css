@@ -116,6 +116,13 @@ address {
   }
 }
 
+/* Nothing may push the page sideways. clip (not hidden) keeps sticky
+   sections working. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-ink);
@@ -487,22 +494,26 @@ body {
 
 /* Hover: the label drifts up out of focus as a copy rises in sharp. */
 .swap {
-  --swap-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --swap-ease: cubic-bezier(0.22, 1, 0.36, 1);
   display: inline-grid;
+  overflow: hidden;
+  vertical-align: top;
 }
 
+/* Both copies stay on their own layer, so the text never re-rasterises or
+   shifts by a fraction of a pixel when the hover starts or ends. */
 .swap > * {
   grid-area: 1 / 1;
+  will-change: transform;
+  backface-visibility: hidden;
   transition:
-    transform 800ms var(--swap-ease),
-    filter 800ms var(--swap-ease),
-    opacity 520ms var(--swap-ease);
+    transform 550ms var(--swap-ease),
+    opacity 400ms var(--swap-ease);
 }
 
 .swap-in {
   opacity: 0;
-  transform: translateY(45%);
-  filter: blur(3px);
+  transform: translate3d(0, 100%, 0);
 }
 
 .underline-line {
@@ -517,16 +528,12 @@ body {
 @media (hover: hover) {
   .group:hover .swap-out {
     opacity: 0;
-    transform: translateY(-45%);
-    filter: blur(3px);
-    transition-delay: 0ms;
+    transform: translate3d(0, -100%, 0);
   }
 
   .group:hover .swap-in {
     opacity: 1;
-    transform: none;
-    filter: none;
-    transition-delay: 60ms;
+    transform: translate3d(0, 0, 0);
   }
 
   .group:hover .underline-line {
@@ -562,10 +569,13 @@ body {
   opacity: 0;
 }
 
+.group:focus-visible .swap-out {
+  transform: translate3d(0, -100%, 0);
+}
+
 .group:focus-visible .swap-in {
   opacity: 1;
-  transform: none;
-  filter: none;
+  transform: translate3d(0, 0, 0);
 }
 
 @media (prefers-reduced-motion: reduce) {

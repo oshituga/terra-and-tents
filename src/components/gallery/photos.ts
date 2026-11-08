@@ -28,96 +28,93 @@ import g25 from "@/assets/gallery/gallery-25.webp";
 export const photos: { src: StaticImageData; alt: string }[] = [
   {
     src: g01,
-    alt: "A triangle timber arch dressed with dried flowers on a lakeside deck at dusk",
+    alt: "A timber-beamed hall set with urns of orange flowers on white plinths",
   },
-  { src: g02, alt: "A canvas bell tent pitched on a lawn among green trees" },
   {
-    src: g03,
-    alt: "A long white-legged table set with rattan chairs on a lawn in late sun",
+    src: g02,
+    alt: "A mariachi band in white playing on a lawn beneath a pepper tree",
   },
+  { src: g03, alt: "An aerial view of open forest stretching to the horizon" },
   {
     src: g04,
-    alt: "A white draped canopy at the end of a grass aisle lined with white chairs",
+    alt: "A terracotta terrace lined with lavender and cypresses, leading to a stone pergola",
   },
   {
     src: g05,
-    alt: "Two arched trellis gates opening onto a timber aisle between palm trees",
+    alt: "A tunnel of greenery arches over a brick path between palms",
   },
   {
     src: g06,
-    alt: "A bell tent glowing from inside at dusk beneath tall trees",
+    alt: "An aerial view of round tables and chairs scattered across a lawn",
   },
   {
     src: g07,
-    alt: "Rattan ceremony chairs with name cards beside a bank of dried and fresh flowers",
+    alt: "A stone arched entrance dressed with dried palms and white flowers",
   },
-  {
-    src: g08,
-    alt: "A white tipi on the shore with the sea behind it in evening light",
-  },
+  { src: g08, alt: "Ears of wheat against a pale sky" },
   {
     src: g09,
-    alt: "A long table with rattan chairs and dried flowers under string lights at golden hour",
+    alt: "A white aisle edged with pampas and white flowers leading to a stone chapel",
   },
   {
     src: g10,
-    alt: "A timber canopy draped in white fabric over an altar on a garden lawn",
+    alt: "Two guests on a rattan sofa on the lawn beside a brick courtyard wall",
   },
   {
     src: g11,
-    alt: "A grass aisle edged with white flowers leading to an arched gate among palms",
+    alt: "A welcome sign on an easel above lavender and dried grasses",
   },
   {
     src: g12,
-    alt: "A long table with pampas arrangements under a clear canopy by the sea",
+    alt: "An aerial view of a round timber deck with benches among the trees",
   },
   {
     src: g13,
-    alt: "A round arch of pampas grass and dried flowers framing the sea",
+    alt: "Rattan pendants and hanging greenery under a draped tent over a painted dance floor",
   },
   {
     src: g14,
-    alt: "A low boho dinner table set beneath a canvas tent among the trees",
+    alt: "Long tables under festoon lights outside a stone farmhouse with red shutters",
   },
+  { src: g15, alt: "A draped arch by a lake at sunset, facing rows of chairs" },
   {
-    src: g15,
-    alt: "A tunnel of white flowers under palm trees leading along a stone path",
+    src: g16,
+    alt: "A wooden pallet welcome sign wrapped in ivy and baby’s breath",
   },
-  { src: g16, alt: "Bell tents on a timber deck overlooking open countryside" },
   {
     src: g17,
-    alt: "A lounge of cushions and rugs beside a curved welcome sign on the lawn",
+    alt: "An aerial view of a palm-lined lawn ceremony beside a jetty and a clear marquee",
   },
   {
     src: g18,
-    alt: "A draped canopy strung with lights and ringed by candles on a beach at dusk",
+    alt: "Round tables with lilac chair sashes on a lawn before a cream villa",
   },
   {
     src: g19,
-    alt: "A wrought iron cart holding drinks and glasses on a patterned rug",
+    alt: "A floral arch in a formal knot garden overlooking open parkland",
   },
   {
     src: g20,
-    alt: "Bell tents and a sailcloth shade pitched on a lawn beneath tall trees",
+    alt: "White chairs on a garden lawn facing a floral arch against an ivy wall",
   },
   {
     src: g21,
-    alt: "A tree wrapped in fairy lights above a lounge of dried flowers",
+    alt: "A ceremony lawn with a hexagon flower arch and wooden chairs above farmland",
   },
   {
     src: g22,
-    alt: "A white fabric canopy over a heart of greenery on a sandy beach",
+    alt: "A red barn with white drapes in its doorway and rows of cross-back chairs",
   },
   {
     src: g23,
-    alt: "A long table set beside a lake under strings of festoon lights",
+    alt: "An aerial view of round tables set on the grass beside a beach",
   },
   {
     src: g24,
-    alt: "Rustic timber doors standing at the end of an orchard ceremony lawn",
+    alt: "A white pavilion at the end of an aisle between long rows of white chairs",
   },
   {
     src: g25,
-    alt: "Pampas grass, roses and dried blooms heaped at the foot of an arch",
+    alt: "A triangle timber arch on a boardwalk aisle below a green hillside",
   },
 ];

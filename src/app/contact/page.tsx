@@ -3,6 +3,7 @@ import { FadeIn } from "@/components/FadeIn";
 import { Nav } from "@/components/Nav";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { delay } from "@/components/motion";
+import { enquiryHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact | Terra & Tent",
@@ -59,7 +60,7 @@ export default function Contact() {
               </address>
             </Detail>
             <Detail label="Email">
-              <a href="mailto:hello@terraandtent.com" className={link}>
+              <a href={enquiryHref} className={link}>
                 <span className="sheen">hello@terraandtent.com</span>
               </a>
             </Detail>

@@ -2,6 +2,7 @@ import { FadeIn } from "./FadeIn";
 import { Footer } from "./Footer";
 import { Nav } from "./Nav";
 import { delay } from "./motion";
+import { enquiryHref } from "@/lib/site";
 
 export type LegalSection = {
   title: string;
@@ -61,7 +62,7 @@ export function LegalPage({
 export function EmailLink() {
   return (
     <a
-      href="mailto:hello@terraandtent.com"
+      href={enquiryHref}
       className="underline decoration-from-font underline-offset-2 transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
     >
       hello@terraandtent.com

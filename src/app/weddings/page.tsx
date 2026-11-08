@@ -7,6 +7,18 @@ import { ParallaxImage } from "@/components/ParallaxImage";
 import { PhotoTicker } from "@/components/PhotoTicker";
 import { delay } from "@/components/motion";
 import { weddings } from "@/lib/weddings";
+import t01 from "@/assets/weddings/ticker/ticker-01.webp";
+import t02 from "@/assets/weddings/ticker/ticker-02.webp";
+import t03 from "@/assets/weddings/ticker/ticker-03.webp";
+import t04 from "@/assets/weddings/ticker/ticker-04.webp";
+import t05 from "@/assets/weddings/ticker/ticker-05.webp";
+import t06 from "@/assets/weddings/ticker/ticker-06.webp";
+import t07 from "@/assets/weddings/ticker/ticker-07.webp";
+import t08 from "@/assets/weddings/ticker/ticker-08.webp";
+import t09 from "@/assets/weddings/ticker/ticker-09.webp";
+import t10 from "@/assets/weddings/ticker/ticker-10.webp";
+import t11 from "@/assets/weddings/ticker/ticker-11.webp";
+import t12 from "@/assets/weddings/ticker/ticker-12.webp";
 
 export const metadata: Metadata = {
   title: "Weddings | Terra & Tent",
@@ -14,21 +26,55 @@ export const metadata: Metadata = {
     "No two days we style look alike. Browse the weddings we have built, from quiet garden lunches to long marquee evenings.",
 };
 
-// Twelve placeholder tiles until the hero photos arrive.
-const tickerItems = Array.from({ length: 12 }, () => null);
+const tickerItems = [
+  {
+    src: t01,
+    alt: "A bride and groom kissing on a grassy slope, framed by leaves",
+  },
+  {
+    src: t02,
+    alt: "A groom lifting his laughing bride on a lawn by the railings",
+  },
+  {
+    src: t03,
+    alt: "A couple walking out through old wooden doors with orange smoke",
+  },
+  {
+    src: t04,
+    alt: "A bride and her father on a gravel path through golden grasses",
+  },
+  { src: t05, alt: "A first kiss in black and white as guests clap" },
+  {
+    src: t06,
+    alt: "A couple walking across a lawn with raised glasses under festoon lights",
+  },
+  { src: t07, alt: "A couple arriving to cheering guests under string lights" },
+  { src: t08, alt: "A bride walking out of an arched wooden door past cacti" },
+  {
+    src: t09,
+    alt: "A couple facing each other on stone steps between tall trees",
+  },
+  { src: t10, alt: "A bride twirling with the groom on a lakeside path" },
+  {
+    src: t11,
+    alt: "A couple kissing on a sunlit lawn, the bride holding white lilies",
+  },
+  {
+    src: t12,
+    alt: "A couple on a wooden jetty framed by trees, a lake and mountain behind",
+  },
+];
 
 export default function Weddings() {
   return (
     <>
       <main className="bg-cream text-ink">
-        {/* On desktop the nav and the opening section fill one screen; the
-            ticker takes the height that is left, keeping its proportions. */}
-        <div className="lg:flex lg:h-svh lg:min-h-[900px] lg:flex-col">
+        <div>
           <Nav variant="light" />
 
           <section
             aria-label="Our weddings"
-            className="flex flex-col gap-10 py-10 lg:min-h-0 lg:flex-1 lg:gap-[51px] lg:py-[60px]"
+            className="flex flex-col gap-10 py-10 lg:gap-[51px] lg:py-[60px]"
           >
             <header className="flex justify-end px-page">
               <div
@@ -42,15 +88,11 @@ export default function Weddings() {
               </div>
             </header>
 
-            <div
-              className="fade lg:flex lg:min-h-0 lg:flex-1 lg:items-center lg:[container-type:size]"
-              style={delay(550)}
-            >
+            <div className="fade" style={delay(550)}>
               <PhotoTicker
                 items={tickerItems}
                 align="center"
                 aspect="aspect-[1440/499]"
-                desktopWidth="lg:w-[min(100cqw,calc(100cqh*1440/499))]"
               />
             </div>
 

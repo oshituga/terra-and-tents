@@ -10,7 +10,7 @@ import { Nav } from "@/components/Nav";
 import { delay } from "@/components/motion";
 import { OnThisPage } from "@/components/weddings/OnThisPage";
 import { ParallaxImage } from "@/components/ParallaxImage";
-import { getWedding, weddings, type Photo } from "@/lib/weddings";
+import { getWedding, nextWedding, weddings, type Photo } from "@/lib/weddings";
 
 export function generateStaticParams() {
   return weddings.map(({ slug }) => ({ slug }));
@@ -79,6 +79,7 @@ export default async function WeddingPage({
   const w = getWedding((await params).slug);
   if (!w) notFound();
   const { overview, brief, approach, layout, gallery, note } = w;
+  const next = nextWedding(w.slug);
 
   return (
     <>
@@ -269,7 +270,7 @@ export default async function WeddingPage({
                   className="h-[70vw] w-full lg:h-[762px]"
                 />
               </FadeIn>
-              <div className="flex gap-2 lg:pr-6">
+              <div className="flex flex-col gap-2 md:flex-row lg:pr-6">
                 <FadeIn className="min-w-0 flex-1">
                   <Picture
                     photo={gallery[1]}
@@ -329,15 +330,32 @@ export default async function WeddingPage({
 
         <section
           aria-label="Plan your wedding"
-          className="flex flex-col gap-20 bg-ink py-10 text-cream"
+          className="flex flex-col gap-20 bg-ink pt-10 pb-2 text-cream"
         >
           <FadeIn className="flex justify-center px-page py-10">
             <h2 className="w-[358px] max-w-full font-display text-display-m font-light uppercase">
               Let’s build your wedding next
             </h2>
           </FadeIn>
-          <div className="flex justify-end px-page py-5">
-            <FadeIn className="flex flex-col items-start gap-10">
+          <div className="max-page flex flex-col-reverse gap-12 pt-5 pr-gutter lg:flex-row lg:items-end lg:justify-between lg:gap-0">
+            <nav aria-label="Next wedding" className="pr-2 lg:pr-0">
+              <FadeIn className="flex flex-col gap-[37px] bg-cream p-4 text-ink">
+                <p className="text-body">Next wedding</p>
+                <div className="flex flex-col items-start gap-4 pl-8 md:w-[434px] md:flex-row md:justify-between md:gap-0">
+                  <p className="font-display text-display-s font-light whitespace-nowrap uppercase">
+                    {next.couple}
+                  </p>
+                  <ButtonLink
+                    href={`/weddings/${next.slug}`}
+                    variant="underline"
+                    compact
+                  >
+                    Read their story
+                  </ButtonLink>
+                </div>
+              </FadeIn>
+            </nav>
+            <FadeIn className="flex flex-col items-start gap-10 pl-gutter lg:pb-6 lg:pl-0">
               <p className="w-[508px] max-w-full text-body">
                 Tell us the date, the place and how you want it to feel. We will
                 reply within two working days to arrange a call and talk through

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FadeIn } from "./FadeIn";
+import { enquiryHref, social } from "@/lib/site";
 
 const explore = [
   { href: "/", label: "Home" },
@@ -8,11 +9,6 @@ const explore = [
   { href: "/journal", label: "Journal" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
-];
-
-const social = [
-  { href: "https://www.instagram.com/terraandtent", label: "Instagram" },
-  { href: "https://www.pinterest.com/terraandtent", label: "Pinterest" },
 ];
 
 const focus =
@@ -77,7 +73,7 @@ export function Footer() {
               <a href="tel:+15550142290" className={bigLink}>
                 <span className="sheen">+1 (555) 014 2290</span>
               </a>
-              <a href="mailto:hello@terraandtent.com" className={bigLink}>
+              <a href={enquiryHref} className={bigLink}>
                 <span className="sheen">hello@terraandtent.com</span>
               </a>
             </div>

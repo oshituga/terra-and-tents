@@ -80,7 +80,7 @@ export default async function JournalArticle({
                   <p className="text-right text-body">
                     <time dateTime={article.date}>{article.dateLabel}</time>
                   </p>
-                  <h1 className="w-[618px] max-w-full font-display text-display-l font-light uppercase">
+                  <h1 className="max-w-full font-display lg:w-[1000px] lg:[text-wrap:balance] text-display-l font-light uppercase">
                     {article.title}
                   </h1>
                   <p className="text-body">

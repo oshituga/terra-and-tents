@@ -14,6 +14,7 @@ import { useLenis } from "lenis/react";
 import { ButtonLink } from "./ButtonLink";
 import { SwapText } from "./SwapText";
 import { delay } from "./motion";
+import { enquiryHref } from "@/lib/site";
 
 const links = [
   { href: "/about", label: "About" },
@@ -192,7 +193,7 @@ export function MobileMenu() {
                 Make enquiries
               </ButtonLink>
               <div className="flex flex-col gap-1 text-body opacity-70">
-                <a href="mailto:hello@terraandtent.com" className={focus}>
+                <a href={enquiryHref} className={focus}>
                   hello@terraandtent.com
                 </a>
                 <a href="tel:+15550142290" className={focus}>
