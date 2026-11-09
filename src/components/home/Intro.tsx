@@ -97,11 +97,11 @@ export function Intro() {
     >
       <div
         ref={pin}
-        className="sticky top-0 flex min-h-svh flex-col items-center justify-center gap-[14px] overflow-hidden pt-[70px]"
+        className="sticky top-0 flex min-h-svh flex-col items-center justify-center gap-[14px] overflow-hidden pt-4 md:pt-[70px]"
       >
-        <div className="max-w-full px-page py-10">
+        <div className="max-w-full px-page py-3 md:py-10">
           <p
-            className="w-[781px] max-w-full text-center font-display text-display-m font-light uppercase"
+            className="w-[781px] max-w-full text-center font-display text-display-m font-light uppercase max-md:text-[min(26px,3.6svh)]"
             style={{ "--n": words.length } as CSSProperties}
           >
             {words.map((word, i) => (
@@ -116,12 +116,12 @@ export function Intro() {
           </p>
         </div>
 
-        <div className="w-full pl-[62vw]">
+        <div className="w-full pl-gutter md:pl-[62vw]">
           <div ref={track} className="slide-track flex w-max gap-2">
             {photos.map(({ src, alt }) => (
               <div
                 key={src.src}
-                className="relative h-[96vw] w-[72vw] shrink-0 overflow-hidden md:h-[56vw] md:w-[42vw] lg:h-[min(37.986vw,820.5px)] lg:w-[min(28.611vw,618px)]"
+                className="relative h-[min(96vw,34svh)] w-[calc(min(96vw,34svh)*0.75)] shrink-0 overflow-hidden md:h-[56vw] md:w-[42vw] lg:h-[min(37.986vw,820.5px)] lg:w-[min(28.611vw,618px)]"
               >
                 <Image
                   src={src}
@@ -137,7 +137,7 @@ export function Intro() {
           </div>
         </div>
 
-        <div className="p-5">
+        <div className="p-2 md:p-5">
           <ButtonLink href="/about" variant="underline" compact>
             Meet the studio
           </ButtonLink>
