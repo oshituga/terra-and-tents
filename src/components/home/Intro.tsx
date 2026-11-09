@@ -121,7 +121,7 @@ export function Intro() {
             {photos.map(({ src, alt }) => (
               <div
                 key={src.src}
-                className="relative h-[min(96vw,34svh)] w-[calc(min(96vw,34svh)*0.75)] shrink-0 overflow-hidden md:h-[56vw] md:w-[42vw] lg:h-[min(37.986vw,820.5px)] lg:w-[min(28.611vw,618px)]"
+                className="relative h-[min(96vw,44svh)] w-[calc(min(96vw,44svh)*0.75)] shrink-0 overflow-hidden md:h-[56vw] md:w-[42vw] lg:h-[min(37.986vw,820.5px)] lg:w-[min(28.611vw,618px)]"
               >
                 <Image
                   src={src}
