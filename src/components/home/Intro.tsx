@@ -97,9 +97,9 @@ export function Intro() {
     >
       <div
         ref={pin}
-        className="sticky top-0 flex min-h-svh flex-col items-center justify-center gap-[14px] overflow-hidden pt-4 md:pt-[70px]"
+        className="sticky top-0 flex min-h-svh flex-col items-center justify-center gap-2 overflow-hidden pt-4 md:gap-[14px] md:pt-[70px]"
       >
-        <div className="max-w-full px-page py-3 md:py-10">
+        <div className="max-w-full px-page pt-3 md:py-10">
           <p
             className="w-[781px] max-w-full text-center font-display text-display-m font-light uppercase max-md:text-[min(26px,3.6svh)]"
             style={{ "--n": words.length } as CSSProperties}
