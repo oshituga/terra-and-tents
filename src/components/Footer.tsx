@@ -107,7 +107,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className={smallLink}
           >
-            <span className="sheen">Designed and built by Ayo</span>
+            <span className="sheen">Designed and built by ayo</span>
           </a>
         </div>
       </FadeIn>
