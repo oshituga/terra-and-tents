@@ -5,6 +5,7 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import { NoOrphans } from "@/components/NoOrphans";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { TouchPress } from "@/components/TouchPress";
 import { siteUrl } from "@/lib/site";
 
 const outfit = Outfit({
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <SmoothScroll />
         <NoOrphans />
+        <TouchPress />
         {children}
       </body>
     </html>
