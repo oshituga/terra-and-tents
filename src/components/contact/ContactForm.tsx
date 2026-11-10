@@ -165,7 +165,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex items-center justify-center rounded-[25px] bg-ink px-6 py-4 text-body text-cream focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:opacity-60"
+          className="group press inline-flex items-center justify-center rounded-[25px] bg-ink px-6 py-4 text-body text-cream focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink disabled:opacity-60"
         >
           <SwapText>
             {status === "sending" ? "Sending" : "Begin your story"}
