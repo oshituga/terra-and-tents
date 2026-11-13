@@ -49,9 +49,9 @@ export function OnThisPage({ sections }: { sections: Section[] }) {
                 href={`#${id}`}
                 onClick={go(id)}
                 aria-current={current ? "location" : undefined}
-                className="toc-link flex items-start gap-0.5 text-body leading-[normal] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                className="toc-link flex items-start gap-0.5 text-body whitespace-nowrap leading-[normal] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
               >
-                <span aria-hidden className="toc-dash mt-[9px] h-0.5 bg-ink" />
+                <span aria-hidden className="toc-dash mt-[9px] h-0.5 shrink-0 bg-ink" />
                 {label}
               </a>
             </li>
