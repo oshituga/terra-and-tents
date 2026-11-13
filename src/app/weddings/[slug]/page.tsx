@@ -302,7 +302,7 @@ export default async function WeddingPage({
             <section
               id="reflections"
               aria-label="Reflections"
-              className="flex scroll-mt-6 flex-col gap-2 bg-ink p-2 text-ink lg:h-[443px] lg:flex-row lg:items-stretch lg:justify-between lg:pr-0"
+              className="flex scroll-mt-6 flex-col gap-2 bg-ink p-2 text-ink lg:min-h-[443px] lg:flex-row lg:items-stretch lg:justify-between lg:pr-0"
             >
               <FadeIn className="flex flex-col justify-between gap-16 bg-cream p-8 lg:w-[449px] lg:shrink-0">
                 <p className="text-right text-body">A note from them</p>
