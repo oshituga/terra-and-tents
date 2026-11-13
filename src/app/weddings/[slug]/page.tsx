@@ -120,7 +120,7 @@ export default async function WeddingPage({
         </section>
 
         <div className="max-page flex gap-[50px] bg-cream pt-[70px] text-ink">
-          <aside className="hidden w-[99px] shrink-0 pt-10 pl-8 lg:block lg:w-[131px]">
+          <aside className="hidden w-[99px] shrink-0 pt-10 pb-8 pl-8 lg:block lg:w-[131px]">
             <div className="sticky top-10">
               <OnThisPage sections={sections} />
             </div>
